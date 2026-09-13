@@ -192,15 +192,12 @@ realistic baselines.
 
 1. Which initial persona experiences the problem most frequently and will pay to
    solve it?
-2. Should a client be able to review and approve through a secure link without
-   creating an account?
-3. What establishes the initial agreement on stages and acceptance criteria?
-4. How should StagePaid represent scope changes after work begins?
-5. Does the MVP need payment collection, a payment-provider integration, or only
+2. What establishes the initial agreement on stages and acceptance criteria?
+3. How should StagePaid represent scope changes after work begins?
+4. Does the MVP need payment collection, a payment-provider integration, or only
    payment-status tracking?
-6. Which evidence types are essential for both physical and remote work?
-7. What language distinguishes operational approval from legal acceptance?
-8. What is the smallest complete project that can validate repeat usage?
+5. Which evidence types are essential for both physical and remote work?
+6. What is the smallest complete project that can validate repeat usage?
 
 ## Decision record
 
@@ -210,3 +207,26 @@ realistic baselines.
   as initial personas.
 - **2026-09-13:** Keep the common MVP free of construction-specific and
   profession-specific administration.
+- **2026-09-13:** Let clients participate without permanent accounts by using a
+  secure invitation, first-access email code, time-limited session, and confirmed
+  display name. See [Client Access](product/client-access.md).
+- **2026-09-13:** Treat stage approval as explicit operational acceptance of one
+  fixed submission revision, distinct from invoicing, payment, contractual
+  modification, or formal electronic signature. See [Stage
+  Approval](product/stage-approval.md).
+- **2026-09-13:** Require an explanatory message when a client requests changes.
+  A request returns the stage to the provider but does not alter agreed scope,
+  price, or schedule; expanded work requires a separate scope-change workflow.
+  See [Requested Changes](product/requested-changes.md).
+- **2026-09-13:** Automatically prepare one draft invoice when a stage is
+  approved, but require the provider to review and explicitly issue it. Approval,
+  invoice issuance, and payment remain separate events. See [Invoice
+  Trigger](product/invoice-trigger.md).
+- **2026-09-13:** Allow a provider to withdraw an awaiting submission before a
+  client decision, including after it has been viewed. Withdrawal requires a
+  client-visible explanation, preserves history, and prevents later action on
+  that revision. See [Submission Withdrawal](product/submission-withdrawal.md).
+- **2026-09-13:** Allow optional evidence-specific notes within a Change Request
+  while retaining one required overall message and one decision event. Defer
+  standalone comments, threads, and markup. See [Evidence
+  Feedback](product/evidence-feedback.md).
