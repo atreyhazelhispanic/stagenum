@@ -236,3 +236,7 @@ realistic baselines.
   residential general contractors and remodelers with multi-stage homeowner
   projects and milestone billing. Preserve remote professionals as a later
   expansion market. See [Launch Customer](product/launch-customer.md).
+- **2026-09-13:** Model project work, submissions, client review, Change Requests,
+  billing, and payment as related but independent lifecycles. Present concise
+  stage summaries as derived views rather than mutable source states. See
+  [Staged-Work Lifecycle](product/staged-work-lifecycle.md).

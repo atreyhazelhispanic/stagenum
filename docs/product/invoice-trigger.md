@@ -145,15 +145,27 @@ silently rewritten.
 - **Ready for billing:** The stage is approved and has a draft invoice.
 - **Invoiced:** An invoice tied to the approval has been issued.
 
-### Invoice
+### Invoice document
 
 - **Draft:** Prepared for provider review; not visible as an issued invoice.
+- **Abandoned:** The provider ended a draft without issuing it.
 - **Issued:** Sent or made available to the client; payment terms have begun.
-- **Partially paid:** Some but not all of the amount due has been recorded.
-- **Paid:** The amount due has been fully recorded as paid.
-- **Overdue:** The unpaid balance remains after the due date.
-- **Void:** The invoice was invalidated through a recorded action.
-- **Refunded:** Some or all recorded payment was returned.
+- **Void:** The issued invoice was invalidated through a recorded action.
+- **Replaced:** A corrected invoice was issued and linked to this one.
+
+### Invoice balance
+
+- **Unpaid:** No valid payment is currently applied.
+- **Partially paid:** Valid payments are greater than zero and less than the
+  amount due.
+- **Paid:** Valid payments equal the amount due.
+- **Overpaid:** Valid payments exceed the amount due and require an explicit
+  refund, reversal, or credit decision.
+
+**Overdue** is a derived condition for an issued invoice with a positive balance
+after its due date. Refunds and reversals are recorded payment events that change
+the derived balance; they do not replace the invoice document state. StagePaid
+does not silently apply excess funds to another invoice or future stage.
 
 Detailed payment and adjustment behavior will be defined separately.
 
@@ -215,3 +227,5 @@ Detailed payment and adjustment behavior will be defined separately.
 3. What correction workflow applies after invoice issuance?
 4. When should the provider be allowed to abandon or void a draft?
 5. Does customer discovery support one invoice per stage as the MVP constraint?
+6. How should an overpayment be refunded or retained as an unapplied client
+   credit?
