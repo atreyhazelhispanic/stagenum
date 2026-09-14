@@ -12,8 +12,9 @@ shared record connecting the agreed scope, evidence of completed work, client
 approval, invoicing, and payment status.
 
 StagePaid is intended to work for both field-based and remote service providers.
-The initial product will focus on the workflow they share rather than the
-industry-specific administration surrounding their work.
+Its initial launch hypothesis focuses on small residential general contractors
+and remodelers while preserving the workflow they share with later markets. See
+[Launch Customer](product/launch-customer.md).
 
 ## Problem
 
@@ -29,9 +30,12 @@ payment delays, and disputes.
 
 ## Target users
 
-### Primary user and buyer
+### Primary launch user and buyer
 
-The primary user is an independent professional or small service business that:
+The initial primary user is the person responsible for client-facing milestones,
+documentation, approval, and billing in a small residential general contracting
+or remodeling business. The broader product serves an independent professional
+or small service business that:
 
 - delivers client work over multiple stages;
 - can define observable outputs or acceptance criteria for those stages;
@@ -43,9 +47,9 @@ The service provider is expected to choose and pay for StagePaid. The client is
 an essential participant, but should not need to purchase or learn a complex
 project-management system to review work.
 
-### Initial personas
+### Market personas
 
-#### Field-based service provider
+#### Initial: field-based service provider
 
 A general contractor, specialty contractor, installer, fabricator, or repair
 professional who documents physical progress on-site and bills at agreed project
@@ -54,7 +58,7 @@ milestones.
 Typical evidence includes photos, notes, completion checklists, and documented
 changes to the original scope.
 
-#### Remote service provider
+#### Later expansion: remote service provider
 
 A freelancer, consultant, designer, developer, marketer, or other remote
 professional who delivers drafts, revisions, and final outputs across defined
@@ -190,14 +194,12 @@ realistic baselines.
 
 ## Open questions
 
-1. Which initial persona experiences the problem most frequently and will pay to
-   solve it?
-2. What establishes the initial agreement on stages and acceptance criteria?
-3. How should StagePaid represent scope changes after work begins?
-4. Does the MVP need payment collection, a payment-provider integration, or only
+1. What establishes the initial agreement on stages and acceptance criteria?
+2. How should StagePaid represent scope changes after work begins?
+3. Does the MVP need payment collection, a payment-provider integration, or only
    payment-status tracking?
-5. Which evidence types are essential for both physical and remote work?
-6. What is the smallest complete project that can validate repeat usage?
+4. Which evidence types are essential for both physical and remote work?
+5. What is the smallest complete project that can validate repeat usage?
 
 ## Decision record
 
@@ -230,3 +232,7 @@ realistic baselines.
   while retaining one required overall message and one decision event. Defer
   standalone comments, threads, and markup. See [Evidence
   Feedback](product/evidence-feedback.md).
+- **2026-09-13:** Focus initial customer discovery and launch positioning on small
+  residential general contractors and remodelers with multi-stage homeowner
+  projects and milestone billing. Preserve remote professionals as a later
+  expansion market. See [Launch Customer](product/launch-customer.md).
