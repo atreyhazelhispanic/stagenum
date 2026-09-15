@@ -42,6 +42,25 @@ take a concrete next step.
 This is directional product discovery, not a statistically representative market
 study.
 
+When a qualified participant cannot schedule a live interview, offer the
+participant-facing [Contractor Workflow
+Questionnaire](contractor-async-questionnaire.md) and request a short follow-up
+conversation. Keep asynchronous responses distinguishable from live interviews
+during synthesis. Do not send participants the internal interview note template
+or evidence scorecard.
+
+An asynchronous response may count as usable directional evidence when it:
+
+- meets the participant criteria;
+- discusses one specific recent project;
+- provides sufficiently detailed behavioral examples; and
+- can be responsibly sanitized and scored without filling gaps through
+  researcher assumptions.
+
+Mark its method as **Asynchronous questionnaire** in the research note. Treat
+unsupported or ambiguous answers as lower-confidence evidence and attempt a
+follow-up before counting them toward interview-specific thresholds.
+
 ## Sample
 
 ### Target
@@ -284,6 +303,7 @@ Create one sanitized note per usable interview using this structure:
 
 **Interview date:** YYYY-MM-DD
 **Interviewer:**
+**Method:** Live interview / Asynchronous questionnaire
 **Recording consent:** Yes / No
 **Qualified:** Yes / No
 
@@ -443,6 +463,8 @@ count.
 - Establish a retention period before collecting recordings or raw documents.
 - Obtain separate permission before using an attributable quotation publicly.
 - Treat deletion requests according to the research privacy process.
+- Ask asynchronous participants to return responses through a private channel;
+  do not collect completed questionnaires through the public repository.
 
 ## Deliverables
 
