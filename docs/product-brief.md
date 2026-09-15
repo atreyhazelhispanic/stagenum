@@ -295,3 +295,7 @@ realistic baselines.
   immediate dashboard visibility, but aggregate card retries into one provider
   alert after a 15-minute unresolved-session grace period. Use processor-informed
   timing for ACH and never expose private decline details.
+- **2026-09-14:** Build the first clickable prototype as a repository-hosted,
+  mobile-first static web experience using only synthetic fixtures. Simulate the
+  complete stage-to-payment path without production authentication, uploads,
+  persistence, notifications, or payment processing.
