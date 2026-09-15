@@ -226,7 +226,7 @@ creates a new visible event.
 
 - Undoing withdrawal or reactivating the same revision
 - Withdrawing an approval
-- Correcting or voiding issued invoices
+- Using submission withdrawal to correct or void an issued invoice
 - Client-initiated submission withdrawal
 - Scheduled or automatic withdrawal
 - Bulk withdrawal

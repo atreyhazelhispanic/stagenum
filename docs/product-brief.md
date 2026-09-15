@@ -240,3 +240,58 @@ realistic baselines.
   billing, and payment as related but independent lifecycles. Present concise
   stage summaries as derived views rather than mutable source states. See
   [Staged-Work Lifecycle](product/staged-work-lifecycle.md).
+- **2026-09-14:** Represent invoice document state, balance state, and immutable
+  payment events independently so partial payments, refunds, reversals, and
+  overpayments remain explicit. See [Invoice and Payment
+  States](product/invoice-payment-states.md).
+- **2026-09-14:** Make **Pay balance** the primary MVP client payment action.
+  Preserve partial-payment states for external payments, refunds, reversals,
+  disputes, and exceptional processor events without offering a
+  client-selected partial-payment flow.
+- **2026-09-14:** Require an invoice total greater than zero at issuance. A
+  zero-dollar stage ends with its approval and completion record instead of a
+  synthetic invoice marked **Paid**.
+- **2026-09-14:** Use immediate payment collection in the MVP. Only a
+  server-verified successful attempt creates an immutable payment record and
+  affects the balance; delayed capture remains deferred.
+- **2026-09-14:** Allow only the provider to record partial or full external
+  payments in the MVP. Clearly identify them as provider-recorded and not
+  processed or verified by StagePaid; notify the client and correct errors
+  through immutable reversals rather than edits or deletion.
+- **2026-09-14:** Allow provider-initiated full or partial refunds in the MVP.
+  Only confirmed results affect invoice balances; external refunds are recorded
+  but not processed by StagePaid, while processor reversals and disputes enter
+  through authenticated server events.
+- **2026-09-14:** Treat **Overpaid** as an accurate balance state and show
+  **Disposition required**, block further payment, and return the excess through
+  an explicit refund or reversal. Defer unapplied credits and cross-invoice
+  allocation.
+- **2026-09-14:** Target partial-payment agreements and client-selected partial
+  payments for version 1.1.0 while preserving an MVP data model that can
+  represent multiple payment events.
+- **2026-09-14:** Process MVP card and ACH bank payments through Stripe Connect.
+  Keep ACH balances unchanged until server-confirmed success, collect sensitive
+  credentials only through Stripe-provided components, and never store full
+  card or bank credentials in StagePaid.
+- **2026-09-14:** Correct an issued invoice through a linked, auditable
+  correction draft that ends in **Void**, **Replaced**, or **Cancelled**. Never
+  rewrite the original invoice; resolve applied funds before completion and give
+  replacements new invoice numbers.
+- **2026-09-14:** Keep the client invoice balance separate from provider
+  settlement. Disclose and itemize Stripe and StagePaid fees, use a
+  1% StagePaid transaction fee for MVP payments processed through StagePaid,
+  charge no transaction fee on provider-recorded external payments, and return
+  the StagePaid fee in proportion to any client refund, reversal, or dispute
+  loss.
+- **2026-09-14:** Retain finalized financial records for a seven-year U.S.-first
+  product-policy baseline, subject to legal review and required extensions.
+  Provide provider CSV/PDF exports and client-relevant PDFs while minimizing
+  unrelated personal data.
+- **2026-09-14:** Present persistent policy links and record versioned,
+  affirmative provider and passwordless-client acknowledgements for the terms
+  relevant to consequential actions. Do not present internal product
+  specifications as legal terms.
+- **2026-09-14:** Give clients immediate payment-attempt guidance and providers
+  immediate dashboard visibility, but aggregate card retries into one provider
+  alert after a 15-minute unresolved-session grace period. Use processor-informed
+  timing for ACH and never expose private decline details.

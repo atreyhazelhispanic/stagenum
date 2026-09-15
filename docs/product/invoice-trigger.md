@@ -134,8 +134,9 @@ Issuing the invoice:
 - sends the configured client notification.
 
 Later corrections to an issued invoice require a traceable billing workflow such
-as voiding and replacement or a credit adjustment. The issued record is not
-silently rewritten.
+as voiding or replacement. The issued record is not silently rewritten. See
+[Invoice and Payment States](invoice-payment-states.md) for the correction event,
+eligibility, and fund-disposition rules.
 
 ## State model
 
@@ -157,17 +158,19 @@ silently rewritten.
 
 - **Unpaid:** No valid payment is currently applied.
 - **Partially paid:** Valid payments are greater than zero and less than the
-  amount due.
-- **Paid:** Valid payments equal the amount due.
-- **Overpaid:** Valid payments exceed the amount due and require an explicit
-  refund, reversal, or credit decision.
+  invoice total.
+- **Paid:** Valid payments equal the invoice total.
+- **Overpaid:** Valid payments exceed the invoice total and require an explicit
+  disposition. The MVP resolves the excess through a refund or reversal.
 
 **Overdue** is a derived condition for an issued invoice with a positive balance
 after its due date. Refunds and reversals are recorded payment events that change
 the derived balance; they do not replace the invoice document state. StagePaid
 does not silently apply excess funds to another invoice or future stage.
 
-Detailed payment and adjustment behavior will be defined separately.
+Payment attempts, financial events, fees, corrections, retention, and
+notifications are defined in [Invoice and Payment
+States](invoice-payment-states.md).
 
 ## Failure and concurrency behavior
 
@@ -200,11 +203,11 @@ Detailed payment and adjustment behavior will be defined separately.
 - Splitting one approved stage across multiple invoices
 - Recurring invoices
 - Deposits and pre-approval billing
-- Credit notes and complex invoice corrections
+- Credit notes and automated payment reallocation during invoice correction
 - Multi-currency projects
 - Client self-billing
 - Automatic invoice issuance immediately upon approval
-- Detailed payment processing and reconciliation
+- Multi-currency payment processing and advanced accounting reconciliation
 
 ## MVP acceptance criteria
 
@@ -224,8 +227,4 @@ Detailed payment and adjustment behavior will be defined separately.
 
 1. Which taxes and adjustments can the provider add without renewed approval?
 2. What default payment terms should StagePaid suggest?
-3. What correction workflow applies after invoice issuance?
-4. When should the provider be allowed to abandon or void a draft?
-5. Does customer discovery support one invoice per stage as the MVP constraint?
-6. How should an overpayment be refunded or retained as an unapplied client
-   credit?
+3. Does customer discovery support one invoice per stage as the MVP constraint?

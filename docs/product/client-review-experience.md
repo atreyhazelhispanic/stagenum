@@ -144,7 +144,10 @@ and retention policy, not exposed indiscriminately in the ordinary project view.
   the client can request a new one.
 
 Payment status is separate from review status. An approved stage may still be
-uninvoiced, invoiced, partially paid, paid, overdue, voided, or refunded.
+uninvoiced or have an invoice that is unpaid, partially paid, paid, overpaid,
+overdue, void, or replaced. A refund is a financial event that may change the
+balance; it is not a replacement invoice status. See [Invoice and Payment
+States](invoice-payment-states.md).
 
 ## Customer-service details
 

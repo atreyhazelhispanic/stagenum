@@ -86,7 +86,8 @@ draft; explicit provider issuance creates the client-facing invoice.
 ### Payment activity
 
 A record of money collected, recorded, refunded, reversed, or otherwise applied
-to an issued invoice. Detailed payment behavior will be defined separately.
+to an issued invoice. See [Invoice and Payment
+States](invoice-payment-states.md) for the detailed model.
 
 ## Project lifecycle
 
@@ -342,12 +343,13 @@ Only one submission revision per stage may be **Awaiting review** at a time.
 
 ### Balance states
 
-- **Unpaid:** No valid payment is currently applied to the amount due.
+- **Unpaid:** No valid payment is currently applied to the invoice total.
 - **Partially paid:** Valid payments are greater than zero and less than the
-  amount due.
-- **Paid:** The valid payments equal the amount due.
-- **Overpaid:** Valid payments exceed the amount due and the excess requires a
-  recorded refund, reversal, or credit decision.
+  invoice total.
+- **Paid:** The valid payments equal the invoice total.
+- **Overpaid:** Valid payments exceed the invoice total and the excess requires a
+  recorded disposition. The MVP resolves the excess through a refund or
+  reversal.
 
 **Overdue** is a derived condition applied when an issued invoice has a positive
 balance after its due date. It does not replace the balance state; an invoice may
@@ -381,12 +383,12 @@ stateDiagram-v2
     [*] --> Unpaid: Invoice issued
     Unpaid --> PartiallyPaid: Record partial payment
     Unpaid --> Paid: Record exact full payment
-    Unpaid --> Overpaid: Record payment above amount due
+    Unpaid --> Overpaid: Record payment above invoice total
     PartiallyPaid --> Paid: Record remaining payment
     PartiallyPaid --> Overpaid: Record excess payment
     Paid --> Overpaid: Record additional payment
     Overpaid --> Paid: Refund or reverse only the excess
-    Overpaid --> PartiallyPaid: Refund or reverse below amount due
+    Overpaid --> PartiallyPaid: Applied total falls below invoice total
     Overpaid --> Unpaid: Refund or reverse all applied payments
     Paid --> PartiallyPaid: Record partial refund or reversal
     Paid --> Unpaid: Record full refund or reversal
@@ -394,8 +396,9 @@ stateDiagram-v2
 ```
 
 The first diagram represents the invoice document. The second represents its
-derived balance. The detailed correction, refund, reversal, and reconciliation
-rules remain an open product decision.
+derived balance. Detailed correction, refund, reversal, reconciliation, fee,
+notification, and retention rules are defined in [Invoice and Payment
+States](invoice-payment-states.md).
 
 ## Derived stage summary
 
@@ -515,7 +518,8 @@ indiscriminately in the shared timeline.
 - Linked resubmissions
 - Automatic draft invoice creation after approval
 - Provider-controlled invoice issuance
-- Basic payment-status representation
+- Detailed invoice, payment, correction, refund, fee, notification, and
+  financial-record behavior
 - Derived overall summaries
 - Shared event history
 
@@ -525,10 +529,10 @@ indiscriminately in the shared timeline.
 - Full scope-change proposal and acceptance lifecycle
 - Stage and project cancellation experience
 - Deposits, retainage, and complex progress billing
-- Invoice correction, credit, reversal, and refund details
+- Stored client credits and automatic cross-invoice allocation
 - Multi-stage or split invoices
 - Partial project completion rules
-- Disputes and external legal processes
+- Full dispute-case management and external legal processes
 - Detailed project archival and data-retention behavior
 
 ## MVP acceptance criteria
@@ -552,6 +556,5 @@ indiscriminately in the shared timeline.
 2. What is the complete scope-change lifecycle?
 3. What are the stage and project cancellation rules?
 4. Which stage conditions are required before a project becomes complete?
-5. What is the detailed payment, refund, and invoice-correction model?
-6. Which lifecycle events generate notifications?
-7. Which status terminology performs best in contractor and homeowner research?
+5. Which non-payment lifecycle events generate notifications?
+6. Which status terminology performs best in contractor and homeowner research?
