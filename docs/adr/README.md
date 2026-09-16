@@ -23,6 +23,7 @@ and link repairs do not require supersession.
 | ADR | Decision | Status |
 | --- | --- | --- |
 | [ADR-001](0001-modular-monolith.md) | Start with a modular monolith | Accepted |
+| [ADR-002](0002-typescript-primary-language.md) | Use TypeScript as the primary application language | Accepted |
 
 ## Naming
 
