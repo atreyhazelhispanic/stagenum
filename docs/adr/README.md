@@ -25,6 +25,7 @@ and link repairs do not require supersession.
 | [ADR-001](0001-modular-monolith.md) | Start with a modular monolith | Accepted |
 | [ADR-002](0002-typescript-primary-language.md) | Use TypeScript as the primary application language | Accepted |
 | [ADR-003](0003-postgresql-primary-database.md) | Use PostgreSQL as the primary database | Accepted |
+| [ADR-004](0004-persistence-and-migrations.md) | Use module-owned persistence and forward schema migrations | Accepted |
 
 ## Naming
 
