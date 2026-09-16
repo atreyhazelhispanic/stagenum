@@ -1,0 +1,99 @@
+StagePaid Proprietary License
+
+Copyright (c) 2026 Angelo Flores. All rights reserved.
+Effective date: September 16, 2026
+
+1. Ownership
+
+The software, source code, documentation, designs, diagrams, text, and other
+original materials in this repository (collectively, the "Materials") are the
+exclusive property of Angelo Flores, except for third-party materials identified
+below. The Materials are not open source.
+
+Public availability of this repository does not place the Materials in the
+public domain and does not grant any rights except those expressly stated in
+this license or required by the terms of the repository's hosting platform.
+
+2. Limited evaluation permission
+
+Subject to this license, you are granted a limited, revocable, non-exclusive,
+non-transferable permission to access, view, and make temporary copies of the
+Materials solely to evaluate the StagePaid project and the author's work for
+personal, educational-review, employment, investment, or potential business-
+relationship purposes.
+
+This permission does not authorize you to operate the Materials as a service,
+use them in production, or incorporate them into another product or project.
+
+3. Restrictions
+
+Unless Angelo Flores gives prior written permission, you may not:
+
+- copy or reproduce the Materials except as expressly allowed for evaluation or
+  through functionality authorized by the hosting platform;
+- modify, adapt, translate, reverse engineer, or create derivative works from
+  the Materials;
+- distribute, publish, transmit, sublicense, sell, rent, lease, or otherwise
+  make the Materials available to another person or entity;
+- use the Materials, in whole or in part, for commercial purposes or to create,
+  train, develop, improve, or operate another product, service, dataset, model,
+  or competing offering;
+- remove or alter copyright, ownership, attribution, or license notices; or
+- represent that you own, authored, sponsor, endorse, or are affiliated with
+  StagePaid or the Materials.
+
+No patent, trademark, trade-dress, publicity, or other intellectual-property
+license is granted by implication, estoppel, or otherwise. StagePaid names,
+logos, slogans, and branding may not be used without prior written permission.
+
+4. Hosting-platform rights
+
+If this repository is hosted publicly, the hosting platform's applicable terms
+may permit platform users to view or fork the repository through features of
+that platform. This license does not revoke rights that must be granted under
+those terms, but no additional permission to use a fork or copy is granted
+beyond the limited evaluation permission above.
+
+5. Third-party materials
+
+Third-party software, packages, fonts, assets, and other materials remain
+subject to their respective licenses and notices. This license applies only to
+the original Materials owned by Angelo Flores and does not restrict rights
+granted directly by a third-party license.
+
+6. Contributions
+
+No license to submit or incorporate contributions is offered by this license.
+Do not submit code, documentation, or other creative contributions unless a
+separate written contribution agreement or contribution policy applies.
+Submitting feedback or an issue does not transfer ownership of the Materials or
+grant permission to implement, copy, or distribute them.
+
+7. Termination
+
+The limited permission granted by this license terminates automatically if you
+breach its terms. Upon termination, you must stop using the Materials and delete
+copies in your possession or control, except copies retained solely through
+hosting-platform functionality that you cannot directly remove or as required
+by law.
+
+8. No warranty
+
+THE MATERIALS ARE PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. THE MATERIALS ARE A
+PROTOTYPE, MAY BE INCOMPLETE OR INCORRECT, AND MUST NOT BE RELIED UPON FOR
+PAYMENTS, FINANCIAL RECORDS, SECURITY, LEGAL COMPLIANCE, OR PRODUCTION USE.
+
+9. Limitation of liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, ANGELO FLORES WILL NOT BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, CONSEQUENTIAL, OR OTHER
+DAMAGES ARISING FROM ACCESS TO OR USE OF THE MATERIALS, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES.
+
+10. Separate permission
+
+Requests for commercial, production, redistribution, modification,
+contribution, or other rights require a separate written agreement with Angelo
+Flores.

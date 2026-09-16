@@ -125,12 +125,17 @@ under `docs/adr/`.
 
 ## Contributing
 
-StagePaid is not yet ready for external contributions. Until contribution
-guidelines and a license are added, please use the repository's issue tracker
-for discussion and do not assume permission to copy, modify, or redistribute the
-code or documentation.
+StagePaid is not currently accepting external code or documentation
+contributions. Please use the repository's issue tracker for discussion and do
+not submit creative contributions unless a separate contribution policy or
+written agreement applies.
 
 ## License
 
-No license has been selected yet. All rights are reserved unless and until a
-license file is added to this repository.
+Copyright © 2026 Angelo Flores. All rights reserved.
+
+StagePaid is publicly viewable for limited evaluation, but it is not open
+source. Copying, modification, redistribution, commercial use, production use,
+and derivative works are prohibited except as expressly permitted in the
+[StagePaid Proprietary License](LICENSE) or required by the repository hosting
+platform's terms.
