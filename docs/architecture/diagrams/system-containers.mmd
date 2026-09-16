@@ -1,0 +1,49 @@
+flowchart LR
+    provider["Provider\nWeb or future mobile client"]
+    client["Client\nPasswordless web review"]
+    operator["Authorized StagePaid operator"]
+
+    subgraph edge["Public trust boundary"]
+        web["Responsive web application\nProvider and client experiences"]
+        api["Application API\nAuthentication, authorization, orchestration"]
+    end
+
+    subgraph app["StagePaid private application boundary"]
+        modules["Modular monolith\nIdentity · Projects · Reviews · Billing\nPayments · Evidence · Notifications · Audit"]
+        worker["Background worker\nDelivery · documents · reconciliation\nfile processing · retries"]
+        outbox["Durable job transport\nTransactional outbox + queue"]
+        db[("Relational database\nAuthoritative business records\nand append-only ledger events")]
+        objects[("Private object storage\nEvidence · invoices · receipts · exports")]
+    end
+
+    subgraph external["External provider boundaries"]
+        email["Email delivery provider\nInvitations · codes · notifications"]
+        stripe["Stripe Connect\nPayment credentials · processor events\nfees · disputes · settlement"]
+    end
+
+    provider -->|"TLS"| web
+    client -->|"TLS"| web
+    operator -->|"Strongly authenticated\nleast-privileged access"| web
+    web -->|"Commands, queries,\nscoped upload requests"| api
+    api --> modules
+    modules -->|"Transactional reads and writes"| db
+    modules -->|"Authorize metadata and access"| objects
+    modules -->|"Commit job intent with business state"| outbox
+    outbox --> worker
+    worker -->|"Scoped file operations"| objects
+    worker -->|"Send without private evidence"| email
+    worker -->|"Idempotent API operations"| stripe
+    stripe -->|"Signed webhooks\nauthoritative outcomes"| api
+    email -->|"Delivery events"| api
+
+    classDef actor fill:#f8fafc,stroke:#64748b,color:#0f172a;
+    classDef surface fill:#ecfeff,stroke:#0f766e,color:#134e4a;
+    classDef service fill:#f0fdfa,stroke:#14b8a6,color:#134e4a;
+    classDef data fill:#fff7ed,stroke:#d97706,color:#7c2d12;
+    classDef outside fill:#f8fafc,stroke:#94a3b8,color:#334155;
+
+    class provider,client,operator actor;
+    class web,api surface;
+    class modules,worker,outbox service;
+    class db,objects data;
+    class email,stripe outside;

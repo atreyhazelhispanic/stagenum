@@ -8,9 +8,9 @@ and keep payment expectations clear from the beginning of a project through its
 final payment.
 
 > [!NOTE]
-> StagePaid is in the product-definition stage. This repository does not yet
-> contain a working application, and its interfaces and technical architecture
-> are still being designed.
+> StagePaid is in product definition and prototyping. The repository includes a
+> clickable research prototype built with synthetic data, but it is not a
+> production application and does not process real payments.
 
 ## The problem
 
@@ -96,23 +96,31 @@ making staged approval and payment meaningfully better.
 
 ## Project status
 
-The project is currently establishing its product requirements, architecture,
-and decision record. Foundational documentation includes:
+The project is currently validating its workflow while establishing production
+requirements, architecture, and decision records. Foundational materials
+include:
 
 - the [product brief](docs/product-brief.md);
-- a system architecture overview;
-- architecture decision records (ADRs);
-- contribution and security guidance; and
-- licensing terms.
+- the [initial system architecture](docs/architecture/initial-system-architecture.md),
+  including rendered container and transaction-sequence diagrams;
+- the [clickable prototype specification](docs/product/clickable-prototype.md);
+- the repository-owned interactive prototype under [`prototype/`](prototype/);
+  and
+- product and research records under [`docs/product/`](docs/product/) and
+  [`docs/research/`](docs/research/).
+
+Architecture decision records, contribution and security guidance, and
+licensing terms remain planned work.
 
 No production deployment, public API, or supported installation process exists
 yet.
 
 ## Repository layout
 
-The repository structure will evolve with the architecture. Documentation will
-live under `docs/`, with significant technical decisions recorded under
-`docs/adr/`.
+The repository structure will evolve with implementation. Product, research,
+and architecture documentation lives under `docs/`; the research prototype
+lives under `prototype/`; and significant technical decisions will be recorded
+under `docs/adr/`.
 
 ## Contributing
 

@@ -1,0 +1,91 @@
+sequenceDiagram
+    autonumber
+    actor Provider
+    actor Client
+    participant Web as Web application
+    participant API as Application API
+    participant DB as Relational database
+    participant Jobs as Outbox and queue
+    participant Worker as Background worker
+    participant Email as Email provider
+    participant Stripe
+    participant Store as Private object storage
+
+    Provider->>Web: Review stage and selected evidence
+    Web->>API: Submit immutable revision
+    API->>DB: Authorize provider and lock stage
+    API->>DB: Commit revision, evidence links,<br/>timeline event, and notification job
+    DB-->>API: Revision 1 committed
+    API-->>Web: Submission accepted
+
+    Jobs-->>Worker: Client-review notification job
+    Worker->>Email: Send invitation without private evidence
+    Email-->>Worker: Delivery outcome
+    Worker->>DB: Record delivery state
+
+    Client->>Web: Open invitation and verify email code
+    Web->>API: Request revision and evidence access
+    API->>DB: Verify session and project grant
+    API-->>Web: Authorized revision metadata
+    Web->>API: Request scoped evidence access
+    API->>Store: Create short-lived download grant
+    Store-->>Web: Authorized evidence response
+
+    alt Client sends Change Request
+        Client->>Web: Submit specific request
+        Web->>API: Record decision for revision 1
+        API->>DB: Lock pending revision
+        API->>DB: Commit terminal Change Request,<br/>timeline event, and provider notification job
+        DB-->>API: Decision committed
+        API-->>Web: Change Request recorded
+
+        Jobs-->>Worker: Provider notification job
+        Worker->>Email: Send Change Request notice
+
+        Provider->>Web: Add response and revised evidence
+        Web->>API: Submit revision 2
+        API->>DB: Commit linked immutable revision 2,<br/>timeline event, and client notification job
+        DB-->>API: Revision 2 committed
+        API-->>Web: Resubmission accepted
+
+        Client->>Web: Review revision 2
+        Web->>API: Approve revision 2
+    else Client approves revision 1
+        Client->>Web: Approve revision 1
+        Web->>API: Record approval for revision 1
+    end
+
+    API->>DB: Lock pending revision and enforce<br/>one terminal decision
+    API->>DB: Commit approval, draft invoice,<br/>timeline event, and provider notification job
+    DB-->>API: Approval and draft invoice committed
+    API-->>Web: Exact revision approved
+
+    Provider->>Web: Review draft invoice
+    Web->>API: Issue invoice with idempotency key
+    API->>DB: Commit immutable invoice snapshot,<br/>official number, timeline event,<br/>and client notification job
+    DB-->>API: Issued invoice committed
+    API-->>Web: Invoice issued
+
+    Client->>Web: Choose method and Pay balance
+    Web->>Stripe: Enter payment credentials<br/>in Stripe-hosted surface
+    Web->>API: Start payment with Stripe token<br/>and idempotency key
+    API->>DB: Commit payment attempt
+    API->>Stripe: Create payment operation
+    Stripe-->>API: Attempt accepted or requires action
+    API-->>Web: Payment processing<br/>invoice balance unchanged
+
+    Stripe-->>API: Signed webhook with authoritative result
+    API->>API: Verify signature and deduplicate event
+    API->>DB: Commit successful payment event,<br/>fee references, zero balance projection,<br/>timeline event, and receipt job
+    DB-->>API: Financial event committed
+    API-->>Stripe: Webhook acknowledged
+
+    Jobs-->>Worker: Receipt and notification jobs
+    Worker->>Store: Generate and store receipt
+    Worker->>Email: Send payment confirmation
+    Worker->>DB: Record document and delivery outcomes
+
+    Client->>Web: View receipt and paid project history
+    Web->>API: Request invoice and project projection
+    API->>DB: Read authoritative events and projections
+    API-->>Web: Paid invoice, receipt reference,<br/>and updated paid-to-date
