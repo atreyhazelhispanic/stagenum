@@ -29,6 +29,7 @@ and link repairs do not require supersession.
 | [ADR-005](0005-transactional-outbox-and-jobs.md) | Use a transactional outbox and idempotent background jobs | Accepted |
 | [ADR-006](0006-private-object-storage.md) | Use private object storage with signed access | Accepted |
 | [ADR-007](0007-stripe-webhook-payment-authority.md) | Treat verified Stripe webhooks as payment authority | Accepted |
+| [ADR-008](0008-passwordless-project-scoped-access.md) | Use passwordless, project-scoped client access | Accepted |
 
 ## Naming
 
