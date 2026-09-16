@@ -103,14 +103,15 @@ include:
 - the [product brief](docs/product-brief.md);
 - the [initial system architecture](docs/architecture/initial-system-architecture.md),
   including rendered container and transaction-sequence diagrams;
+- the [architecture decision record index](docs/adr/README.md), containing the
+  accepted technical decisions and reusable ADR template;
 - the [clickable prototype specification](docs/product/clickable-prototype.md);
 - the repository-owned interactive prototype under [`prototype/`](prototype/);
   and
 - product and research records under [`docs/product/`](docs/product/) and
   [`docs/research/`](docs/research/).
 
-Architecture decision records, contribution and security guidance, and
-licensing terms remain planned work.
+Contribution and security guidance and licensing terms remain planned work.
 
 No production deployment, public API, or supported installation process exists
 yet.

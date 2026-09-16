@@ -13,7 +13,25 @@ processing, notifications, and financial history without introducing
 microservices before the product requires them.
 
 This document defines logical boundaries and data flow. Individual technology
-and provider choices belong in architecture decision records under issue #7.
+and provider choices are recorded in the
+[architecture decision record index](../adr/README.md).
+
+## Accepted architecture decisions
+
+The following decisions govern implementation of this architecture:
+
+1. [ADR-001: Start with a modular monolith](../adr/0001-modular-monolith.md)
+2. [ADR-002: Use TypeScript as the primary application language](../adr/0002-typescript-primary-language.md)
+3. [ADR-003: Use PostgreSQL as the primary database](../adr/0003-postgresql-primary-database.md)
+4. [ADR-004: Use module-owned persistence and forward schema migrations](../adr/0004-persistence-and-migrations.md)
+5. [ADR-005: Use a transactional outbox and idempotent background jobs](../adr/0005-transactional-outbox-and-jobs.md)
+6. [ADR-006: Use private object storage with signed access](../adr/0006-private-object-storage.md)
+7. [ADR-007: Treat verified Stripe webhooks as payment authority](../adr/0007-stripe-webhook-payment-authority.md)
+8. [ADR-008: Use passwordless, project-scoped client access](../adr/0008-passwordless-project-scoped-access.md)
+
+Later decisions may refine provider and implementation details without
+silently changing these accepted boundaries. Material changes are recorded in
+new ADRs that supersede the affected decision.
 
 ## Architectural approach
 
@@ -329,14 +347,13 @@ Production data is never copied into demo fixtures.
 
 ## Follow-up architecture decisions
 
-Issue #7 should record, at minimum:
+The accepted ADRs define the foundational boundaries needed for the next
+implementation phase. Later ADRs should be created when implementation evidence
+requires a durable decision, including:
 
-1. production application runtime and deployment platform;
-2. relational database and migration strategy;
-3. session, invitation-token, and email-code implementation;
-4. private object storage and signed-access strategy;
-5. queue and transactional-outbox implementation;
-6. Stripe Connect charge and account model;
-7. audit-event and financial-ledger persistence rules;
-8. invoice and receipt document generation; and
-9. observability, secrets, and environment isolation.
+1. production runtime and deployment platform;
+2. TypeScript database-access library;
+3. object-storage, queue, and email providers;
+4. Stripe Connect charge and account model;
+5. invoice and receipt document generation; and
+6. observability, secrets, and environment isolation.
