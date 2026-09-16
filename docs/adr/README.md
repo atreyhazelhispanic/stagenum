@@ -26,6 +26,7 @@ and link repairs do not require supersession.
 | [ADR-002](0002-typescript-primary-language.md) | Use TypeScript as the primary application language | Accepted |
 | [ADR-003](0003-postgresql-primary-database.md) | Use PostgreSQL as the primary database | Accepted |
 | [ADR-004](0004-persistence-and-migrations.md) | Use module-owned persistence and forward schema migrations | Accepted |
+| [ADR-005](0005-transactional-outbox-and-jobs.md) | Use a transactional outbox and idempotent background jobs | Accepted |
 
 ## Naming
 
