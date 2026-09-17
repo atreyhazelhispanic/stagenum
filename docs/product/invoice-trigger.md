@@ -11,7 +11,7 @@ client approval unexpectedly send an invoice or initiate payment.
 
 ## Decision
 
-When a client approves a stage, StagePaid automatically creates one draft invoice
+When a client approves a stage, Stagenum automatically creates one draft invoice
 from the approved stage. The draft is visible to the provider for review but is
 not issued or sent to the client.
 
@@ -29,7 +29,7 @@ None of these events implies that either of the others has occurred.
 ## Why approval creates a draft
 
 Automatically preparing the draft preserves momentum after approval and avoids
-making the provider re-enter information that StagePaid already knows. Requiring
+making the provider re-enter information that Stagenum already knows. Requiring
 provider issuance creates a deliberate checkpoint for reviewing:
 
 - billing identity and address;
@@ -45,7 +45,7 @@ document to the client.
 
 ## Approval result
 
-After recording approval, StagePaid:
+After recording approval, Stagenum:
 
 1. marks the submitted revision approved;
 2. records the approval event;
@@ -62,7 +62,7 @@ either operation cannot create duplicate approvals or invoices.
 The approval acknowledgement should say:
 
 > By approving, you confirm that you reviewed this submission and accept it as
-> completing the stage described above. StagePaid will prepare a draft invoice
+> completing the stage described above. Stagenum will prepare a draft invoice
 > for **[provider name]** to review. This does not send an invoice or record
 > payment.
 
@@ -165,7 +165,7 @@ eligibility, and fund-disposition rules.
 
 **Overdue** is a derived condition for an issued invoice with a positive balance
 after its due date. Refunds and reversals are recorded payment events that change
-the derived balance; they do not replace the invoice document state. StagePaid
+the derived balance; they do not replace the invoice document state. Stagenum
 does not silently apply excess funds to another invoice or future stage.
 
 Payment attempts, financial events, fees, corrections, retention, and
@@ -226,5 +226,5 @@ States](invoice-payment-states.md).
 ## Remaining decisions
 
 1. Which taxes and adjustments can the provider add without renewed approval?
-2. What default payment terms should StagePaid suggest?
+2. What default payment terms should Stagenum suggest?
 3. Does customer discovery support one invoice per stage as the MVP constraint?

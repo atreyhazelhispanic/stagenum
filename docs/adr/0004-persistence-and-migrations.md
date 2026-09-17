@@ -4,11 +4,11 @@
 
 **Date:** 2026-09-16
 
-**Decision owners:** StagePaid maintainers
+**Decision owners:** Stagenum maintainers
 
 ## Context
 
-StagePaid's PostgreSQL schema must evolve while preserving projects, immutable
+Stagenum's PostgreSQL schema must evolve while preserving projects, immutable
 submission revisions, invoices, financial events, access grants, and audit
 history. The modular monolith also needs code-level persistence boundaries so a
 route handler or unrelated module cannot casually bypass domain invariants.
@@ -17,7 +17,7 @@ TypeScript database libraries can improve type safety and developer experience,
 but their generated types do not replace PostgreSQL constraints, migration
 history, runtime validation, or deliberate transaction design. Selecting an ORM
 before production use cases exist would bind the architecture to a tool without
-evidence that its abstractions fit StagePaid's transactional and reporting
+evidence that its abstractions fit Stagenum's transactional and reporting
 needs.
 
 Schema changes must support safe deployment, rollback of application releases,
@@ -27,7 +27,7 @@ commands do not provide sufficient review or history for financial software.
 
 ## Decision
 
-StagePaid will use **module-owned persistence adapters backed by PostgreSQL and
+Stagenum will use **module-owned persistence adapters backed by PostgreSQL and
 version-controlled, forward schema migrations**.
 
 The PostgreSQL schema and committed migration history are authoritative. Domain
@@ -228,7 +228,7 @@ never sourced from repository fixtures.
 
 Using generated persistence models throughout the application would reduce
 mapping code, but it would couple domain behavior and API contracts to storage
-shapes. It would also make module boundaries easier to bypass. StagePaid accepts
+shapes. It would also make module boundaries easier to bypass. Stagenum accepts
 explicit adapters to keep persistence concerns at the infrastructure boundary.
 
 ### ORM-managed automatic schema synchronization

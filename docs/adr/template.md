@@ -4,7 +4,7 @@
 
 **Date:** YYYY-MM-DD
 
-**Decision owners:** StagePaid maintainers
+**Decision owners:** Stagenum maintainers
 
 ## Context
 

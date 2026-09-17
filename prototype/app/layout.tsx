@@ -13,25 +13,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'StagePaid Prototype',
+  title: 'Stagenum Prototype',
   description:
     'A mobile-first staged work, approval, invoicing, and payment prototype.',
   openGraph: {
-    title: 'StagePaid',
-    description: 'Invoice by stage. Get StagePaid.',
+    title: 'Stagenum',
+    description: 'Make every stage count.',
     images: [
       {
         url: '/og.png',
         width: 1732,
         height: 908,
-        alt: 'StagePaid — Invoice by stage. Get StagePaid.',
+        alt: 'Stagenum — Make every stage count.',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'StagePaid',
-    description: 'Invoice by stage. Get StagePaid.',
+    title: 'Stagenum',
+    description: 'Make every stage count.',
     images: ['/og.png'],
   },
 };
@@ -46,7 +46,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('stagepaid-theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d)}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('stagenum-theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d)}catch(e){}})()`,
           }}
         />
       </head>

@@ -1,6 +1,6 @@
 # Architecture Decision Records
 
-Architecture Decision Records (ADRs) capture significant StagePaid technical
+Architecture Decision Records (ADRs) capture significant Stagenum technical
 decisions, the context in which they were made, and the consequences the team
 accepts. They complement the
 [initial system architecture](../architecture/initial-system-architecture.md)

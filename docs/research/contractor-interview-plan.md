@@ -13,7 +13,7 @@ a frequent, costly, and insufficiently solved gap between:
 > milestone invoice**
 
 The research should establish whether this segment is a credible launch customer
-for StagePaid and identify how its real workflow differs from the current product
+for Stagenum and identify how its real workflow differs from the current product
 hypothesis.
 
 ## Decisions this research should inform
@@ -26,16 +26,16 @@ hypothesis.
 5. How are corrections distinguished from additional scope?
 6. Which evidence is already captured, and what does the homeowner actually see?
 7. Which system currently creates the invoice?
-8. Should StagePaid create invoices or hand approved billing data to an existing
+8. Should Stagenum create invoices or hand approved billing data to an existing
    system?
-9. What measurable outcome would make a provider adopt and pay for StagePaid?
+9. What measurable outcome would make a provider adopt and pay for Stagenum?
 
 ## Research method
 
 Conduct individual semi-structured interviews based on a specific recent
 project. Interviews should last approximately 30–45 minutes.
 
-Ask about past behavior before describing StagePaid. A product concept may be
+Ask about past behavior before describing Stagenum. A product concept may be
 introduced near the end to test comprehension, workflow fit, and willingness to
 take a concrete next step.
 
@@ -253,7 +253,7 @@ existing language is understood.
 
 Only after the behavioral interview, describe the concept neutrally:
 
-> StagePaid is exploring a focused workflow where a contractor defines a payable
+> Stagenum is exploring a focused workflow where a contractor defines a payable
 > project stage, attaches evidence when it is complete, and sends it to the
 > homeowner for approval or a documented Change Request. Approval prepares a
 > draft invoice for the contractor to review and issue.
@@ -264,7 +264,7 @@ Then ask:
 2. What would not fit?
 3. At which point would you stop using it and return to your current process?
 4. What would the homeowner find confusing or burdensome?
-5. Which existing tool would StagePaid need to work with?
+5. Which existing tool would Stagenum need to work with?
 6. What outcome would make this worth changing your process for?
 7. Who besides you would need to agree to a pilot?
 

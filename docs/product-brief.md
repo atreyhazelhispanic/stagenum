@@ -1,4 +1,4 @@
-# StagePaid Product Brief
+# Stagenum Product Brief
 
 **Status:** Draft
 
@@ -6,12 +6,12 @@
 
 ## Summary
 
-StagePaid is a mobile-first invoicing platform for independent professionals
+Stagenum is a mobile-first invoicing platform for independent professionals
 whose client work progresses through reviewable, billable stages. It creates a
 shared record connecting the agreed scope, evidence of completed work, client
 approval, invoicing, and payment status.
 
-StagePaid is intended to work for both field-based and remote service providers.
+Stagenum is intended to work for both field-based and remote service providers.
 Its initial launch hypothesis focuses on small residential general contractors
 and remodelers while preserving the workflow they share with later markets. See
 [Launch Customer](product/launch-customer.md).
@@ -43,7 +43,7 @@ or small service business that:
   provider continues or bills; and
 - currently coordinates that process across several disconnected tools.
 
-The service provider is expected to choose and pay for StagePaid. The client is
+The service provider is expected to choose and pay for Stagenum. The client is
 an essential participant, but should not need to purchase or learn a complex
 project-management system to review work.
 
@@ -82,9 +82,9 @@ request revisions, and understand what is due.
 
 ## Product promise
 
-**Invoice by stage. Get StagePaid.**
+**Make every stage count.**
 
-StagePaid turns each project stage into a traceable sequence:
+Stagenum turns each project stage into a traceable sequence:
 
 **Agreement → Evidence → Submission → Client decision → Invoice → Payment status**
 
@@ -160,7 +160,7 @@ The MVP will look promising if pilot users can:
 - move stages from submission to a recorded decision;
 - produce invoices that clients understand in the context of approved work;
 - reduce follow-up messages needed to clarify status or payment; and
-- choose StagePaid again for a subsequent project.
+- choose Stagenum again for a subsequent project.
 
 Specific numeric targets should be set after initial customer discovery provides
 realistic baselines.
@@ -195,7 +195,7 @@ realistic baselines.
 ## Open questions
 
 1. What establishes the initial agreement on stages and acceptance criteria?
-2. How should StagePaid represent scope changes after work begins?
+2. How should Stagenum represent scope changes after work begins?
 3. Does the MVP need payment collection, a payment-provider integration, or only
    payment-status tracking?
 4. Which evidence types are essential for both physical and remote work?
@@ -256,11 +256,11 @@ realistic baselines.
   affects the balance; delayed capture remains deferred.
 - **2026-09-14:** Allow only the provider to record partial or full external
   payments in the MVP. Clearly identify them as provider-recorded and not
-  processed or verified by StagePaid; notify the client and correct errors
+  processed or verified by Stagenum; notify the client and correct errors
   through immutable reversals rather than edits or deletion.
 - **2026-09-14:** Allow provider-initiated full or partial refunds in the MVP.
   Only confirmed results affect invoice balances; external refunds are recorded
-  but not processed by StagePaid, while processor reversals and disputes enter
+  but not processed by Stagenum, while processor reversals and disputes enter
   through authenticated server events.
 - **2026-09-14:** Treat **Overpaid** as an accurate balance state and show
   **Disposition required**, block further payment, and return the excess through
@@ -272,16 +272,16 @@ realistic baselines.
 - **2026-09-14:** Process MVP card and ACH bank payments through Stripe Connect.
   Keep ACH balances unchanged until server-confirmed success, collect sensitive
   credentials only through Stripe-provided components, and never store full
-  card or bank credentials in StagePaid.
+  card or bank credentials in Stagenum.
 - **2026-09-14:** Correct an issued invoice through a linked, auditable
   correction draft that ends in **Void**, **Replaced**, or **Cancelled**. Never
   rewrite the original invoice; resolve applied funds before completion and give
   replacements new invoice numbers.
 - **2026-09-14:** Keep the client invoice balance separate from provider
-  settlement. Disclose and itemize Stripe and StagePaid fees, use a
-  1% StagePaid transaction fee for MVP payments processed through StagePaid,
+  settlement. Disclose and itemize Stripe and Stagenum fees, use a
+  1% Stagenum transaction fee for MVP payments processed through Stagenum,
   charge no transaction fee on provider-recorded external payments, and return
-  the StagePaid fee in proportion to any client refund, reversal, or dispute
+  the Stagenum fee in proportion to any client refund, reversal, or dispute
   loss.
 - **2026-09-14:** Retain finalized financial records for a seven-year U.S.-first
   product-policy baseline, subject to legal review and required extensions.

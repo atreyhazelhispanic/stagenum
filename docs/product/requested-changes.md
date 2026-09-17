@@ -55,7 +55,7 @@ stage state.
 
 > What needs to change?
 
-The message is required. StagePaid should encourage actionable detail without
+The message is required. Stagenum should encourage actionable detail without
 forcing arbitrary length or requiring the client to use contractual language.
 
 The client may also add optional notes linked to specific submitted evidence.
@@ -140,7 +140,7 @@ erase the request from the shared history.
 
 ## Resubmission
 
-When the provider is ready, StagePaid creates a new immutable submission revision
+When the provider is ready, Stagenum creates a new immutable submission revision
 containing:
 
 - the updated evidence and deliverables;
@@ -187,7 +187,7 @@ clarifications create new events rather than rewriting the original request.
 - Repeated submission of the same request must not create duplicate events.
 - If the provider withdraws or supersedes the submission before the request is
   recorded, sending must fail safely and explain that the review changed.
-- If another decision was already recorded, StagePaid shows the current result
+- If another decision was already recorded, Stagenum shows the current result
   instead of overwriting it.
 - The client does not see a success state until the request is durably recorded.
 - A failed form submission preserves the client's message locally when it is safe

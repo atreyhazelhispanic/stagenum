@@ -21,7 +21,7 @@ new browser or device, the client verifies with a one-time code sent to the
 invited email address. Successful verification establishes a limited,
 time-bound session; no password or permanent account is required.
 
-This is passwordless access, not anonymous access. StagePaid associates the
+This is passwordless access, not anonymous access. Stagenum associates the
 review with the invited email address and a client-confirmed display name. The
 complete product decision is documented in [Client Access](client-access.md).
 
@@ -69,7 +69,7 @@ an unstructured attachment list. It may include:
 - relevant prior requested changes and responses.
 
 The client reviews a fixed submission snapshot. If the provider changes the work
-after submission, StagePaid creates a new revision rather than silently changing
+after submission, Stagenum creates a new revision rather than silently changing
 what the client was asked to approve.
 
 ### 3. Ask for one explicit decision
@@ -90,7 +90,7 @@ Approval](stage-approval.md) and [Invoice Trigger](invoice-trigger.md).
 
 #### Approval
 
-Before recording approval, StagePaid shows a concise confirmation containing:
+Before recording approval, Stagenum shows a concise confirmation containing:
 
 - project and stage;
 - submitted revision;
@@ -99,7 +99,7 @@ Before recording approval, StagePaid shows a concise confirmation containing:
 - the effect of approval.
 
 The client actively confirms rather than approving through an accidental single
-tap. StagePaid then displays a receipt and sends confirmation to both parties.
+tap. Stagenum then displays a receipt and sends confirmation to both parties.
 
 #### Request changes
 
@@ -111,11 +111,11 @@ threads and complex annotations are deferred. See [Evidence
 Feedback](evidence-feedback.md).
 
 If the requested work appears to expand the agreed scope rather than correct the
-submitted work, StagePaid should identify it as a potential scope change for the
+submitted work, Stagenum should identify it as a potential scope change for the
 provider to review—not silently treat it as an included revision. The complete
 decision is documented in [Requested Changes](requested-changes.md).
 
-StagePaid confirms that the request was sent and shows what will happen next. The
+Stagenum confirms that the request was sent and shows what will happen next. The
 stage returns to the provider without becoming invoice-eligible.
 
 ### 5. Preserve a shared record
@@ -157,7 +157,7 @@ States](invoice-payment-states.md).
 - Preserve the client's requested-change message if submission fails.
 - Make expired-link recovery self-service where it can be done safely.
 - Meet accessible color, keyboard, screen-reader, and touch-target expectations.
-- Make support and disagreement paths visible without presenting StagePaid as
+- Make support and disagreement paths visible without presenting Stagenum as
   the arbiter of the underlying contract.
 
 ## Provider controls
@@ -209,7 +209,7 @@ history.
 - A first-time client can reach a decision without assistance.
 - Clients understand what they are approving and the amount associated with it.
 - Most submitted stages receive a decision without clarification outside
-  StagePaid.
+  Stagenum.
 - Requested changes contain enough detail for the provider to act.
 - Providers trust the review history enough to use it as their project record.
 

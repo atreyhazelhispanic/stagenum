@@ -6,7 +6,7 @@
 
 ## Objective
 
-Define a secure, auditable, and practical starting architecture for StagePaid's
+Define a secure, auditable, and practical starting architecture for Stagenum's
 MVP. The design supports staged agreements, immutable review revisions,
 passwordless client access, private evidence, invoice issuance, payment
 processing, notifications, and financial history without introducing
@@ -35,7 +35,7 @@ new ADRs that supersede the affected decision.
 
 ## Architectural approach
 
-StagePaid begins as a **modular monolith** with one deployable application and
+Stagenum begins as a **modular monolith** with one deployable application and
 one primary relational database. Modules enforce business boundaries inside the
 codebase, while durable jobs isolate communication with external systems.
 
@@ -54,7 +54,7 @@ in-memory state do not select the production application stack.
 
 ## System context
 
-StagePaid serves two primary actors:
+Stagenum serves two primary actors:
 
 - **Provider:** defines projects and stages, submits work, responds to Change
   Requests, issues invoices, and reviews financial records.
@@ -72,7 +72,7 @@ The application integrates with:
 See [`diagrams/system-containers.mmd`](diagrams/system-containers.mmd) for the
 container-level view.
 
-![StagePaid system container architecture](diagrams/system-containers.svg)
+![Stagenum system container architecture](diagrams/system-containers.svg)
 
 The primary stage-to-payment path is shown in
 [`diagrams/stage-to-payment-sequence.mmd`](diagrams/stage-to-payment-sequence.mmd).
@@ -80,7 +80,7 @@ It includes the Change Request branch and distinguishes committed business
 transactions from eventually delivered notifications, documents, and processor
 outcomes.
 
-![StagePaid stage-to-payment sequence](diagrams/stage-to-payment-sequence.svg)
+![Stagenum stage-to-payment sequence](diagrams/stage-to-payment-sequence.svg)
 
 ## Runtime containers
 
@@ -100,7 +100,7 @@ direct database or unrestricted object-storage access.
 
 ### Application API
 
-The API is the only public entry point for StagePaid business operations. It:
+The API is the only public entry point for Stagenum business operations. It:
 
 - authenticates sessions and authorizes every protected operation;
 - validates commands at the trust boundary;
@@ -215,7 +215,7 @@ the issued document.
 ### Process a payment
 
 Starting a payment creates a payment-attempt record and a Stripe operation with
-the same StagePaid idempotency key. A payment attempt does not change the
+the same Stagenum idempotency key. A payment attempt does not change the
 invoice balance.
 
 An authenticated Stripe webhook records the authoritative financial event in a
@@ -244,7 +244,7 @@ embed sensitive evidence.
 
 ### Payment boundary
 
-Stripe collects sensitive card and bank credentials. StagePaid stores only the
+Stripe collects sensitive card and bank credentials. Stagenum stores only the
 minimum processor references and masked display details required for business
 records. Webhook signatures are verified against the raw request body before
 events enter the financial ledger.
@@ -273,16 +273,16 @@ credentials.
 
 ## Data ownership and retention
 
-StagePaid remains authoritative for agreements, submissions, decisions,
+Stagenum remains authoritative for agreements, submissions, decisions,
 invoices, application ledger events, and their relationships. Stripe remains
 authoritative for processor outcomes, fees, disputes, and settlement events;
-StagePaid records reconciled representations and source references.
+Stagenum records reconciled representations and source references.
 
 Retention is record-class specific. Final financial records use the documented
 seven-year U.S.-first baseline, subject to pre-launch legal review. Evidence,
 authentication telemetry, and ordinary application logs receive separate,
 purpose-limited schedules. Account closure does not silently destroy records
-that StagePaid must retain, but access and eventual deletion remain governed by
+that Stagenum must retain, but access and eventual deletion remain governed by
 documented policy.
 
 ## Observability

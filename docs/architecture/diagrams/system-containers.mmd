@@ -1,14 +1,14 @@
 flowchart LR
     provider["Provider\nWeb or future mobile client"]
     client["Client\nPasswordless web review"]
-    operator["Authorized StagePaid operator"]
+    operator["Authorized Stagenum operator"]
 
     subgraph edge["Public trust boundary"]
         web["Responsive web application\nProvider and client experiences"]
         api["Application API\nAuthentication, authorization, orchestration"]
     end
 
-    subgraph app["StagePaid private application boundary"]
+    subgraph app["Stagenum private application boundary"]
         modules["Modular monolith\nIdentity · Projects · Reviews · Billing\nPayments · Evidence · Notifications · Audit"]
         worker["Background worker\nDelivery · documents · reconciliation\nfile processing · retries"]
         outbox["Durable job transport\nTransactional outbox + queue"]

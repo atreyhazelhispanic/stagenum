@@ -4,31 +4,31 @@
 
 **Date:** 2026-09-16
 
-**Decision owners:** StagePaid maintainers
+**Decision owners:** Stagenum maintainers
 
 ## Context
 
-StagePaid clients initiate payments through Stripe, but payment processing is
+Stagenum clients initiate payments through Stripe, but payment processing is
 asynchronous. A browser can close, lose connectivity, display stale state, or
 receive an API response before the final payment outcome. Some payment methods
 remain in processing for an extended period, and later events such as refunds,
 reversals, disputes, and chargebacks can change the financial position.
 
 Neither a client callback nor a successful request to create or confirm a
-PaymentIntent proves that StagePaid has durably recorded the final result.
+PaymentIntent proves that Stagenum has durably recorded the final result.
 Polling Stripe from the client is also not a reliable foundation for ledger
 updates.
 
 Stripe webhook deliveries can be duplicated, retried, and received out of
 order. An endpoint must verify the signature against the exact raw request body,
-respond quickly, and process financial effects idempotently. StagePaid needs a
+respond quickly, and process financial effects idempotently. Stagenum needs a
 clear boundary between Stripe's processor records and its own invoice and
 ledger records.
 
 ## Decision
 
 For Stripe-processed payments, **a verified Stripe webhook event is the normal
-authority that permits StagePaid to record a processor-originated financial
+authority that permits Stagenum to record a processor-originated financial
 transition**.
 
 Client responses and synchronous Stripe API responses may update the payment
@@ -37,23 +37,23 @@ balance, create a final receipt, or trigger provider fulfilment. Those business
 effects occur only after the server accepts an authenticated Stripe event or an
 audited reconciliation process retrieves and verifies equivalent Stripe state.
 
-Stripe is authoritative for what occurred in Stripe. StagePaid's append-only
+Stripe is authoritative for what occurred in Stripe. Stagenum's append-only
 financial ledger is authoritative for how verified processor activity is
-represented and applied to StagePaid invoices, fees, refunds, disputes, and
+represented and applied to Stagenum invoices, fees, refunds, disputes, and
 provider balances.
 
 ## Decision details
 
 ### Separation of states
 
-StagePaid maintains distinct concepts:
+Stagenum maintains distinct concepts:
 
 - **Payment attempt state** describes the customer's current interaction, such
   as awaiting payment method, requiring action, processing, failed, cancelled,
   or apparently successful at the client.
 - **Verified processor event** records an authenticated Stripe event or
-  reconciliation observation that StagePaid accepted for processing.
-- **Financial ledger event** records the immutable StagePaid interpretation of
+  reconciliation observation that Stagenum accepted for processing.
+- **Financial ledger event** records the immutable Stagenum interpretation of
   money collected, refunded, reversed, disputed, fee-assessed, or otherwise
   applied.
 - **Invoice balance state** is derived from the issued invoice and applicable
@@ -61,16 +61,16 @@ StagePaid maintains distinct concepts:
 
 A client-facing success response may show that confirmation completed, but the
 invoice remains pending processor confirmation until the verified event has
-been committed to StagePaid's ledger.
+been committed to Stagenum's ledger.
 
 ### Payment initiation
 
 The server creates or updates Stripe payment resources using authenticated
 server-side API calls. The client never chooses an authoritative invoice amount,
-currency, fee, recipient, connected account, or StagePaid metadata mapping.
+currency, fee, recipient, connected account, or Stagenum metadata mapping.
 Those values are derived from the immutable invoice and server configuration.
 
-Each collection operation has a stable StagePaid attempt identifier. Stripe
+Each collection operation has a stable Stagenum attempt identifier. Stripe
 object identifiers are stored separately and constrained to the relevant
 environment, account or connected-account context, and object type.
 
@@ -87,7 +87,7 @@ server records.
 ### Client behavior
 
 Stripe-hosted or approved Stripe client components collect payment credentials.
-Raw card details and security codes never pass through StagePaid servers, logs,
+Raw card details and security codes never pass through Stagenum servers, logs,
 analytics, or databases.
 
 The client may use the PaymentIntent result to provide immediate guidance:
@@ -95,7 +95,7 @@ The client may use the PaymentIntent result to provide immediate guidance:
 - request another payment method after a failure;
 - continue required authentication;
 - display processing for a delayed method; or
-- display that confirmation succeeded and StagePaid is verifying the payment.
+- display that confirmation succeeded and Stagenum is verifying the payment.
 
 The client cannot directly update invoice or ledger state. Refreshing,
 replaying, or modifying a client request must not duplicate a charge or ledger
@@ -128,7 +128,7 @@ retired.
 
 A valid signature proves that Stripe signed the delivered bytes. It does not by
 itself prove that the referenced invoice, amount, currency, account, livemode,
-or lifecycle transition is valid for StagePaid; those checks still occur during
+or lifecycle transition is valid for Stagenum; those checks still occur during
 processing.
 
 ### Asynchronous processing
@@ -139,7 +139,7 @@ strategy from ADR-005. The processing transaction:
 - deduplicates the Stripe event identifier within its endpoint and account
   context;
 - validates the supported event type and pinned payload version;
-- correlates the Stripe object with the expected StagePaid payment attempt and
+- correlates the Stripe object with the expected Stagenum payment attempt and
   invoice;
 - verifies environment, account, amount, currency, and relevant metadata;
 - confirms that the observed transition is valid or records an exception for
@@ -154,13 +154,13 @@ internal job processing to retry without partially applying money.
 
 ### Duplicates and idempotency
 
-Stripe may deliver the same Event more than once. StagePaid stores each accepted
+Stripe may deliver the same Event more than once. Stagenum stores each accepted
 Stripe event identifier with a unique database constraint so redelivery cannot
 apply its effect twice.
 
 Stripe may also produce separate Event objects concerning the same underlying
 object and transition. Business-level uniqueness therefore additionally uses
-the relevant Stripe object identifier, event type or transition, and StagePaid
+the relevant Stripe object identifier, event type or transition, and Stagenum
 ledger relationship. Event-ID deduplication alone is insufficient.
 
 Receipt, email, balance, fee, and payout-related jobs use stable identifiers and
@@ -168,7 +168,7 @@ remain safe after worker retries or crashes.
 
 ### Ordering and current state
 
-Webhook delivery order is not guaranteed. StagePaid does not compare Stripe
+Webhook delivery order is not guaranteed. Stagenum does not compare Stripe
 event creation timestamps as a universal ordering mechanism and does not assume
 the most recently received event describes the latest object state.
 
@@ -183,7 +183,7 @@ explain the resulting balance.
 
 ### Relevant events
 
-StagePaid subscribes only to event types required by the implemented payment
+Stagenum subscribes only to event types required by the implemented payment
 and settlement model. The exact list is configuration and evolves with enabled
 Stripe products, but it will cover applicable transitions such as:
 
@@ -191,9 +191,9 @@ Stripe products, but it will cover applicable transitions such as:
 - refunds and refund failures;
 - disputes, dispute updates, and dispute closure;
 - charge reversals or other balance-changing corrections;
-- connected-account capability or payout state when StagePaid adopts Stripe
+- connected-account capability or payout state when Stagenum adopts Stripe
   Connect; and
-- other processor events required to reconcile StagePaid fees and provider
+- other processor events required to reconcile Stagenum fees and provider
   settlement.
 
 Subscribing to an event type does not mean every event creates a ledger entry.
@@ -203,23 +203,23 @@ financial effect.
 ### Refunds, disputes, and fees
 
 A refund request accepted by Stripe is not recorded as completed merely because
-the API call returned. StagePaid records the request or pending attempt, then
+the API call returned. Stagenum records the request or pending attempt, then
 uses verified events or reconciliation to append the actual refund outcome.
 
 Disputes and reversals append financial events that adjust derived balances and
 provider settlement without changing the historical invoice or successful
 payment record.
 
-StagePaid's 1% application fee and any proportional fee reversal are represented
+Stagenum's 1% application fee and any proportional fee reversal are represented
 explicitly in its ledger. Stripe processing, Connect, dispute, and other fees
 are recorded from authoritative Stripe balance or reporting data where the
-selected integration exposes them. StagePaid does not infer a provider fee from
+selected integration exposes them. Stagenum does not infer a provider fee from
 a hard-coded percentage when the actual amount is available from Stripe.
 
 ### Reconciliation path
 
 Webhooks are the normal real-time authority path, but they are not the only
-recovery mechanism. A scheduled reconciliation process compares StagePaid
+recovery mechanism. A scheduled reconciliation process compares Stagenum
 attempts and ledger records with Stripe objects and reports.
 
 Reconciliation may import a missing authoritative transition after:
@@ -255,7 +255,7 @@ The ingress endpoint returns:
   asynchronous business processing is still pending.
 
 Internal terminal processing failures do not cause an endless Stripe delivery
-loop after durable receipt. They remain visible in StagePaid's failed-job and
+loop after durable receipt. They remain visible in Stagenum's failed-job and
 reconciliation tooling with alerts and controlled replay.
 
 ## Consequences
@@ -280,7 +280,7 @@ reconciliation tooling with alerts and controlled replay.
 - The UI may briefly show payment verification after Stripe confirmation.
 - Webhook ingress, raw-body handling, secret rotation, versioning, and
   reconciliation add operational complexity.
-- StagePaid must maintain mappings among invoices, attempts, PaymentIntents,
+- Stagenum must maintain mappings among invoices, attempts, PaymentIntents,
   Charges, refunds, disputes, balance activity, and account contexts.
 - At-least-once and out-of-order delivery require careful state machines and
   database constraints.
@@ -293,7 +293,7 @@ reconciliation tooling with alerts and controlled replay.
 
 ### Trust the browser result
 
-The browser can be closed, modified, replayed, or disconnected before StagePaid
+The browser can be closed, modified, replayed, or disconnected before Stagenum
 records the result. It is useful for immediate presentation but cannot
 authoritatively update invoices or the ledger.
 
@@ -315,11 +315,11 @@ Performing ledger, document, and notification work during ingress increases
 timeouts and duplicate delivery. Durable receipt followed by asynchronous,
 idempotent processing gives a faster and more reliable acknowledgement path.
 
-### Treat Stripe as StagePaid's only ledger
+### Treat Stripe as Stagenum's only ledger
 
-Stripe records processor activity but does not encode all StagePaid invoice,
+Stripe records processor activity but does not encode all Stagenum invoice,
 agreement, external-payment, application-fee policy, and client-visible history.
-StagePaid needs an internal append-only ledger linked to Stripe's authoritative
+Stagenum needs an internal append-only ledger linked to Stripe's authoritative
 objects and events.
 
 ## Security and privacy implications
@@ -331,11 +331,11 @@ objects and events.
   time to reduce replay risk.
 - PaymentIntent client secrets are not logged, placed in URLs, or returned to an
   actor who is not authorized to pay the associated invoice.
-- Raw payment credentials never enter StagePaid systems.
+- Raw payment credentials never enter Stagenum systems.
 - Event payloads, logs, traces, and retained diagnostic data are minimized and
   redacted according to payment and privacy requirements.
 - The handler validates `livemode`, Stripe account context, object identity,
-  amount, currency, and StagePaid correlation before creating financial effects.
+  amount, currency, and Stagenum correlation before creating financial effects.
 - Operator reconciliation and replay require privileged access and produce
   audit records.
 - The endpoint is rate limited and size bounded without relying on rate limiting
@@ -360,14 +360,14 @@ The implementation will enforce this decision through:
 - contract fixtures pinned to the configured Stripe API and event versions;
 - monitoring for delivery failures, signature rejection, unprocessed-event age,
   handler failure, reconciliation differences, and ledger imbalance; and
-- periodic comparison of Stripe reports and balance activity with StagePaid's
+- periodic comparison of Stripe reports and balance activity with Stagenum's
   ledger and provider settlement views.
 
 ## Revisit triggers
 
 A new ADR should reconsider this decision when:
 
-- StagePaid adds another payment processor or supports direct external payment
+- Stagenum adds another payment processor or supports direct external payment
   imports;
 - Stripe Connect account and charge architecture changes the authoritative
   account context or event topology;
@@ -376,7 +376,7 @@ A new ADR should reconsider this decision when:
   authentication guarantees;
 - regulatory, accounting, or marketplace requirements change ledger or funds-
   flow responsibilities; or
-- StagePaid introduces authorization-and-capture, recurring billing, escrow-like
+- Stagenum introduces authorization-and-capture, recurring billing, escrow-like
   behavior, or payment methods with materially different settlement semantics.
 
 ## Related decisions and documents

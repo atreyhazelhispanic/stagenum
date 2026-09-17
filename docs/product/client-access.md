@@ -6,7 +6,7 @@
 
 ## Decision
 
-StagePaid clients can review project stages without creating a permanent
+Stagenum clients can review project stages without creating a permanent
 account. Access uses a secure email invitation followed by a one-time email code
 on first access from a new browser or device. Successful verification establishes
 a time-limited client session.
@@ -48,15 +48,15 @@ stages made available through that invitation.
 ## First-access flow
 
 1. The provider submits a stage for review.
-2. StagePaid emails the invited client with the provider name, project, stage,
+2. Stagenum emails the invited client with the provider name, project, stage,
    and reason for the message.
 3. The client opens the unique review link.
-4. StagePaid explains that a one-time code will be sent to the invited email
+4. Stagenum explains that a one-time code will be sent to the invited email
    address.
 5. The client requests the code.
-6. StagePaid sends a short-lived, single-use code.
+6. Stagenum sends a short-lived, single-use code.
 7. The client enters the code.
-8. StagePaid establishes a time-limited session scoped to that client's project
+8. Stagenum establishes a time-limited session scoped to that client's project
    access.
 9. The client enters or confirms a display name before making their first
    decision.
@@ -68,10 +68,10 @@ provided the client can still recognize it.
 ## Returning-client flow
 
 If a valid client session exists in the browser, an active invitation link opens
-the authorized review experience without another code. StagePaid requests a new
+the authorized review experience without another code. Stagenum requests a new
 code when the session is absent, expired, revoked, or otherwise invalid.
 
-A client who later manages several StagePaid projects may be offered an optional
+A client who later manages several Stagenum projects may be offered an optional
 account in a future release. The MVP should not pressure the client to register
 before or after making a decision.
 
@@ -149,7 +149,7 @@ A verified session is required to:
 - submit a requested-change message; or
 - perform any later client action that changes project state.
 
-StagePaid should require an explicit confirmation before recording a decision.
+Stagenum should require an explicit confirmation before recording a decision.
 Possession of a valid session does not turn navigation, inactivity, or viewing
 into approval.
 
@@ -184,13 +184,13 @@ The shared project history may show:
 
 Security telemetry such as network address, device signals, failed-code details,
 and abuse indicators is internal. Its collection, access, retention, and deletion
-must follow a documented privacy policy and should be limited to what StagePaid
+must follow a documented privacy policy and should be limited to what Stagenum
 actually needs.
 
 ## Abuse and privacy requirements
 
 - Rate-limit code requests and verification attempts.
-- Do not reveal whether an arbitrary email address has a StagePaid relationship.
+- Do not reveal whether an arbitrary email address has a Stagenum relationship.
 - Never place one-time codes or authenticated session credentials in analytics.
 - Avoid sending sensitive project evidence in notification emails.
 - Provide a clear path for a recipient who received an invitation in error.

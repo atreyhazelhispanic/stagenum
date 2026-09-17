@@ -4,11 +4,11 @@
 
 **Date:** 2026-09-16
 
-**Decision owners:** StagePaid maintainers
+**Decision owners:** Stagenum maintainers
 
 ## Context
 
-StagePaid coordinates projects, staged agreements, submission revisions,
+Stagenum coordinates projects, staged agreements, submission revisions,
 evidence metadata, client decisions, invoices, payment events, fees, refunds,
 and audit history. These records are strongly related, and several business
 transitions must update multiple records atomically.
@@ -26,7 +26,7 @@ needs.
 
 ## Decision
 
-StagePaid will use **PostgreSQL as its primary authoritative database**.
+Stagenum will use **PostgreSQL as its primary authoritative database**.
 
 PostgreSQL will store relational business records, module-owned persistence,
 append-only audit and financial events, transactional outbox entries, and
@@ -41,7 +41,7 @@ integrity information, lifecycle state, and storage references.
 
 ### Authority and transactions
 
-PostgreSQL is authoritative for StagePaid's internal representation of:
+PostgreSQL is authoritative for Stagenum's internal representation of:
 
 - identities, sessions, invitations, and project-scoped access grants;
 - projects, stages, agreement versions, and lifecycle state;
@@ -134,7 +134,7 @@ integrity digest where applicable, retention state, and authorization
 relationship.
 
 Raw card numbers, security codes, magnetic-stripe data, and equivalent payment
-credentials must never enter StagePaid's database, logs, or analytics. Secrets
+credentials must never enter Stagenum's database, logs, or analytics. Secrets
 and verification codes must be hashed, encrypted, tokenized, or excluded as
 appropriate to their threat model and lifetime.
 
@@ -157,7 +157,7 @@ credentials.
 
 ### Positive
 
-- ACID transactions support StagePaid's tightly related lifecycle and financial
+- ACID transactions support Stagenum's tightly related lifecycle and financial
   invariants.
 - Foreign keys, uniqueness constraints, checks, and indexes protect integrity
   beneath every application entry point.
@@ -205,7 +205,7 @@ would add risk without a demonstrated scaling benefit.
 ### Database per module
 
 Separate databases would strengthen physical ownership but introduce
-distributed consistency, replication, and operational costs before StagePaid
+distributed consistency, replication, and operational costs before Stagenum
 has independently deployed services or teams. Logical module ownership within
 one database is sufficient for the current architecture.
 
@@ -220,7 +220,7 @@ generated client APIs.
 
 Append-only audit and financial events are necessary, but reconstructing every
 domain object exclusively from events would add projection, replay, and schema-
-evolution complexity. StagePaid will use relational current state alongside
+evolution complexity. Stagenum will use relational current state alongside
 append-only history where immutability and explanation require it.
 
 ## Security and privacy implications

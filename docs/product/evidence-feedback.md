@@ -7,7 +7,7 @@
 ## Objective
 
 Let a client identify exactly which photo, file, link, checklist item, or other
-submitted evidence needs attention without turning StagePaid into a general
+submitted evidence needs attention without turning Stagenum into a general
 commenting or collaboration platform.
 
 ## Decision
@@ -39,7 +39,7 @@ the single source of truth.
 
 ### 1. Start a Change Request
 
-The client selects **Request changes** from the stage review. StagePaid opens the
+The client selects **Request changes** from the stage review. Stagenum opens the
 Change Request form with the overall message field.
 
 ### 2. Add an evidence note
@@ -48,7 +48,7 @@ For any submitted evidence item, the client may select:
 
 > **Add note to Change Request**
 
-StagePaid shows the selected item and asks:
+Stagenum shows the selected item and asks:
 
 > What should **[provider name]** know about this item?
 
@@ -57,7 +57,7 @@ remove it while the Change Request remains a draft.
 
 ### 3. Review the complete request
 
-Before sending, StagePaid presents:
+Before sending, Stagenum presents:
 
 - the required overall message;
 - every referenced evidence item;
@@ -69,7 +69,7 @@ The client can return to edit without losing the draft.
 ### 4. Send one decision
 
 Selecting **Send request** records the overall message and all evidence notes as
-one immutable Change Request event. StagePaid does not send a separate
+one immutable Change Request event. Stagenum does not send a separate
 notification for each note.
 
 ## Supported evidence references
@@ -141,7 +141,7 @@ note.
 - Removing a note from the draft does not remove its evidence item from the
   submitted revision.
 - If referenced evidence becomes unavailable before the request is sent,
-  StagePaid stops submission and explains what changed.
+  Stagenum stops submission and explains what changed.
 - Retrying the Change Request cannot create duplicate notes or events.
 - A provider withdrawal or concurrent client decision follows the same
   first-durable-event-wins rule as the parent Change Request.
@@ -154,7 +154,7 @@ note.
 - File names, captions, and alternative text remain available to assistive
   technology.
 - Note validation identifies the affected evidence item clearly.
-- StagePaid treats note text and referenced evidence as sensitive project data.
+- Stagenum treats note text and referenced evidence as sensitive project data.
 - Notifications do not reproduce sensitive evidence or every note by default.
 
 ## MVP boundary
@@ -203,5 +203,5 @@ note.
 2. Should a provider mark individual notes addressed when resubmitting, or is the
    response summary sufficient?
 3. What limits apply to note length and the number of referenced items?
-4. How should StagePaid handle an external link whose contents change outside the
+4. How should Stagenum handle an external link whose contents change outside the
    platform?

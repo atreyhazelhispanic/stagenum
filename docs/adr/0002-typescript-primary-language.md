@@ -4,11 +4,11 @@
 
 **Date:** 2026-09-16
 
-**Decision owners:** StagePaid maintainers
+**Decision owners:** Stagenum maintainers
 
 ## Context
 
-StagePaid will initially include a browser-based interface, an application API,
+Stagenum will initially include a browser-based interface, an application API,
 background workers, shared domain rules, and integrations with payment, email,
 and object-storage providers. A future native mobile application is also likely
 because providers and clients commonly interact with staged work from phones.
@@ -27,7 +27,7 @@ web and mobile interface components interchangeable.
 
 ## Decision
 
-StagePaid will use **TypeScript as its primary application language** for:
+Stagenum will use **TypeScript as its primary application language** for:
 
 - server-side domain and application modules;
 - the external API and background workers;
@@ -106,7 +106,7 @@ package explicitly targets that runtime.
 ### Financial and security boundaries
 
 Payment credentials will be handled through approved provider SDKs and hosted
-or native payment elements where applicable. StagePaid TypeScript types must not
+or native payment elements where applicable. Stagenum TypeScript types must not
 create the impression that raw card data is safe to receive or store.
 
 Stripe webhooks and other external events remain untrusted until their
@@ -160,7 +160,7 @@ language-specific types for their meaning.
 
 Plain JavaScript would reduce initial type configuration, but it provides less
 automated protection for evolving lifecycle states, financial contracts, and
-module interfaces. StagePaid accepts TypeScript's additional tooling in return
+module interfaces. Stagenum accepts TypeScript's additional tooling in return
 for stronger development-time feedback.
 
 ### Separate languages for browser and server
@@ -176,7 +176,7 @@ This decision does not reject those languages for future bounded components.
 
 Using React Native for every interface could appear to maximize component
 reuse, but web and native platforms have different interaction, accessibility,
-navigation, storage, and distribution requirements. StagePaid will share
+navigation, storage, and distribution requirements. Stagenum will share
 portable logic intentionally rather than making universal UI reuse an
 architectural requirement.
 

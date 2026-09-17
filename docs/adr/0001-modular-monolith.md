@@ -4,11 +4,11 @@
 
 **Date:** 2026-09-15
 
-**Decision owners:** StagePaid maintainers
+**Decision owners:** Stagenum maintainers
 
 ## Context
 
-StagePaid must coordinate several closely related business lifecycles:
+Stagenum must coordinate several closely related business lifecycles:
 
 - provider and passwordless client access;
 - projects, staged agreements, and scope changes;
@@ -23,7 +23,7 @@ example, one terminal client decision applies to one exact submission revision,
 an eligible approval creates at most one draft invoice, and a successful
 payment event changes the derived balance without rewriting the issued invoice.
 
-StagePaid is currently a small product with an evolving domain, one coordinated
+Stagenum is currently a small product with an evolving domain, one coordinated
 delivery team, and no measured workload that requires independently deployed
 domain services. Introducing network boundaries at this stage would add
 distributed transactions, versioned service contracts, additional deployment
@@ -32,11 +32,11 @@ units, and more failure modes before those costs solve a demonstrated problem.
 An unstructured monolith would avoid that operational complexity but would make
 it easy for route handlers, database queries, payment adapters, and business
 rules to become tightly coupled. That would weaken the auditability and domain
-invariants on which StagePaid's value depends.
+invariants on which Stagenum's value depends.
 
 ## Decision
 
-StagePaid will begin as a **TypeScript modular monolith**.
+Stagenum will begin as a **TypeScript modular monolith**.
 
 Domain capabilities will be isolated through code-level module boundaries,
 owned persistence, explicit public interfaces, and typed domain events. The
@@ -200,7 +200,7 @@ release must not consume jobs or access schema changes it cannot understand.
 ### Networked microservices from the beginning
 
 Independent services could isolate deployments, runtime failures, and scaling.
-StagePaid does not yet have the load, team topology, or independently evolving
+Stagenum does not yet have the load, team topology, or independently evolving
 domains needed to offset the cost of service discovery, network authorization,
 distributed tracing, contract compatibility, data ownership across services,
 and partial-failure handling.
@@ -213,7 +213,7 @@ stages of the product.
 A conventional controllers/services/models structure would be initially
 familiar, but business rules would likely span generic service and model
 layers. It provides weak ownership for the exact revision, invoice, and ledger
-invariants StagePaid must preserve.
+invariants Stagenum must preserve.
 
 ### Independent serverless function per operation
 
@@ -224,7 +224,7 @@ modular monolith if it preserves module and transaction boundaries.
 
 ### Event sourcing as the primary persistence model
 
-StagePaid needs immutable business and financial events, but that requirement
+Stagenum needs immutable business and financial events, but that requirement
 does not make full event sourcing necessary. Event sourcing would add replay,
 projection versioning, event-schema evolution, and operational complexity before
 the team has demonstrated a need for it.

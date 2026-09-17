@@ -6,7 +6,7 @@
 
 ## Objective
 
-Define how StagePaid represents an invoice, the money applied to it, and the
+Define how Stagenum represents an invoice, the money applied to it, and the
 events that change its balance without treating billing and payment as one
 status.
 
@@ -15,7 +15,7 @@ Trigger](invoice-trigger.md) and [Staged Work Lifecycle](staged-work-lifecycle.m
 
 ## Core decision
 
-StagePaid keeps three related concepts separate:
+Stagenum keeps three related concepts separate:
 
 1. **Invoice document state** describes whether the billing document is a draft,
    issued, or no longer collectible.
@@ -103,7 +103,7 @@ A replacement correction also prepares a new invoice draft linked to both the
 correction event and source invoice. The new draft has no official invoice
 number and is not client-visible or payable until issuance.
 
-While a correction draft is active, StagePaid shows **Correction pending** and
+While a correction draft is active, Stagenum shows **Correction pending** and
 temporarily disables new online payment attempts on the source invoice. Cancelling
 the correction draft restores payment availability without modifying the source
 invoice. The cancelled correction event remains in provider-visible history.
@@ -115,7 +115,7 @@ invoice. The cancelled correction event remains in provider-visible history.
   disposition of every applied payment before the correction can complete.
 - Pending payment or refund attempts must reach an authoritative outcome before
   correction completes.
-- StagePaid does not automatically transfer payments or credits to a replacement
+- Stagenum does not automatically transfer payments or credits to a replacement
   invoice in the MVP.
 
 ### Permitted corrections
@@ -136,7 +136,7 @@ issued.
 
 ### Void completion
 
-Before confirming a void, StagePaid displays the invoice, reason, balance, and
+Before confirming a void, Stagenum displays the invoice, reason, balance, and
 effect of making it no longer payable. Successful confirmation:
 
 1. records an immutable void event linked to the correction and invoice;
@@ -147,7 +147,7 @@ effect of making it no longer payable. Successful confirmation:
 ### Replacement completion
 
 The provider previews the complete corrected invoice and confirms issuance. In
-one recoverable, idempotent operation, StagePaid:
+one recoverable, idempotent operation, Stagenum:
 
 1. assigns a new official invoice number to the corrected invoice;
 2. issues the new immutable invoice snapshot;
@@ -158,7 +158,7 @@ one recoverable, idempotent operation, StagePaid:
 6. notifies the client that the replacement is available.
 
 The original invoice number is never reused. Numbering gaps remain visible when
-they occur; StagePaid does not renumber later invoices.
+they occur; Stagenum does not renumber later invoices.
 
 The client can view both documents, the correction reason, and which invoice is
 currently payable. Internal-only notes and cancelled correction drafts remain
@@ -175,7 +175,7 @@ stateDiagram-v2
     Issued --> Replaced: Provider issues corrected replacement
 ```
 
-`Abandoned`, `Void`, and `Replaced` are terminal document states. StagePaid never
+`Abandoned`, `Void`, and `Replaced` are terminal document states. Stagenum never
 returns the same invoice record to **Draft** or silently edits an issued invoice.
 
 ## Amount model
@@ -188,7 +188,7 @@ An invoice stores its issued monetary components, including:
 - other clearly identified adjustments; and
 - final invoice total.
 
-The final invoice total must be greater than zero before issuance. StagePaid
+The final invoice total must be greater than zero before issuance. Stagenum
 does not issue a zero-total invoice or derive **Paid** merely because nothing is
 owed. A zero-dollar stage ends with its approval and completion record unless a
 later product decision defines a separate receipt or statement workflow.
@@ -225,7 +225,7 @@ The valid applied payment amount exceeds the invoice total. The excess requires
 an explicit disposition. The MVP resolves the excess through a refund or
 reversal; unapplied client credit is deferred.
 
-StagePaid does not silently apply excess funds to another invoice, another
+Stagenum does not silently apply excess funds to another invoice, another
 stage, or future work.
 
 ## Derived payment conditions
@@ -264,15 +264,15 @@ applied to the invoice. The event records at least:
 
 ### External payment recorded
 
-The provider may record a payment received outside StagePaid, such as a check,
+The provider may record a payment received outside Stagenum, such as a check,
 cash payment, or bank transfer. The client cannot record or confirm an external
 payment in the MVP.
 
-StagePaid clearly labels the entry:
+Stagenum clearly labels the entry:
 
-> **Provider recorded—not processed by StagePaid**
+> **Provider recorded—not processed by Stagenum**
 
-The label appears in both provider and client payment history. StagePaid does
+The label appears in both provider and client payment history. Stagenum does
 not claim to have collected, held, settled, or independently verified the funds.
 
 #### Required information
@@ -283,26 +283,26 @@ The provider enters:
 - date received;
 - payment method;
 - payer name; and
-- confirmation that the payment was received outside StagePaid.
+- confirmation that the payment was received outside Stagenum.
 
 The provider may also add:
 
 - check, transfer, or other reference number; and
 - an internal or client-visible note.
 
-StagePaid records the provider identity and system timestamp automatically. A
+Stagenum records the provider identity and system timestamp automatically. A
 reference number must not be presented as processor verification.
 
 #### Confirmation
 
-Before applying the entry, StagePaid shows the invoice, entered amount, resulting
+Before applying the entry, Stagenum shows the invoice, entered amount, resulting
 balance, and any overpayment. The provider confirms:
 
-> Record **[amount]** as received outside StagePaid? This will update the invoice
-> balance and appear in the client's payment history. StagePaid did not process
+> Record **[amount]** as received outside Stagenum? This will update the invoice
+> balance and appear in the client's payment history. Stagenum did not process
 > or verify this payment.
 
-After confirmation, StagePaid creates an immutable **Payment recorded** event
+After confirmation, Stagenum creates an immutable **Payment recorded** event
 with an external source type and immediately recalculates the invoice balance.
 External payments may be partial.
 
@@ -326,23 +326,23 @@ event to the invoice history. The notification identifies:
 - amount and date received;
 - provider-recorded payment method;
 - resulting balance; and
-- the fact that StagePaid did not process or verify the payment.
+- the fact that Stagenum did not process or verify the payment.
 
-The client may contact the provider about an incorrect entry, but StagePaid does
+The client may contact the provider about an incorrect entry, but Stagenum does
 not provide a formal client dispute or confirmation workflow for external
 payments in the MVP.
 
 #### Overpayment
 
-If the entry makes the invoice **Overpaid**, StagePaid does not block an otherwise
+If the entry makes the invoice **Overpaid**, Stagenum does not block an otherwise
 valid record of money the provider says was received. It shows the excess before
 confirmation and marks the invoice **Disposition required** after recording.
-StagePaid does not silently move the excess to another invoice or stage.
+Stagenum does not silently move the excess to another invoice or stage.
 
 ### Payment reversed
 
 Some or all of a previously recorded payment no longer applies. A reversal does
-not mean StagePaid returned money. It records either:
+not mean Stagenum returned money. It records either:
 
 - the correction of a provider-recorded external payment; or
 - a processor-confirmed event that invalidated previously applied funds.
@@ -364,7 +364,7 @@ server-verified processor event. It cannot be manually selected by the provider.
 Some or all captured funds were intentionally returned to the payer. Only the
 provider can initiate a refund in the MVP.
 
-For a payment processed through StagePaid, the provider may request a full or
+For a payment processed through Stagenum, the provider may request a full or
 partial refund up to the amount that remains refundable on the originating
 payment. The provider must enter a reason and confirm:
 
@@ -376,14 +376,14 @@ payment. The provider must enter a reason and confirm:
 
 A refund request progresses independently through **Pending**, **Succeeded**, or
 **Failed**. The invoice balance changes only after the processor confirms that
-the refund succeeded. StagePaid then records an immutable refund event linked to
+the refund succeeded. Stagenum then records an immutable refund event linked to
 the original payment.
 
-StagePaid cannot electronically refund cash, checks, bank transfers, or other
-funds it did not process. The provider returns those funds outside StagePaid and
+Stagenum cannot electronically refund cash, checks, bank transfers, or other
+funds it did not process. The provider returns those funds outside Stagenum and
 records an external refund with its date, amount, method, reason, and optional
-reference. StagePaid labels the event **Provider recorded—not processed by
-StagePaid**.
+reference. Stagenum labels the event **Provider recorded—not processed by
+Stagenum**.
 
 ### Dispute recorded
 
@@ -392,7 +392,7 @@ processor event. Neither the provider nor client can manually assign a payment
 the **Disputed** condition.
 
 The dispute is tracked separately from the invoice document and remains linked
-to the originating payment. StagePaid records processor updates and displays the
+to the originating payment. Stagenum records processor updates and displays the
 disputed amount and current condition. Whether the funds remain in the valid
 applied total depends on the processor's authoritative state.
 
@@ -406,9 +406,9 @@ A successful refund, reversal, or dispute-related loss recalculates the balance
 without changing the invoice document from **Issued**. A previously **Paid**
 invoice may therefore become **Partially paid** or **Unpaid**.
 
-StagePaid notifies both provider and client when applied funds are successfully
+Stagenum notifies both provider and client when applied funds are successfully
 returned, reversed, or removed because of a dispute. The notification identifies
-the invoice, event type, amount, resulting balance, and whether StagePaid or the
+the invoice, event type, amount, resulting balance, and whether Stagenum or the
 provider recorded the event. Pending and failed refund requests are visible to
 the provider but do not tell the client that funds were returned.
 
@@ -436,11 +436,11 @@ stateDiagram-v2
 A payment attempt is not itself a payment. The MVP uses these
 processor-independent states:
 
-- **Pending:** StagePaid created the attempt, but the processor has not confirmed
+- **Pending:** Stagenum created the attempt, but the processor has not confirmed
   a result.
 - **Action required:** The client must complete an additional authentication or
   payment step.
-- **Succeeded:** The processor confirmed successful collection. StagePaid
+- **Succeeded:** The processor confirmed successful collection. Stagenum
   creates or recovers exactly one immutable payment record for the attempt.
 - **Failed:** Collection failed and no money is applied to the invoice.
 - **Cancelled:** The attempt ended before collection and no money is applied to
@@ -464,7 +464,7 @@ changes the invoice balance.
 
 ## Payment-attempt notification policy
 
-StagePaid gives the client immediate help while giving the provider prompt,
+Stagenum gives the client immediate help while giving the provider prompt,
 privacy-safe visibility without sending an alert for every retry. A failed,
 cancelled, or action-required attempt never implies that the client is unwilling
 or unable to pay.
@@ -476,7 +476,7 @@ or unable to pay.
   immediately.
 - Provider messages describe the invoice and outcome without exposing private
   decline reasons or unnecessary payment details.
-- StagePaid aggregates related attempts into one unresolved payment session and
+- Stagenum aggregates related attempts into one unresolved payment session and
   avoids sending one alert per retry.
 - A later successful payment cancels any scheduled unresolved-payment alert.
 - Notifications report financial state; they never direct the provider to stop
@@ -487,19 +487,19 @@ or unable to pay.
 When a card or other immediate-payment attempt requires action, fails, or is
 cancelled:
 
-1. StagePaid immediately tells the client what they can safely do next.
+1. Stagenum immediately tells the client what they can safely do next.
 2. The provider dashboard immediately shows **Payment not completed** without a
    disruptive outbound notification.
-3. StagePaid starts a 15-minute grace period for the invoice's unresolved
+3. Stagenum starts a 15-minute grace period for the invoice's unresolved
    payment session.
 4. A successful replacement payment during the grace period cancels the
    provider alert and produces the normal successful-payment notification.
-5. If no successful payment resolves the session within 15 minutes, StagePaid
+5. If no successful payment resolves the session within 15 minutes, Stagenum
    sends the provider one **Payment not completed** notification.
 
 Additional failed attempts during the same grace period update the operational
 history but do not restart the timer or create additional provider alerts. After
-an alert is sent, StagePaid does not repeatedly notify the provider for the same
+an alert is sent, Stagenum does not repeatedly notify the provider for the same
 session unless a materially new event or a separately scheduled invoice reminder
 occurs.
 
@@ -523,14 +523,14 @@ attempt. The provider does not receive:
 - client-entered information that is not already approved for masked display.
 
 The provider may see the method category and processor-supplied masked details
-that StagePaid is permitted to display.
+that Stagenum is permitted to display.
 
 ### ACH notifications
 
 ACH timing is not governed by the 15-minute grace period because delayed
 settlement can be normal.
 
-- When the bank payment is submitted, StagePaid immediately tells both parties
+- When the bank payment is submitted, Stagenum immediately tells both parties
   **Bank payment submitted—processing** and leaves the invoice balance unchanged.
 - The provider dashboard shows the processor's current status and expected
   timing when available.
@@ -540,7 +540,7 @@ settlement can be normal.
 - A pending ACH attempt triggers a provider follow-up only after the expected
   processor window or a separately configured operational threshold has passed.
 
-StagePaid does not promise a settlement date that the processor has not supplied
+Stagenum does not promise a settlement date that the processor has not supplied
 or confirmed.
 
 ### Successful payments
@@ -556,7 +556,7 @@ provider initiated the action and may need to intervene. The client is notified
 when the processor authoritatively confirms a successful refund. The message
 says that the refund was issued and presents processor-supplied arrival timing
 when available; it does not claim the client's bank has posted the funds.
-StagePaid does not tell the client that a failed or merely pending refund was
+Stagenum does not tell the client that a failed or merely pending refund was
 completed.
 
 ### Delivery, deduplication, and audit
@@ -575,7 +575,7 @@ The in-application history remains the authoritative user-facing status.
 
 ## Online payment methods
 
-StagePaid uses Stripe Connect as the MVP online payment processor. Online
+Stagenum uses Stripe Connect as the MVP online payment processor. Online
 payments are made toward a specific issued invoice and are credited to the
 provider's connected account according to the platform's payment configuration.
 
@@ -585,15 +585,15 @@ provider's connected account according to the platform's payment configuration.
 - **ACH bank payments:** A lower-cost option appropriate for larger contractor
   invoices, subject to processor eligibility and availability.
 
-Checks, cash, and bank transfers completed outside StagePaid use the
+Checks, cash, and bank transfers completed outside Stagenum use the
 provider-recorded external-payment workflow. They are not online payment methods
-processed by StagePaid.
+processed by Stagenum.
 
 ### Deferred
 
 - Apple Pay and Google Pay
 - Buy now, pay later and third-party financing
-- Wire transfers processed through StagePaid
+- Wire transfers processed through Stagenum
 - Additional regional payment methods
 - Cryptocurrency
 
@@ -602,7 +602,7 @@ the provider, client, currency, amount, or jurisdiction.
 
 ## Card behavior
 
-StagePaid requests immediate collection of the outstanding balance. A card
+Stagenum requests immediate collection of the outstanding balance. A card
 payment changes the invoice balance only after Stripe reports successful
 collection through a server-verified result.
 
@@ -618,11 +618,11 @@ their work.
 
 - The invoice shows **Payment processing** while the outcome is pending.
 - Pending ACH funds do not reduce the balance or mark the invoice **Paid**.
-- StagePaid applies the payment only after Stripe confirms success through an
+- Stagenum applies the payment only after Stripe confirms success through an
   authenticated server event.
 - A failed or returned ACH payment leaves or restores the appropriate balance
   and preserves the attempt and processor events in history.
-- StagePaid prevents an ordinary duplicate online payment while an attempt for
+- Stagenum prevents an ordinary duplicate online payment while an attempt for
   the full balance is actively processing, while still handling races and
   processor events idempotently.
 
@@ -632,11 +632,11 @@ received**.
 ## Payment-data security boundary
 
 Stripe-hosted or Stripe-provided payment components collect card and bank
-credentials. Sensitive payment credentials must not pass through StagePaid's
+credentials. Sensitive payment credentials must not pass through Stagenum's
 application server or be written to its database, logs, analytics, error
 reports, support tools, or notifications.
 
-StagePaid stores only the minimum operational and display-safe information
+Stagenum stores only the minimum operational and display-safe information
 needed to associate and explain a transaction, such as:
 
 - Stripe customer, connected-account, payment, and payment-method references;
@@ -646,7 +646,7 @@ needed to associate and explain a transaction, such as:
 - invoice identifier, amount, currency, and timestamps; and
 - processor outcome and reconciliation references.
 
-StagePaid never stores:
+Stagenum never stores:
 
 - full card numbers;
 - card security codes;
@@ -657,7 +657,7 @@ StagePaid never stores:
 All processor callbacks are authenticated and handled on the server. The system
 uses transport encryption, limits payment data by role, protects secrets outside
 the source repository, and redacts sensitive values from logs. Using Stripe
-reduces the sensitive data StagePaid handles but does not remove StagePaid's
+reduces the sensitive data Stagenum handles but does not remove Stagenum's
 responsibility to follow applicable security, privacy, and payment-industry
 requirements.
 
@@ -665,9 +665,9 @@ requirements.
 
 The client invoice balance and provider settlement are separate calculations. A
 successful payment applies the client's full payment amount to the invoice even
-when Stripe and StagePaid deduct fees before the provider's payout.
+when Stripe and Stagenum deduct fees before the provider's payout.
 
-StagePaid does not add an automatic card surcharge, convenience fee, or other
+Stagenum does not add an automatic card surcharge, convenience fee, or other
 payment-method fee to the client invoice in the MVP. Any future fee pass-through
 requires separate product, contractual, card-network, tax, and jurisdictional
 review.
@@ -677,48 +677,48 @@ review.
 Before accepting payments, the provider must accept an agreement that clearly
 states:
 
-- how the StagePaid platform fee is calculated;
+- how the Stagenum platform fee is calculated;
 - that Stripe processing and related fees are separate;
 - which party bears processing, refund, dispute, and currency-conversion costs;
-- how StagePaid's fee is treated after a refund, reversal, or dispute loss; and
+- how Stagenum's fee is treated after a refund, reversal, or dispute loss; and
 - where the provider can review transaction and payout records.
 
-The applicable StagePaid fee is also shown before the provider enables payment
+The applicable Stagenum fee is also shown before the provider enables payment
 collection and in the ledger for every transaction. A fee change applies only
 after the notice and acceptance required by the provider agreement and
 applicable law.
 
-### StagePaid platform fee
+### Stagenum platform fee
 
 The MVP uses a **1% percentage-only transaction fee** on payments processed
-through StagePaid. Provider-recorded external payments do not incur a StagePaid
-transaction fee because StagePaid did not process them.
+through Stagenum. Provider-recorded external payments do not incur a Stagenum
+transaction fee because Stagenum did not process them.
 
-StagePaid earns its fee only on the portion of a payment the provider ultimately
+Stagenum earns its fee only on the portion of a payment the provider ultimately
 retains:
 
-- a full client refund returns the full StagePaid fee;
-- a partial client refund returns the same percentage of the StagePaid fee;
+- a full client refund returns the full Stagenum fee;
+- a partial client refund returns the same percentage of the Stagenum fee;
 - a payment completely reversed or lost through a dispute reverses the full
-  StagePaid fee;
+  Stagenum fee;
 - a partial reversal or dispute loss reverses the fee proportionally; and
 - a dispute resolved in the provider's favor does not reverse the fee merely
   because the payment was temporarily disputed.
 
 Stripe does not automatically return a Connect application fee with every
-refund. StagePaid explicitly requests the appropriate full or proportional
+refund. Stagenum explicitly requests the appropriate full or proportional
 application-fee refund and records its authoritative result.
 
 Calculations use integer minor units. Each proportional return rounds according
 to one documented rule, and the final full disposition returns any remaining
-StagePaid fee so cumulative fee returns never exceed or fall short of the
+Stagenum fee so cumulative fee returns never exceed or fall short of the
 original fee.
 
 ### Stripe and other processor fees
 
 Stripe's original payment-processing, Connect, and currency-conversion fees may
 remain charged after a refund. Some payment methods, account pricing agreements,
-or regions may also impose a refund or dispute fee. StagePaid reads actual fees
+or regions may also impose a refund or dispute fee. Stagenum reads actual fees
 from Stripe rather than estimating them as authoritative amounts.
 
 Processor-retained or newly assessed fees are provider expenses under the MVP
@@ -732,18 +732,18 @@ For each payment and later disposition, the provider can see:
 
 - gross client payment;
 - Stripe processing and related fees;
-- StagePaid platform fee;
+- Stagenum platform fee;
 - client refunds;
-- returned StagePaid fee;
+- returned Stagenum fee;
 - reversals, disputes, and separately assessed fees;
 - net provider proceeds; and
 - payout status and processor references.
 
 The client sees the invoice amount, their payments, their refunds, and the
 resulting balance. The client does not see the provider's private processing
-costs, StagePaid fee, or net payout.
+costs, Stagenum fee, or net payout.
 
-The following ledgers illustrate the MVP's 1% StagePaid fee. Stripe amounts are
+The following ledgers illustrate the MVP's 1% Stagenum fee. Stripe amounts are
 examples; the authoritative amount comes from the provider's Stripe ledger.
 
 #### Successful payment
@@ -751,7 +751,7 @@ examples; the authoritative amount comes from the provider's Stripe ledger.
 ```text
 Gross client payment                  $5,000.00
 Stripe processing fee                  -$145.30
-StagePaid platform fee (1%)              -$50.00
+Stagenum platform fee (1%)              -$50.00
 Provider net proceeds                  $4,804.70
 Client amount applied to invoice       $5,000.00
 ```
@@ -761,9 +761,9 @@ Client amount applied to invoice       $5,000.00
 ```text
 Original gross client payment          $5,000.00
 Client refund (25%)                    -$1,250.00
-Original StagePaid fee                    $50.00
-StagePaid fee returned (25%)               $12.50
-StagePaid fee retained                     $37.50
+Original Stagenum fee                    $50.00
+Stagenum fee returned (25%)               $12.50
+Stagenum fee retained                     $37.50
 Original Stripe processing fee            $145.30
 Stripe processing fee returned               $0.00
 Client payment retained                $3,750.00
@@ -779,8 +779,8 @@ payment and refund amounts, not from provider fees.
 ```text
 Original gross client payment          $5,000.00
 Client refund                          -$5,000.00
-StagePaid fee returned                    $50.00
-StagePaid fee retained                     $0.00
+Stagenum fee returned                    $50.00
+Stagenum fee retained                     $0.00
 Original Stripe processing fee            $145.30
 Stripe processing fee returned               $0.00
 Provider's remaining processing cost     -$145.30
@@ -793,7 +793,7 @@ of the illustrative values above.
 
 ## Financial-record retention and export
 
-StagePaid uses a seven-year baseline retention period for finalized financial
+Stagenum uses a seven-year baseline retention period for finalized financial
 records in its U.S.-first MVP. This is a product-policy baseline subject to
 legal, tax, accounting, and jurisdictional review before launch; it is not a
 claim that one period satisfies every legal requirement.
@@ -803,13 +803,13 @@ The retention period begins after the later of:
 - the invoice's final financial event; or
 - the associated project's closure date.
 
-StagePaid retains these records during the applicable period:
+Stagenum retains these records during the applicable period:
 
 - issued, void, and replaced invoice snapshots;
 - invoice correction events;
 - payments and provider-recorded external payments;
 - payment reversals, refunds, and disputes;
-- Stripe and StagePaid fee entries;
+- Stripe and Stagenum fee entries;
 - invoice balance and provider settlement entries;
 - payout and reconciliation references; and
 - the actors, timestamps, currencies, and relationships needed to explain the
@@ -820,19 +820,19 @@ silently rewrites earlier history.
 
 ### Extensions and deletion
 
-StagePaid retains a record beyond seven years when a legal hold, unresolved
+Stagenum retains a record beyond seven years when a legal hold, unresolved
 dispute, tax or reporting obligation, court order, agreement, or applicable
 jurisdiction requires it. The reason and applicable scope are access-controlled
 and auditable.
 
 Closing a provider account or ending a passwordless client's access does not
 immediately delete financial records still within their retention period.
-StagePaid minimizes or removes profile, session, analytics, support, and
+Stagenum minimizes or removes profile, session, analytics, support, and
 operational data that is no longer needed and is not part of a required record.
 
-When no retention purpose remains, StagePaid securely deletes or irreversibly
+When no retention purpose remains, Stagenum securely deletes or irreversibly
 anonymizes the record according to a documented disposal process. Where
-practical, StagePaid gives the affected user notice and an opportunity to export
+practical, Stagenum gives the affected user notice and an opportunity to export
 their records before ordinary deletion.
 
 ### Export
@@ -844,7 +844,7 @@ The provider can export:
 - PDF copies of issued invoices, corrections, and payment or refund receipts.
 
 The client can export PDF copies of invoices, corrections, and receipts relevant
-to them. A client export does not expose the provider's Stripe costs, StagePaid
+to them. A client export does not expose the provider's Stripe costs, Stagenum
 fees, internal notes, net proceeds, or unrelated records.
 
 Exports include stable identifiers, timestamps, amounts, currency, source type,
@@ -854,8 +854,8 @@ than modifying a previously downloaded file.
 
 ### Account closure access
 
-Before ordinary account closure, StagePaid prompts the provider to download
-their financial records. During the required retention period, StagePaid
+Before ordinary account closure, Stagenum prompts the provider to download
+their financial records. During the required retention period, Stagenum
 maintains a documented process for an authorized former user to request records
 they are legally entitled to receive, subject to identity verification and
 privacy boundaries.
@@ -872,15 +872,15 @@ links to the current:
 - payment-processing terms; and
 - financial-record retention and export policy.
 
-StagePaid records the provider identity, timestamp, document versions, and
+Stagenum records the provider identity, timestamp, document versions, and
 affirmative acceptance required for account creation or payment enablement. A
 material change receives appropriate notice and renewed acknowledgement when
 required.
 
-A client does not need to create a permanent StagePaid account. Before a client
-takes a consequential action such as submitting a payment, StagePaid presents
+A client does not need to create a permanent Stagenum account. Before a client
+takes a consequential action such as submitting a payment, Stagenum presents
 the relevant client terms, privacy notice, payment authorization, refund
-information, and retention summary with persistent links. StagePaid records the
+information, and retention summary with persistent links. Stagenum records the
 client's affirmative acknowledgement with the action, confirmed identity,
 timestamp, and document versions.
 
@@ -898,7 +898,7 @@ The domain model supports more than one payment event per invoice so that
 partial payments, retries, and mixed payment sources remain representable.
 
 For the first MVP interface, the primary client action is **Pay balance**. The
-client cannot intentionally enter a smaller online payment amount. StagePaid can
+client cannot intentionally enter a smaller online payment amount. Stagenum can
 still represent a partial balance when it results from a provider-recorded
 external payment, a refund, a reversal, a dispute, or an exceptional processor
 event.
@@ -908,7 +908,7 @@ partial-payment workflow to ship in the first release.
 
 ## Overpayment handling
 
-When an invoice becomes **Overpaid**, StagePaid:
+When an invoice becomes **Overpaid**, Stagenum:
 
 1. preserves the successful payment record;
 2. shows the invoice total, amount paid, and excess separately;
@@ -918,13 +918,13 @@ When an invoice becomes **Overpaid**, StagePaid:
 6. prevents silent allocation of the excess; and
 7. records the eventual refund or reversal.
 
-If StagePaid processed the excess, the provider returns it through the refund
+If Stagenum processed the excess, the provider returns it through the refund
 workflow. If the excess came from an external payment, the provider returns the
-money outside StagePaid and records an external refund. The invoice remains
+money outside Stagenum and records an external refund. The invoice remains
 **Overpaid** with **Disposition required** until a successful refund or reversal
 reduces the valid applied amount.
 
-When the disposition is complete, StagePaid recalculates the balance:
+When the disposition is complete, Stagenum recalculates the balance:
 
 - an applied amount equal to the invoice total becomes **Paid**;
 - an applied amount between zero and the invoice total becomes **Partially
@@ -932,12 +932,12 @@ When the disposition is complete, StagePaid recalculates the balance:
 - an applied amount of zero becomes **Unpaid**.
 
 The fixed **Pay balance** action prevents an ordinary client from intentionally
-overpaying online. StagePaid must still handle simultaneous attempts, duplicate
+overpaying online. Stagenum must still handle simultaneous attempts, duplicate
 real-world payments, exceptional processor events, and provider-recorded
 external payments without hiding money that was actually received.
 
 Holding an unapplied client credit is deferred until its accounting, legal, and
-processor requirements are defined. StagePaid does not apply the excess to
+processor requirements are defined. Stagenum does not apply the excess to
 another invoice, stage, or future project in the MVP.
 
 ## Refund and reversal rules
@@ -1020,7 +1020,7 @@ The client sees:
 - Idempotent processor event handling
 - Processor-hosted collection of sensitive payment credentials
 - Separate client-balance and provider-settlement ledgers
-- Proportional return of the StagePaid fee after refunds, reversals, and dispute
+- Proportional return of the Stagenum fee after refunds, reversals, and dispute
   losses
 - Auditable void and replacement corrections for issued invoices
 - Seven-year financial-record retention baseline with legal-hold extensions
@@ -1065,7 +1065,7 @@ The client sees:
   disposition event.
 - Only the provider initiates refunds, and only processor-confirmed successful
   refunds change the balance.
-- StagePaid never claims to electronically refund funds it did not process.
+- Stagenum never claims to electronically refund funds it did not process.
 - Processor reversals and disputes originate only from authenticated server
   events.
 - Successful refunds, reversals, and dispute-related losses recalculate the
@@ -1084,13 +1084,13 @@ The client sees:
   invoice without changing its issued snapshot.
 - Duplicate requests or processor notifications cannot apply money twice.
 - Card and ACH credentials are collected by Stripe-provided components and are
-  never stored by StagePaid.
+  never stored by Stagenum.
 - A pending ACH submission remains **Payment processing** and does not reduce
   the invoice balance.
 - Client copy distinguishes a submitted bank payment from confirmed receipt.
 - Provider fee terms are disclosed before payment collection is enabled and
-  every transaction itemizes Stripe fees, the StagePaid fee, and net proceeds.
-- A refund, reversal, or dispute loss returns the StagePaid fee in the same
+  every transaction itemizes Stripe fees, the Stagenum fee, and net proceeds.
+- A refund, reversal, or dispute loss returns the Stagenum fee in the same
   proportion as the payment amount returned or lost.
 - Provider fees never change the amount applied to the client invoice.
 - Required financial records remain immutable and available under the
@@ -1114,7 +1114,7 @@ The client sees:
 - External-payment corrections preserve the original entry through a reversal
   and, when necessary, a new corrected record.
 - The client can see and is notified of external payment and reversal events,
-  including the fact that StagePaid did not process or verify them.
+  including the fact that Stagenum did not process or verify them.
 - MVP inclusions and deferred accounting features are explicit.
 
 ## Planned follow-up: 1.1.0

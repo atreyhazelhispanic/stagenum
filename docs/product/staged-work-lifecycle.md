@@ -6,13 +6,13 @@
 
 ## Objective
 
-Define how a StagePaid project moves from initial setup through documented work,
+Define how a Stagenum project moves from initial setup through documented work,
 client review, invoicing, and payment without using one overloaded status to
 represent several independent facts.
 
 ## Core decision
 
-StagePaid models work, review, Change Requests, billing, and payment as related
+Stagenum models work, review, Change Requests, billing, and payment as related
 but distinct lifecycles.
 
 For example, a stage may simultaneously be:
@@ -76,7 +76,7 @@ or acceptance criteria. Identifying a potential scope change does not create one
 ### Approval
 
 An immutable client decision accepting one submission revision as completing its
-stage for StagePaid workflow purposes.
+stage for Stagenum workflow purposes.
 
 ### Invoice
 
@@ -284,7 +284,7 @@ state.
 Changing the response state never rewrites the client's original message or
 evidence notes.
 
-If the client sends another Change Request on the response revision, StagePaid
+If the client sends another Change Request on the response revision, Stagenum
 creates a new CR identifier. The earlier Change Request remains **Response
 submitted** and links to the newer request; only client approval marks it
 **Resolved**.
@@ -364,7 +364,7 @@ be both **Partially paid** and **Overdue**.
 
 Payment and refund records are immutable financial events. Their valid totals
 derive the invoice balance; **Refunded** is not used as a replacement invoice
-state. StagePaid must not silently apply an overpayment to another invoice or
+state. Stagenum must not silently apply an overpayment to another invoice or
 future stage.
 
 ### Primary transitions
@@ -431,7 +431,7 @@ underlying state remains visible when the summary could hide important context.
 6. Provider submits revision 1; the stage becomes **Under review** and the
    submission becomes **Awaiting review**.
 7. Client approves revision 1; the stage becomes **Approved**.
-8. StagePaid creates one **Draft** invoice and marks the stage **Ready for
+8. Stagenum creates one **Draft** invoice and marks the stage **Ready for
    billing**.
 9. Provider reviews and issues the invoice; billing becomes **Invoiced** and the
    invoice becomes **Issued**.
@@ -449,7 +449,7 @@ underlying state remains visible when the summary could hide important context.
 4. Provider submits revision 2 linked to `CR-001`; the stage returns to **Under
    review**.
 5. Client approves revision 2.
-6. StagePaid creates the draft invoice from the approved stage state.
+6. Stagenum creates the draft invoice from the approved stage state.
 
 ## Withdrawal path
 

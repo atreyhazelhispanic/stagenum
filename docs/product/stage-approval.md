@@ -13,7 +13,7 @@ without overstating its legal effect or confusing it with invoicing or payment.
 
 A client approves a specific, fixed submission revision for one project stage.
 Approval records that the client reviewed the submission and accepted it as
-completing the described stage for StagePaid workflow purposes.
+completing the described stage for Stagenum workflow purposes.
 
 Approval:
 
@@ -31,9 +31,9 @@ Approval does not, by itself:
 - modify the agreed scope, stage amount, or schedule;
 - approve a later submission or a different stage;
 - operate as a waiver of unrelated claims or contract rights;
-- constitute a formal electronic signature unless StagePaid later implements a
+- constitute a formal electronic signature unless Stagenum later implements a
   compliant, explicitly presented signature workflow; or
-- make StagePaid a party to or arbiter of the underlying agreement.
+- make Stagenum a party to or arbiter of the underlying agreement.
 
 ## Client-facing review action
 
@@ -61,7 +61,7 @@ approval.
 ### Acknowledgement
 
 > By approving, you confirm that you reviewed this submission and accept it as
-> completing the stage described above. StagePaid will prepare a draft invoice
+> completing the stage described above. Stagenum will prepare a draft invoice
 > for **[provider name]** to review. This does not send an invoice or record
 > payment.
 
@@ -120,7 +120,7 @@ The provider cannot edit the approved submission snapshot. New or corrected work
 requires a new recorded revision or a separately agreed scope change.
 
 Neither party can silently delete or rewrite an approval event. If an approval
-was made by mistake, StagePaid should provide a later corrective workflow that
+was made by mistake, Stagenum should provide a later corrective workflow that
 records what changed, who requested it, and why while preserving the original
 event.
 
@@ -134,7 +134,7 @@ behavior are defined.
 - If the provider withdraws or supersedes the submission before confirmation is
   recorded, approval must fail safely and explain that the review changed. See
   [Submission Withdrawal](submission-withdrawal.md).
-- If another valid decision has already been recorded, StagePaid shows the
+- If another valid decision has already been recorded, Stagenum shows the
   resulting current state instead of overwriting it.
 - A network or service failure must not show success until the approval is
   durably recorded.

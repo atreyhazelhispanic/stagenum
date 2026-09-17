@@ -6,11 +6,11 @@
 
 ## Decision
 
-StagePaid's initial launch customer is a small residential general contractor or
+Stagenum's initial launch customer is a small residential general contractor or
 remodeler who manages multi-stage projects directly with homeowners and collects
 payment at defined milestones.
 
-This is a market-entry focus, not a permanent product boundary. StagePaid retains
+This is a market-entry focus, not a permanent product boundary. Stagenum retains
 a profession-neutral foundation so it can later expand to specialty trades,
 installers, and remote independent professionals when evidence supports doing so.
 
@@ -37,7 +37,7 @@ administrative cost of delayed approvals, disputed completion, and slow mileston
 payments.
 
 The homeowner is a required participant and beneficiary, but is not expected to
-purchase StagePaid.
+purchase Stagenum.
 
 ## Ideal customer profile
 
@@ -58,7 +58,7 @@ The strongest initial fit is a residential contractor or remodeler that:
 
 ## Best initial project types
 
-StagePaid should first be tested on projects with visible, client-understandable
+Stagenum should first be tested on projects with visible, client-understandable
 stages, such as:
 
 - kitchen or bathroom remodeling;
@@ -73,7 +73,7 @@ templates promised for the MVP.
 
 ## Poor initial fit
 
-StagePaid is not initially optimized for:
+Stagenum is not initially optimized for:
 
 - single-visit or low-value service calls;
 - businesses paid entirely at the point of service;
@@ -103,7 +103,7 @@ The target provider commonly:
 6. creates an invoice in a separate accounting or field-service tool; and
 7. follows up again when approval or payment status is unclear.
 
-The fragmentation—not the absence of any single feature—is the problem StagePaid
+The fragmentation—not the absence of any single feature—is the problem Stagenum
 intends to solve.
 
 ## Core pain hypothesis
@@ -147,7 +147,7 @@ The homeowner wants to:
 
 ## Adoption trigger
 
-A provider is most likely to seek StagePaid after experiencing one or more of:
+A provider is most likely to seek Stagenum after experiencing one or more of:
 
 - a milestone invoice delayed by an unclear approval;
 - a dispute about whether work was complete;
@@ -162,12 +162,12 @@ A provider is most likely to seek StagePaid after experiencing one or more of:
 
 ### Short form
 
-> StagePaid helps residential contractors document each project stage, get a
+> Stagenum helps residential contractors document each project stage, get a
 > clear homeowner decision, and turn approved work into an invoice draft.
 
 ### Differentiation
 
-StagePaid is not positioned as a full construction-management or accounting
+Stagenum is not positioned as a full construction-management or accounting
 suite. Its initial differentiation is the traceable handoff from stage evidence
 to client decision to billing readiness.
 
@@ -202,7 +202,7 @@ Ask about actual recent behavior before showing the proposed product:
 9. Where did the process slow down or require repeated follow-up?
 10. What tools were involved, and which record did you trust afterward?
 
-Avoid asking whether the participant “likes” StagePaid until their existing
+Avoid asking whether the participant “likes” Stagenum until their existing
 behavior and pain are understood.
 
 ## Validation signals
@@ -214,7 +214,7 @@ Evidence supporting this launch segment would include:
 - providers already taking photos or maintaining evidence for client confidence;
 - recurring confusion between requested corrections and expanded scope;
 - willingness to invite a real homeowner into a lightweight review flow;
-- willingness to pilot StagePaid on an upcoming project; and
+- willingness to pilot Stagenum on an upcoming project; and
 - willingness to pay that is connected to a demonstrated business outcome.
 
 ## Disconfirming signals
@@ -233,7 +233,7 @@ Reconsider the segment or product approach if discovery shows that:
 
 ## Initial validation threshold
 
-Before treating the segment as validated, StagePaid should:
+Before treating the segment as validated, Stagenum should:
 
 - interview multiple qualified providers across more than one residential project
   type;
@@ -271,9 +271,9 @@ segment.
    employee?
 3. What currently counts as acceptable evidence to homeowners?
 4. How formal are milestone definitions before work begins?
-5. Which existing tool owns invoicing, and should StagePaid complement or replace
+5. Which existing tool owns invoicing, and should Stagenum complement or replace
    it initially?
 6. What event makes the provider willing to invite a homeowner into a new tool?
 7. How much contractor-specific language is necessary for the product to feel
    credible?
-8. What measurable outcome would make the provider pay for StagePaid?
+8. What measurable outcome would make the provider pay for Stagenum?

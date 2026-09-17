@@ -4,18 +4,18 @@
 
 **Date:** 2026-09-16
 
-**Decision owners:** StagePaid maintainers
+**Decision owners:** Stagenum maintainers
 
 ## Context
 
-StagePaid clients need to review evidence, approve an exact submission revision,
+Stagenum clients need to review evidence, approve an exact submission revision,
 request changes, and pay invoices. Requiring every client to create and manage a
 permanent account would add friction for people who may participate in only one
 project.
 
 An emailed review link alone is convenient but acts as a bearer credential that
 can be forwarded, leaked through browser history or referrers, or opened on a
-shared device. StagePaid needs greater confidence that the actor controls the
+shared device. Stagenum needs greater confidence that the actor controls the
 invited email address without claiming to establish legal identity.
 
 Authentication and authorization must remain separate. Verifying access to an
@@ -26,7 +26,7 @@ lifecycle rules.
 
 ## Decision
 
-StagePaid will provide **passwordless client access using a high-entropy email
+Stagenum will provide **passwordless client access using a high-entropy email
 invitation plus a short-lived, single-use email verification code** on first
 access from a browser without a valid session.
 
@@ -44,9 +44,9 @@ service.
 
 ### Principal, invitation, grant, and session
 
-StagePaid models these concepts separately:
+Stagenum models these concepts separately:
 
-- A **client principal** is StagePaid's internal identity record for an invited
+- A **client principal** is Stagenum's internal identity record for an invited
   client and normalized email address within the appropriate relationship.
 - An **invitation** is a revocable route into one intended access flow.
 - A **project grant** defines the provider, project, role, allowed capabilities,
@@ -62,7 +62,7 @@ invitation token alone does not authorize protected content on a new browser.
 
 ### Invitation issuance
 
-The provider supplies and confirms the intended client email address. StagePaid
+The provider supplies and confirms the intended client email address. Stagenum
 normalizes it for delivery and comparison without applying unsafe assumptions
 that distinct provider-specific mailbox forms always represent one person.
 
@@ -93,7 +93,7 @@ to explain the verification flow. Sensitive evidence, financial details, and
 protected project content remain unavailable.
 
 If the browser already has a valid session for that exact active grant, the
-client may continue without another code. Otherwise, StagePaid offers to send a
+client may continue without another code. Otherwise, Stagenum offers to send a
 code to the invitation's email address, displayed only in a safely masked form.
 
 Responses do not reveal whether arbitrary emails, projects, or invitations
@@ -112,7 +112,7 @@ Each requested verification challenge:
 - is invalidated or superseded according to the resend policy; and
 - cannot be used to authenticate a different invitation or project.
 
-Codes are authentication secrets. StagePaid never stores or logs them in plain
+Codes are authentication secrets. Stagenum never stores or logs them in plain
 text. Because human-entered codes have a small search space, storage uses a
 keyed verifier with a server-held secret in addition to strict online attempt
 limits; an ordinary fast unsalted hash would not adequately protect a leaked
@@ -248,7 +248,7 @@ requires authenticated authority and creates an audit event.
 
 ### Logging and security telemetry
 
-StagePaid records security-relevant events such as invitation issuance,
+Stagenum records security-relevant events such as invitation issuance,
 replacement, revocation, code request, verification success, bounded failure
 signals, session creation, session revocation, and authorization denial.
 
@@ -322,7 +322,7 @@ requirements.
 ### Treat email verification as legal identity or signature
 
 Inbox control does not prove government identity, exclusive account control, or
-compliance with every electronic-signature requirement. StagePaid records
+compliance with every electronic-signature requirement. Stagenum records
 authentication and explicit action without making that unsupported claim.
 
 ## Security and privacy implications
@@ -373,7 +373,7 @@ The implementation will enforce this decision through:
 
 A new ADR should reconsider this decision when:
 
-- clients commonly participate in multiple concurrent StagePaid projects;
+- clients commonly participate in multiple concurrent Stagenum projects;
 - permanent client accounts or organization membership become a validated need;
 - legal, contractual, payment, or project-risk requirements demand stronger
   identity proofing, MFA, passkeys, or electronic signatures;

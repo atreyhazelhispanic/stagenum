@@ -1,4 +1,4 @@
-# StagePaid Clickable Prototype
+# Stagenum Clickable Prototype
 
 This directory contains a static, mobile-first product prototype backed entirely
 by synthetic repository fixtures. It does not authenticate users, upload files,

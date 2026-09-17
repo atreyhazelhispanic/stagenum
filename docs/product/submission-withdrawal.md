@@ -34,7 +34,7 @@ workflow.
 
 Opening a review does not mean the client has made a decision. Preventing
 withdrawal after a simple view would pressure providers to leave known mistakes
-in front of the client or resolve them outside StagePaid.
+in front of the client or resolve them outside Stagenum.
 
 The client is protected by immediate notice, a visible explanation, and a
 preserved record. The provider is protected from an outdated submission being
@@ -67,7 +67,7 @@ submission.
 > Reason for withdrawal
 
 The explanation is required and client-visible. Example reasons may help the
-provider write a useful message, but StagePaid should not reduce the explanation
+provider write a useful message, but Stagenum should not reduce the explanation
 to a private status code.
 
 Suggested reasons include:
@@ -116,7 +116,7 @@ After withdrawal, the provider sees:
 
 ## Client experience
 
-StagePaid notifies the client promptly that the provider withdrew the submission.
+Stagenum notifies the client promptly that the provider withdrew the submission.
 The message identifies the provider, project, stage, revision, and explanation,
 but does not embed sensitive evidence.
 
@@ -150,7 +150,7 @@ defined with the broader project lifecycle.
 
 ## Resubmission after withdrawal
 
-The provider prepares and submits a new immutable revision. StagePaid links the
+The provider prepares and submits a new immutable revision. Stagenum links the
 new revision to the withdrawn one and may carry forward reusable stage content,
 but it does not overwrite the withdrawn snapshot.
 
@@ -196,7 +196,7 @@ creates a new visible event.
 - A failed attempt preserves the provider's explanation when safe.
 - If a client decision wins concurrently, the provider sees that decision and
   the withdrawal is not recorded.
-- Notification failure does not reverse withdrawal; StagePaid retains a
+- Notification failure does not reverse withdrawal; Stagenum retains a
   recoverable delivery state and retries safely.
 
 ## Customer-service requirements
@@ -249,7 +249,7 @@ creates a new visible event.
 ## Remaining decisions
 
 1. Which event qualifies as “viewed” for provider-facing status?
-2. How long should StagePaid retry a failed withdrawal notification?
+2. How long should Stagenum retry a failed withdrawal notification?
 3. What working state should the stage enter after withdrawal?
 4. What corrective workflow handles a mistaken approval?
 5. How is an entire stage or project cancelled?

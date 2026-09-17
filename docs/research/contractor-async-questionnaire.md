@@ -93,14 +93,14 @@ phase, milestone, or progress payment.
 
 Please answer the questions above before reading this section.
 
-StagePaid is exploring a focused workflow where a contractor defines a payable
+Stagenum is exploring a focused workflow where a contractor defines a payable
 project stage, attaches evidence when it is complete, and sends it to the
 homeowner for approval or a documented Change Request. Approval prepares a draft
 invoice for the contractor to review and issue.
 
 17. Which part fits the project you described, what would not fit, and what might
     the homeowner find confusing or burdensome?
-18. Which existing tool would StagePaid need to work with, and what measurable
+18. Which existing tool would Stagenum need to work with, and what measurable
     result would make changing your process worthwhile?
 
 ## Follow-up

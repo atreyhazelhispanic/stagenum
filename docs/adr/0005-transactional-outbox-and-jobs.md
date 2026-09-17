@@ -4,11 +4,11 @@
 
 **Date:** 2026-09-16
 
-**Decision owners:** StagePaid maintainers
+**Decision owners:** Stagenum maintainers
 
 ## Context
 
-StagePaid must perform work that cannot safely or efficiently finish inside an
+Stagenum must perform work that cannot safely or efficiently finish inside an
 HTTP request or database transaction. Examples include sending client review
 links, delivering payment notifications, generating receipts and exports,
 processing uploaded evidence, and reconciling external provider events.
@@ -21,12 +21,12 @@ state that never committed. This is the dual-write problem.
 
 Queues and providers normally deliver messages at least once. Requests,
 webhooks, workers, and network responses can be retried after an operation has
-already succeeded. StagePaid therefore cannot depend on exactly-once delivery
+already succeeded. Stagenum therefore cannot depend on exactly-once delivery
 or assume that receiving a message once means its effect occurred once.
 
 ## Decision
 
-StagePaid will use a **PostgreSQL transactional outbox as the durable source of
+Stagenum will use a **PostgreSQL transactional outbox as the durable source of
 asynchronous job intent** and **idempotent background workers** to perform side
 effects after the originating business transaction commits.
 
@@ -154,7 +154,7 @@ Global ordering is not guaranteed. Where order matters, jobs use an aggregate
 sequence, expected version, or state precondition. A handler receiving obsolete
 work may safely no-op, delay, or supersede it according to the job contract.
 
-StagePaid will avoid depending on strict queue ordering for correctness. Jobs
+Stagenum will avoid depending on strict queue ordering for correctness. Jobs
 for different projects or aggregates may run concurrently.
 
 ### Managed queue integration
@@ -245,12 +245,12 @@ not yet visible. This reverses rather than solves the dual-write problem.
 
 Managed queues provide valuable delivery and scaling features, but message
 retention and acknowledgement do not necessarily provide the business linkage,
-replay history, or atomic relationship with PostgreSQL changes StagePaid needs.
+replay history, or atomic relationship with PostgreSQL changes Stagenum needs.
 
 ### Assume exactly-once delivery
 
 Crashes and ambiguous network outcomes make end-to-end exactly-once execution
-unavailable across PostgreSQL and external providers. StagePaid instead designs
+unavailable across PostgreSQL and external providers. Stagenum instead designs
 for at-least-once delivery with idempotent effects.
 
 ### Change-data capture from business tables

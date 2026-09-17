@@ -90,7 +90,7 @@ export default function Home() {
     const root = document.documentElement;
     const nextTheme = root.classList.contains('dark') ? 'light' : 'dark';
     root.classList.toggle('dark', nextTheme === 'dark');
-    localStorage.setItem('stagepaid-theme', nextTheme);
+    localStorage.setItem('stagenum-theme', nextTheme);
   }
 
   function resetDemo() {
@@ -116,7 +116,7 @@ export default function Home() {
             </div>
             <div>
               <p className="font-heading text-[15px] font-bold tracking-tight">
-                StagePaid
+                Stagenum
               </p>
               <p className="text-[11px] font-medium text-muted-foreground">
                 {isClientScreen ? 'Client review' : 'Provider workspace'}
@@ -510,7 +510,7 @@ function StageWorkspace({
             Ready for client review
           </h1>
           <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-slate-600 dark:text-slate-300">
-            Morgan &amp; Casey R. can now review this exact revision. StagePaid
+            Morgan &amp; Casey R. can now review this exact revision. Stagenum
             has simulated the passwordless review notification for this demo.
           </p>
           <div className="mt-7 rounded-2xl bg-slate-50 p-4 text-left dark:bg-slate-950">
@@ -742,7 +742,7 @@ function ClientReview({
           <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-teal-100 text-teal-700 dark:bg-teal-950 dark:text-teal-300"><CheckCircle2 className="size-7" /></span>
           <Badge className="mt-5 bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300">Revision 1 approved</Badge>
           <h1 className="mt-4 font-heading text-3xl font-bold tracking-tight text-slate-950 dark:text-white">Stage approved</h1>
-          <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-slate-600 dark:text-slate-300">The approval record points to revision 1. StagePaid prepared a draft invoice for provider review—nothing has been issued yet.</p>
+          <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-slate-600 dark:text-slate-300">The approval record points to revision 1. Stagenum prepared a draft invoice for provider review—nothing has been issued yet.</p>
           <div className="mt-7 grid grid-cols-2 gap-3 rounded-2xl bg-slate-50 p-5 text-left dark:bg-slate-950"><div><p className="text-xs text-slate-500">Approved revision</p><p className="mt-1 font-semibold">Revision 1</p></div><div><p className="text-xs text-slate-500">Draft invoice</p><p className="mt-1 font-mono font-semibold">{stage.amount.display}</p></div></div>
           <div className="mt-7 grid gap-3 sm:grid-cols-2"><Button variant="outline" size="lg" onClick={onReset}>Reset demo</Button><Button size="lg" className="bg-teal-600 text-white hover:bg-teal-500" onClick={onContinueAsProvider}>Continue as provider <ArrowRight data-icon="inline-end" /></Button></div>
         </section>
@@ -1077,7 +1077,7 @@ function RevisionTwoReview({
           <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-teal-100 text-teal-700 dark:bg-teal-950 dark:text-teal-300"><CheckCircle2 className="size-7" /></span>
           <Badge className="mt-5 bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300">Revision 2 approved</Badge>
           <h1 className="mt-4 font-heading text-3xl font-bold tracking-tight text-slate-950 dark:text-white">Stage approved</h1>
-          <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-slate-600 dark:text-slate-300">The approval record points to revision 2. StagePaid has prepared a draft invoice for the provider to review—nothing has been issued yet.</p>
+          <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-slate-600 dark:text-slate-300">The approval record points to revision 2. Stagenum has prepared a draft invoice for the provider to review—nothing has been issued yet.</p>
           <div className="mt-7 grid grid-cols-2 gap-3 rounded-2xl bg-slate-50 p-5 text-left dark:bg-slate-950"><div><p className="text-xs text-slate-500">Approved revision</p><p className="mt-1 font-semibold">Revision 2</p></div><div><p className="text-xs text-slate-500">Draft invoice</p><p className="mt-1 font-mono font-semibold">{stage.amount.display}</p></div></div>
           <div className="mt-7 grid gap-3 sm:grid-cols-2"><Button variant="outline" size="lg" onClick={onReset}>Reset demo</Button><Button size="lg" className="bg-teal-600 text-white hover:bg-teal-500" onClick={onContinueAsProvider}>Continue as provider <ArrowRight data-icon="inline-end" /></Button></div>
         </section>
@@ -1184,7 +1184,7 @@ function InvoiceFlow({
           <div className="p-6 sm:p-8">
             <fieldset><legend className="text-sm font-semibold">Payment method</legend><div className="mt-3 grid gap-3 sm:grid-cols-2"><PaymentChoice selected={paymentMethod === 'card'} title="Card" detail="Visa •••• 4242" onClick={() => onPaymentMethodChange('card')} /><PaymentChoice selected={paymentMethod === 'ach'} title="Bank account" detail="Checking •••• 6789" onClick={() => onPaymentMethodChange('ach')} /></div></fieldset>
             <div className="mt-6 rounded-2xl bg-slate-50 p-5 dark:bg-slate-950"><ReceiptRow label="Invoice balance" value={stage.amount.display} /><ReceiptRow label="Client payment fee" value="$0.00" /><ReceiptRow label="Total payment" value={stage.amount.display} strong /></div>
-            <p className="mt-4 text-xs leading-5 text-slate-500">StagePaid does not add a card surcharge or convenience fee to this MVP invoice. Provider processing costs are not included in the client total.</p>
+            <p className="mt-4 text-xs leading-5 text-slate-500">Stagenum does not add a card surcharge or convenience fee to this MVP invoice. Provider processing costs are not included in the client total.</p>
             <Button size="lg" className="mt-6 w-full bg-teal-600 text-white hover:bg-teal-500" onClick={onStartPayment}>Pay {stage.amount.display}</Button>
           </div>
         </section>
@@ -1217,7 +1217,7 @@ function InvoiceFlow({
       <Button variant="ghost" size="sm" className="-ml-2" onClick={onReset}><ChevronLeft /> Project overview</Button>
       <div className="mt-5 flex flex-col justify-between gap-4 border-b border-slate-200 pb-6 dark:border-slate-700 sm:flex-row sm:items-end"><div><Badge className="bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">Draft · Not issued</Badge><h1 className="mt-3 font-heading text-3xl font-bold tracking-tight">Review draft invoice</h1><p className="mt-2 text-sm text-slate-500">Prepared from the client’s approval of revision {approvedRevision}.</p></div><div className="sm:text-right"><p className="text-xs text-slate-500">Invoice total</p><p className="mt-1 font-mono text-2xl font-bold">{stage.amount.display}</p></div></div>
       <InvoiceDocument stage={stage} approvedRevision={approvedRevision} invoiceNumber={invoiceNumber} />
-      <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Provider fee disclosure</p><div className="mt-3 space-y-2"><ReceiptRow label="Gross client payment" value={stage.amount.display} /><ReceiptRow label="StagePaid platform fee (1%)" value="−$112.00" /><ReceiptRow label="Stripe processing costs" value="Shown from actual settlement" /></div><p className="mt-3 text-xs leading-5 text-slate-500">The client pays the invoice total. Provider fees are itemized separately and do not reduce the amount applied to the invoice.</p></section>
+      <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Provider fee disclosure</p><div className="mt-3 space-y-2"><ReceiptRow label="Gross client payment" value={stage.amount.display} /><ReceiptRow label="Stagenum platform fee (1%)" value="−$112.00" /><ReceiptRow label="Stripe processing costs" value="Shown from actual settlement" /></div><p className="mt-3 text-xs leading-5 text-slate-500">The client pays the invoice total. Provider fees are itemized separately and do not reduce the amount applied to the invoice.</p></section>
       <Button size="lg" className="mt-6 w-full bg-teal-600 text-white hover:bg-teal-500" onClick={onIssue}>Issue invoice · {stage.amount.display}</Button>
       <p className="mt-3 text-center text-xs text-slate-500">Issuance creates a fixed invoice snapshot and makes it payable.</p>
     </div>

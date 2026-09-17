@@ -6,7 +6,7 @@
 
 ## Objective
 
-Create a repository-hosted, mobile-first prototype that makes StagePaid's core
+Create a repository-hosted, mobile-first prototype that makes Stagenum's core
 value understandable and testable without a production backend, authentication
 system, file store, or payment processor.
 
@@ -24,7 +24,7 @@ and submits revision 1.
 
 The homeowner sends a Change Request asking for clarification of one inspection
 detail. The contractor responds with revised evidence and submits revision 2.
-The homeowner approves that fixed revision. StagePaid prepares a draft invoice,
+The homeowner approves that fixed revision. Stagenum prepares a draft invoice,
 the contractor reviews and issues it, and the homeowner submits payment.
 
 All people, businesses, projects, identifiers, dates, amounts, and evidence in
@@ -80,7 +80,7 @@ information.
 Interactive changes are held in browser memory. Optional local browser storage
 may preserve a demonstration session, but **Reset demo** must restore the
 committed fixture. The interface never implies that prototype changes were
-saved to StagePaid or another person's device.
+saved to Stagenum or another person's device.
 
 ## Success criteria
 

@@ -1,14 +1,14 @@
-# StagePaid
+# Stagenum
 
-**Invoice by stage. Get StagePaid.**
+**Make every stage count.**
 
-StagePaid is a mobile-first invoicing platform for independent professionals and
+Stagenum is a mobile-first invoicing platform for independent professionals and
 their clients. It helps both sides document completed work, approve milestones,
 and keep payment expectations clear from the beginning of a project through its
 final payment.
 
 > [!NOTE]
-> StagePaid is in product definition and prototyping. The repository includes a
+> Stagenum is in product definition and prototyping. The repository includes a
 > clickable research prototype built with synthetic data, but it is not a
 > production application and does not process real payments.
 
@@ -23,7 +23,7 @@ reached that point. For projects completed in stages, that gap can lead to:
 - delayed invoices and payments; and
 - poor visibility into what is approved, due, or overdue.
 
-StagePaid is intended to make the history of the work part of the invoice—not an
+Stagenum is intended to make the history of the work part of the invoice—not an
 afterthought assembled when something goes wrong.
 
 ## Product vision
@@ -44,7 +44,7 @@ The core workflow is:
 
 ## Who it is for
 
-StagePaid is initially focused on small, service-based projects where work is
+Stagenum is initially focused on small, service-based projects where work is
 visible, milestone-driven, and commonly performed away from a desk—for example,
 home services, specialty trades, fabrication, installation, repair, creative
 production, and event work.
@@ -89,7 +89,7 @@ implementation begins.
 
 ### Not an initial goal
 
-StagePaid is not intended to begin as a general-purpose accounting suite, a full
+Stagenum is not intended to begin as a general-purpose accounting suite, a full
 construction-management platform, a labor marketplace, or a replacement for
 legal advice. Integrations and adjacent workflows should earn their place by
 making staged approval and payment meaningfully better.
@@ -101,6 +101,7 @@ requirements, architecture, and decision records. Foundational materials
 include:
 
 - the [product brief](docs/product-brief.md);
+- the [brand-language guide](docs/marketing/brand-language.md);
 - the [initial system architecture](docs/architecture/initial-system-architecture.md),
   including rendered container and transaction-sequence diagrams;
 - the [architecture decision record index](docs/adr/README.md), containing the
@@ -125,7 +126,7 @@ under `docs/adr/`.
 
 ## Contributing
 
-StagePaid is not currently accepting external code or documentation
+Stagenum is not currently accepting external code or documentation
 contributions. Please use the repository's issue tracker for discussion and do
 not submit creative contributions unless a separate contribution policy or
 written agreement applies.
@@ -134,8 +135,8 @@ written agreement applies.
 
 Copyright © 2026 Angelo Flores. All rights reserved.
 
-StagePaid is publicly viewable for limited evaluation, but it is not open
+Stagenum is publicly viewable for limited evaluation, but it is not open
 source. Copying, modification, redistribution, commercial use, production use,
 and derivative works are prohibited except as expressly permitted in the
-[StagePaid Proprietary License](LICENSE) or required by the repository hosting
+[Stagenum Proprietary License](LICENSE) or required by the repository hosting
 platform's terms.
