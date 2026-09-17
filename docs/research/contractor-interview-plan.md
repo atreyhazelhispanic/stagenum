@@ -1,8 +1,8 @@
 # Contractor Interview Plan
 
-**Status:** Ready for review
+**Status:** Ready for field research
 
-**Last updated:** 2026-09-13
+**Last updated:** 2026-09-16
 
 ## Research objective
 
@@ -33,11 +33,13 @@ hypothesis.
 ## Research method
 
 Conduct individual semi-structured interviews based on a specific recent
-project. Interviews should last approximately 30–45 minutes.
+project. Allow 30–45 minutes for the behavioral interview and another 15–20
+minutes when including the prototype walkthrough.
 
-Ask about past behavior before describing Stagenum. A product concept may be
-introduced near the end to test comprehension, workflow fit, and willingness to
-take a concrete next step.
+Ask about past behavior before describing Stagenum or showing the prototype.
+After the behavioral interview, the researcher may introduce the concept and
+observe an unaided prototype walkthrough to test comprehension, workflow fit,
+and willingness to take a concrete next step.
 
 This is directional product discovery, not a statistically representative market
 study.
@@ -150,6 +152,9 @@ not imply an affiliation, endorsement, or prior relationship that does not exist
 - State that client names, addresses, financial account information, and
   confidential documents are not needed.
 - Prepare a fresh copy of the interview note template.
+- Open a reset copy of the prototype at the projects dashboard and silence
+  unrelated notifications before sharing the screen or device.
+- Do not tell the participant which controls to use during the first attempt.
 
 ## Opening script
 
@@ -249,7 +254,21 @@ existing language is understood.
 6. What works well enough that you would not want to replace it?
 7. What does the current process cost in time, delayed cash, or client trust?
 
-### 8. Concept reaction
+### 8. Travel and mileage context
+
+Keep this section exploratory. Do not describe GPS tracking or suggest that
+Stagenum should replace an existing mileage product.
+
+1. On the recent project, did you or anyone on the team track job-site travel,
+   mileage, or travel-related expenses?
+2. If so, who recorded it, when, and in which tool or record?
+3. Who needed that information, and for what decision, reimbursement, tax, or
+   client-facing purpose?
+4. Tell me about the last time the record was missing, late, disputed, or had to
+   be reconstructed.
+5. What works well enough about the current method that you would keep it?
+
+### 9. Concept reaction
 
 Only after the behavioral interview, describe the concept neutrally:
 
@@ -270,7 +289,45 @@ Then ask:
 
 Avoid defending the concept. Confusion and objections are research findings.
 
-### 9. Concrete next step
+### 10. Observed prototype walkthrough
+
+Show the prototype only after the behavioral and concept questions. Explain
+that every person, project, amount, image, and payment shown is fictional and
+that no real transaction will occur.
+
+Use this task prompt without naming individual controls:
+
+> Imagine you are the contractor for this fictional project. A stage is ready
+> for client review. Please think aloud as you move the work through review,
+> address any client response, issue the resulting invoice, switch to the client
+> perspective when prompted, complete the simulated payment, and return to the
+> project list. I will mostly stay quiet because I want to see what is clear or
+> unclear on its own.
+
+Observe whether the participant can:
+
+1. identify the project, current stage, amount, and next action;
+2. find and understand the submitted evidence and acceptance criteria;
+3. distinguish submission from client approval;
+4. understand the Change Request and provider-resubmission loop;
+5. identify which revision is being approved and invoiced;
+6. distinguish an invoice draft, issued invoice, payment attempt, and successful
+   payment; and
+7. return to the projects dashboard and recognize the updated state.
+
+Do not rescue the participant immediately. Record the control they expected,
+the words they used, and the point at which help became necessary. After the
+walkthrough, ask:
+
+1. Where did you hesitate or expect something different?
+2. Which step felt least trustworthy, and what information was missing?
+3. What would a homeowner find confusing or burdensome?
+4. Which part would replace work you do today, and which part would create more
+   work?
+5. What did you expect to happen after payment?
+6. How closely did this resemble the recent project you described?
+
+### 11. Concrete next step
 
 Interest alone is weak evidence. Ask for an appropriate commitment:
 
@@ -360,6 +417,17 @@ Agreement → Evidence → Review → Changes → Invoice → Payment
 - Missing dependency:
 - Existing tool that must remain:
 
+## Prototype observation
+
+- Device and viewport:
+- Path tested: Direct approval / Change Request
+- Tasks completed without help:
+- First hesitation or wrong turn:
+- Words or controls the participant expected:
+- Assistance required:
+- Trust or comprehension concerns:
+- Post-payment state understood: Yes / No / Unclear
+
 ## Commitment
 
 - Prototype review:
@@ -392,6 +460,7 @@ from the specific project discussed:
 | Change/scope friction | Rare and clear | Some manual clarification | Recurring confusion or commercial impact |
 | Billing handoff | Immediate and connected | Some re-entry or delay | Material rework or approval-to-invoice gap |
 | Adoption fit | Workflow would not fit | Conditional interest | Clear fit and concrete next step |
+| Prototype comprehension | Could not complete core path | Completed with material help | Completed unaided and explained state changes |
 
 The score organizes evidence; it does not replace interview notes or judgment.
 Do not alter scoring definitions after seeing results without recording why.

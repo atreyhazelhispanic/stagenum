@@ -1,6 +1,6 @@
 {
   "id": "project_demo_001",
-  "reference": "SP-2026-014",
+  "reference": "SN-2026-014",
   "name": "Maple Street Kitchen Remodel",
   "client": { "id": "client_demo_001", "displayName": "Morgan & Casey R." },
   "provider": {
@@ -92,7 +92,7 @@
           "id": "evidence_demo_003",
           "name": "City inspection record",
           "type": "PDF",
-          "detail": "Permit SP-DEMO-1842 · 2 pages"
+          "detail": "Permit SN-DEMO-1842 · 2 pages"
         }
       ],
       "evidenceCount": 6,

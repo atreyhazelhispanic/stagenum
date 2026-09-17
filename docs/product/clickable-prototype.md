@@ -1,8 +1,8 @@
 # First Clickable Prototype
 
-**Status:** In progress
+**Status:** Research-ready
 
-**Last updated:** 2026-09-14
+**Last updated:** 2026-09-16
 
 ## Objective
 
@@ -32,16 +32,19 @@ the prototype are synthetic.
 
 ## Required path
 
-1. Provider project overview
-2. Provider stage workspace and evidence review
-3. Submission confirmation
-4. Passwordless client review
-5. Client Change Request
-6. Provider response and resubmission
-7. Client approval of revision 2
-8. Provider invoice review and issuance
-9. Client invoice and **Pay balance** flow
-10. Payment receipt and updated project history
+1. Provider projects dashboard
+2. Provider project overview
+3. Provider stage workspace and evidence review
+4. Submission confirmation
+5. Passwordless client review
+6. Client Change Request
+7. Provider response and resubmission
+8. Client approval of revision 2
+9. Provider invoice review and issuance
+10. Client invoice and **Pay balance** flow
+11. Payment receipt
+12. Return to the projects dashboard with paid-to-date and next-action state
+    updated
 
 ## Prototype boundaries
 
@@ -49,7 +52,7 @@ the prototype are synthetic.
 
 - Mobile-first responsive web experience
 - One realistic synthetic project fixture
-- Clickable happy path with one Change Request loop
+- Clickable direct-approval path and one Change Request loop
 - Visible stage, submission, approval, invoice, and payment relationships
 - Simulated passwordless access, uploads, notifications, card payment, and ACH
   processing
@@ -95,6 +98,8 @@ saved to Stagenum or another person's device.
 - A participant understands that **Pay balance** requests the full outstanding
   amount.
 - Payment processing and successful payment are visibly distinct.
+- A participant can return to the projects dashboard and recognize that the
+  payment changed the project state and paid-to-date total.
 - The complete path works at narrow mobile and desktop widths.
 - No interaction sends data to a production service.
 

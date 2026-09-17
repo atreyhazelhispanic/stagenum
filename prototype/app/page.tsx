@@ -12,7 +12,6 @@ import {
   HardHat,
   Image as ImageIcon,
   Moon,
-  MoreHorizontal,
   RotateCcw,
   Send,
   ShieldCheck,
@@ -42,6 +41,7 @@ export default function Home() {
     demoProject.currentStageId,
   );
   const [screen, setScreen] = useState<
+    | 'projects'
     | 'overview'
     | 'workspace'
     | 'confirm'
@@ -61,7 +61,8 @@ export default function Home() {
     | 'pay-balance'
     | 'payment-processing'
     | 'payment-receipt'
-  >('overview');
+  >('projects');
+  const [demoCompleted, setDemoCompleted] = useState(false);
   const [changeRequest, setChangeRequest] = useState(
     'Could you add a closer photo of the plumbing inspection sticker and confirm which supply line serves the refrigerator?',
   );
@@ -95,7 +96,8 @@ export default function Home() {
 
   function resetDemo() {
     setSelectedStageId(demoProject.currentStageId);
-    setScreen('overview');
+    setScreen('projects');
+    setDemoCompleted(false);
     setChangeRequest(
       'Could you add a closer photo of the plumbing inspection sticker and confirm which supply line serves the refrigerator?',
     );
@@ -139,7 +141,7 @@ export default function Home() {
               <Moon className="dark:hidden" />
               <Sun className="hidden dark:block" />
             </Button>
-            {screen !== 'overview' && (
+            {screen !== 'projects' && (
               <Button
                 variant="ghost"
                 size="icon"
@@ -150,13 +152,6 @@ export default function Home() {
                 <RotateCcw />
               </Button>
             )}
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label="More project options"
-            >
-              <MoreHorizontal />
-            </Button>
             <div
               className="grid size-8 place-items-center rounded-full bg-slate-900 text-xs font-bold text-white"
               aria-label={
@@ -171,11 +166,17 @@ export default function Home() {
         </div>
       </header>
 
-      {screen === 'overview' ? (
+      {screen === 'projects' ? (
+        <ProjectsDashboard
+          completed={demoCompleted}
+          onOpenProject={() => setScreen('overview')}
+        />
+      ) : screen === 'overview' ? (
         <Overview
           selectedStageId={selectedStageId}
           setSelectedStageId={setSelectedStageId}
           onOpenStage={() => setScreen('workspace')}
+          onBack={() => setScreen('projects')}
         />
       ) : screen === 'client-review' ||
         screen === 'revision1-approved' ||
@@ -246,7 +247,11 @@ export default function Home() {
           onPayBalance={() => setScreen('pay-balance')}
           onStartPayment={() => setScreen('payment-processing')}
           onCompletePayment={() => setScreen('payment-receipt')}
-          onReset={resetDemo}
+          onFinish={() => {
+            setDemoCompleted(true);
+            setScreen('projects');
+          }}
+          onBackToProject={() => setScreen('overview')}
         />
       ) : (
         <StageWorkspace
@@ -265,14 +270,73 @@ export default function Home() {
   );
 }
 
+function ProjectsDashboard({
+  completed,
+  onOpenProject,
+}: {
+  completed: boolean;
+  onOpenProject: () => void;
+}) {
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-10">
+      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Provider workspace</p>
+          <h1 className="mt-2 font-heading text-3xl font-bold tracking-tight sm:text-4xl">Projects</h1>
+          <p className="mt-2 text-sm text-slate-500">Review active work, client decisions, invoices, and payments.</p>
+        </div>
+        <Badge className="w-fit bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">Synthetic demonstration</Badge>
+      </div>
+
+      <section className="mt-7 grid gap-3 sm:grid-cols-3">
+        <Metric label="Active projects" value="1" />
+        <Metric label="Awaiting your action" value={completed ? '0' : '1'} />
+        <Metric label="Paid to date" value={completed ? '$26,000' : '$14,800'} accent />
+      </section>
+
+      <section className="mt-8" aria-labelledby="active-projects-title">
+        <div className="mb-3 flex items-end justify-between">
+          <div><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Current work</p><h2 id="active-projects-title" className="mt-1 font-heading text-xl font-bold">Active projects</h2></div>
+          <span className="text-sm text-slate-500">1 project</span>
+        </div>
+        <button
+          type="button"
+          onClick={onOpenProject}
+          aria-label={`Open project ${demoProject.name}`}
+          className="grid w-full gap-5 rounded-3xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-900 dark:focus-visible:ring-offset-slate-950 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:p-6"
+        >
+          <span>
+            <span className="flex flex-wrap items-center gap-2">
+              <Badge className={completed ? stateStyles.Paid : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'}>{completed ? 'Payment received' : 'Ready to submit'}</Badge>
+              <span className="text-xs font-medium text-slate-500">{demoProject.reference}</span>
+            </span>
+            <span className="mt-3 block font-heading text-xl font-bold">{demoProject.name}</span>
+            <span className="mt-1 block text-sm text-slate-500">{demoProject.client.displayName} · {demoProject.location.display}</span>
+            <span className="mt-4 block text-sm font-semibold text-slate-700 dark:text-slate-200">{completed ? 'Rough-in inspection paid · Next stage ready for planning' : 'Rough-in inspection · Evidence ready for client review'}</span>
+          </span>
+          <span className="flex items-center justify-between gap-8 sm:block sm:text-right">
+            <span className="block text-xs text-slate-500">Paid to date</span>
+            <strong className="mt-1 block font-mono text-xl text-teal-700 dark:text-teal-400">{completed ? '$26,000' : demoProject.paidToDate.display}</strong>
+            <span className="mt-3 inline-flex items-center text-sm font-bold text-primary">Open project <ArrowRight className="ml-1 size-4" /></span>
+          </span>
+        </button>
+      </section>
+
+      <p className="mt-6 text-xs leading-5 text-slate-500">This prototype stores changes only in memory. Refreshing or resetting restores the synthetic fixture.</p>
+    </div>
+  );
+}
+
 function Overview({
   selectedStageId,
   setSelectedStageId,
   onOpenStage,
+  onBack,
 }: {
   selectedStageId: string;
   setSelectedStageId: (id: string) => void;
   onOpenStage: () => void;
+  onBack: () => void;
 }) {
   const selectedStage = demoProject.stages.find(
     (stage) => stage.id === selectedStageId,
@@ -280,7 +344,7 @@ function Overview({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-9">
-        <Button variant="ghost" size="sm" className="mb-5 -ml-2 text-slate-500">
+        <Button variant="ghost" size="sm" className="mb-5 -ml-2 text-slate-500" onClick={onBack}>
           <ChevronLeft /> Projects
         </Button>
 
@@ -1110,7 +1174,8 @@ function InvoiceFlow({
   onPayBalance,
   onStartPayment,
   onCompletePayment,
-  onReset,
+  onFinish,
+  onBackToProject,
 }: {
   stage: (typeof demoProject.stages)[number];
   screen: 'invoice-review' | 'invoice-issued' | 'client-invoice' | 'pay-balance' | 'payment-processing' | 'payment-receipt';
@@ -1122,9 +1187,10 @@ function InvoiceFlow({
   onPayBalance: () => void;
   onStartPayment: () => void;
   onCompletePayment: () => void;
-  onReset: () => void;
+  onFinish: () => void;
+  onBackToProject: () => void;
 }) {
-  const invoiceNumber = 'SP-2026-014-03';
+  const invoiceNumber = 'SN-2026-014-03';
 
   if (screen === 'payment-receipt') {
     return (
@@ -1152,7 +1218,7 @@ function InvoiceFlow({
             <p className="mt-2 text-sm font-semibold">Payment succeeded and {stage.name} moved to Paid.</p>
             <p className="mt-1 text-xs leading-5 text-slate-400">The successful payment—not the earlier attempt—created the receipt and reduced the balance to zero.</p>
           </div>
-          <Button variant="outline" size="lg" className="mt-7 w-full" onClick={onReset}>Finish and reset demo</Button>
+          <Button size="lg" className="mt-7 w-full bg-teal-600 text-white hover:bg-teal-500" onClick={onFinish}>Return to projects <ArrowRight data-icon="inline-end" /></Button>
           <p className="mt-4 text-center text-xs text-slate-500">Prototype only — no payment was processed and no financial record was created.</p>
         </section>
       </div>
@@ -1214,7 +1280,7 @@ function InvoiceFlow({
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 sm:py-9">
-      <Button variant="ghost" size="sm" className="-ml-2" onClick={onReset}><ChevronLeft /> Project overview</Button>
+      <Button variant="ghost" size="sm" className="-ml-2" onClick={onBackToProject}><ChevronLeft /> Project overview</Button>
       <div className="mt-5 flex flex-col justify-between gap-4 border-b border-slate-200 pb-6 dark:border-slate-700 sm:flex-row sm:items-end"><div><Badge className="bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">Draft · Not issued</Badge><h1 className="mt-3 font-heading text-3xl font-bold tracking-tight">Review draft invoice</h1><p className="mt-2 text-sm text-slate-500">Prepared from the client’s approval of revision {approvedRevision}.</p></div><div className="sm:text-right"><p className="text-xs text-slate-500">Invoice total</p><p className="mt-1 font-mono text-2xl font-bold">{stage.amount.display}</p></div></div>
       <InvoiceDocument stage={stage} approvedRevision={approvedRevision} invoiceNumber={invoiceNumber} />
       <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Provider fee disclosure</p><div className="mt-3 space-y-2"><ReceiptRow label="Gross client payment" value={stage.amount.display} /><ReceiptRow label="Stagenum platform fee (1%)" value="−$112.00" /><ReceiptRow label="Stripe processing costs" value="Shown from actual settlement" /></div><p className="mt-3 text-xs leading-5 text-slate-500">The client pays the invoice total. Provider fees are itemized separately and do not reduce the amount applied to the invoice.</p></section>

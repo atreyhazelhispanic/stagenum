@@ -1,6 +1,6 @@
 # Contractor Workflow Questionnaire
 
-**Estimated time:** 20–25 minutes
+**Estimated time:** 25–30 minutes, including the optional prototype walkthrough
 
 ## Purpose
 
@@ -89,6 +89,15 @@ phase, milestone, or progress payment.
     overall process cost in time, delayed payment, rework, disputes, or client
     trust? Approximate ranges are sufficient.
 
+## Travel and mileage context
+
+17. On this project, did you or anyone on the team track job-site travel,
+    mileage, or travel-related expenses? If so, who recorded it, when, in which
+    tool, and who needed the result?
+18. Describe the last time that record was missing, late, disputed, or had to be
+    reconstructed. What works well enough about the current method that you
+    would keep it?
+
 ## Product concept
 
 Please answer the questions above before reading this section.
@@ -98,16 +107,35 @@ project stage, attaches evidence when it is complete, and sends it to the
 homeowner for approval or a documented Change Request. Approval prepares a draft
 invoice for the contractor to review and issue.
 
-17. Which part fits the project you described, what would not fit, and what might
+19. Which part fits the project you described, what would not fit, and what might
     the homeowner find confusing or burdensome?
-18. Which existing tool would Stagenum need to work with, and what measurable
+20. Which existing tool would Stagenum need to work with, and what measurable
     result would make changing your process worthwhile?
+
+## Optional clickable prototype
+
+Complete the questions above before opening a prototype link supplied by the
+researcher. The walkthrough uses fictional people, projects, amounts, evidence,
+and payment details. It does not save your answers or process a real payment.
+
+Please begin on the projects screen and think aloud if completing the walkthrough
+with the researcher. Move the ready stage through client review, respond to the
+client when prompted, approve the correct revision, issue and pay the simulated
+invoice, and return to the projects screen.
+
+21. Where did you first hesitate, need help, or expect a different next action?
+22. Which stage, revision, invoice, and payment did you believe were connected?
+23. What information would you or a homeowner need before trusting this process?
+24. After returning to the projects screen, what did you believe had changed and
+    what should happen next?
+25. Which part would reduce work in your current process, and which part would
+    add work?
 
 ## Follow-up
 
-19. Would you be willing to spend 15–20 minutes on a follow-up call to clarify
+26. Would you be willing to spend 15–20 minutes on a follow-up call to clarify
     your answers or review a clickable prototype?
-20. If a prototype addressed your concerns, would you consider testing it on an
+27. If a prototype addressed your concerns, would you consider testing it on an
     appropriate future project? Is there another contractor or coordinator with
     a different process whom we should ask?
 

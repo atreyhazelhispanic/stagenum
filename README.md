@@ -70,9 +70,9 @@ The product serves two primary participants:
 - **Human control.** Automation may assist, but people remain responsible for
   agreements, approvals, and payments.
 
-## Initial product scope
+## MVP product scope
 
-The first usable release is expected to explore:
+The current product definition and research prototype explore:
 
 - service-provider and client project views;
 - staged estimates or agreements;
@@ -84,8 +84,8 @@ The first usable release is expected to explore:
 - payment-status tracking; and
 - reminders and notifications around review and payment events.
 
-Exact release boundaries will be recorded in the product brief before
-implementation begins.
+Exact production release boundaries remain subject to user research and are
+tracked in the product documentation.
 
 ### Not an initial goal
 
@@ -94,11 +94,40 @@ construction-management platform, a labor marketplace, or a replacement for
 legal advice. Integrations and adjacent workflows should earn their place by
 making staged approval and payment meaningfully better.
 
+## Try the prototype
+
+The repository includes a mobile-first, synthetic-data walkthrough of the core
+provider and client journey. It begins on a provider projects dashboard and
+covers stage submission, client approval or a Change Request, resubmission,
+invoice issuance, simulated payment, receipt creation, and the updated project
+state.
+
+Requirements: Node.js 22.13 or newer and npm.
+
+```bash
+cd prototype
+npm install
+npm run dev
+```
+
+Open the local address printed by the development server. No account,
+credentials, external service, or real payment information is required. The
+prototype does not persist changes; use **Reset demo** or refresh the page to
+restore its synthetic fixture.
+
+To verify a local change:
+
+```bash
+npm run lint
+npm run build
+npm audit
+```
+
 ## Project status
 
-The project is currently validating its workflow while establishing production
-requirements, architecture, and decision records. Foundational materials
-include:
+Stagenum is in problem validation and prototype testing, not production. The
+current repository demonstrates the intended experience and records the
+decisions needed to build it responsibly. Foundational materials include:
 
 - the [product brief](docs/product-brief.md);
 - the [brand-language guide](docs/marketing/brand-language.md);
@@ -108,21 +137,23 @@ include:
   accepted technical decisions and reusable ADR template;
 - the [clickable prototype specification](docs/product/clickable-prototype.md);
 - the repository-owned interactive prototype under [`prototype/`](prototype/);
+- the [contractor interview plan](docs/research/contractor-interview-plan.md)
+  and participant-facing [questionnaire](docs/research/contractor-async-questionnaire.md);
   and
 - product and research records under [`docs/product/`](docs/product/) and
   [`docs/research/`](docs/research/).
 
-Contribution and security guidance and licensing terms remain planned work.
-
-No production deployment, public API, or supported installation process exists
-yet.
+The proprietary license is included. Contribution and security-reporting
+guidance remain planned work. There is no production deployment, public API,
+real authentication, durable data store, file upload, notification delivery, or
+payment processing in this repository.
 
 ## Repository layout
 
-The repository structure will evolve with implementation. Product, research,
-and architecture documentation lives under `docs/`; the research prototype
-lives under `prototype/`; and significant technical decisions will be recorded
-under `docs/adr/`.
+Product, research, marketing, legal-screening, and architecture documentation
+lives under `docs/`; the research prototype lives under `prototype/`; synthetic
+fixture data lives under `prototype/data/`; and significant technical decisions
+are recorded under `docs/adr/`.
 
 ## Contributing
 
