@@ -145,6 +145,8 @@ decisions needed to build it responsibly. Foundational materials include:
 - the [brand-language guide](docs/marketing/brand-language.md);
 - the [initial system architecture](docs/architecture/initial-system-architecture.md),
   including rendered container and transaction-sequence diagrams;
+- the [production domain model](docs/architecture/production-domain-model.md),
+  initial PostgreSQL migration, and rendered entity-relationship diagram;
 - the [architecture decision record index](docs/adr/README.md), containing the
   accepted technical decisions and reusable ADR template;
 - the [clickable prototype specification](docs/product/clickable-prototype.md);

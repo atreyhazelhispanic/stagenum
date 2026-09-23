@@ -142,6 +142,10 @@ Derived states—such as invoice balance and project paid-to-date—are calculat
 from authoritative records and ledger events rather than maintained as manually
 editable flags.
 
+The production record relationships, constraints, and first PostgreSQL migration
+are defined in the [production domain model](production-domain-model.md) and its
+[ERD](diagrams/production-domain-model.mmd).
+
 ### Private object storage
 
 Object storage contains evidence files, generated invoice documents, receipts,
