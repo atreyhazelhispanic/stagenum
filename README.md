@@ -102,11 +102,13 @@ covers stage submission, client approval or a Change Request, resubmission,
 invoice issuance, simulated payment, receipt creation, and the updated project
 state.
 
-Requirements: Node.js 22.13 or newer and npm.
+Requirements: Node.js 22.13.0 and npm. The root `.nvmrc` records the supported
+Node.js version for tools such as nvm.
 
 ```bash
+nvm use
 cd prototype
-npm install
+npm ci
 npm run dev
 ```
 
@@ -115,11 +117,20 @@ credentials, external service, or real payment information is required. The
 prototype does not persist changes; use **Reset demo** or refresh the page to
 restore its synthetic fixture.
 
-To verify a local change:
+To reproduce the required repository checks locally:
 
 ```bash
 npm run lint
 npm run build
+```
+
+GitHub Actions runs `npm ci`, lint, and the production build for every pull
+request and every push to `main`. See
+[`prototype-ci.yml`](.github/workflows/prototype-ci.yml) for the pipeline.
+
+To check the current dependency advisory database separately:
+
+```bash
 npm audit
 ```
 
