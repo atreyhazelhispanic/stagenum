@@ -30,6 +30,7 @@ and link repairs do not require supersession.
 | [ADR-006](0006-private-object-storage.md) | Use private object storage with signed access | Accepted |
 | [ADR-007](0007-stripe-webhook-payment-authority.md) | Treat verified Stripe webhooks as payment authority | Accepted |
 | [ADR-008](0008-passwordless-project-scoped-access.md) | Use passwordless, project-scoped client access | Accepted |
+| [ADR-009](0009-production-runtime-and-deployment.md) | Use Next.js on a managed Node.js container platform | Accepted |
 
 ## Naming
 

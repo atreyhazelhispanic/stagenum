@@ -316,6 +316,15 @@ Development, staging, and production use separate credentials, databases,
 buckets, Stripe environments, email configuration, and encryption material.
 Production data is never copied into demo fixtures.
 
+[ADR-009](../adr/0009-production-runtime-and-deployment.md) selects Next.js
+on the Node.js runtime, packaged as one immutable container image with separate
+web and worker process roles. It also defines environment isolation,
+configuration and secret handling, deployment sequencing, forward-only
+migrations, rollback boundaries, health checks, observability, and local
+development expectations. The current Vinext application remains a synthetic
+research prototype and does not select or evolve in place into this production
+architecture.
+
 ## Explicitly deferred
 
 - Splitting domain modules into networked microservices
@@ -327,8 +336,7 @@ Production data is never copied into demo fixtures.
 - General client accounts and social login
 - Search infrastructure beyond relational capabilities
 - Analytics warehouses and machine-learning pipelines
-- Final cloud vendor, runtime, framework, database, queue, and email-provider
-  selections
+- Final cloud, object-storage, managed-queue, and email-provider selections
 
 ## Architecture acceptance criteria
 
@@ -351,9 +359,9 @@ The accepted ADRs define the foundational boundaries needed for the next
 implementation phase. Later ADRs should be created when implementation evidence
 requires a durable decision, including:
 
-1. production runtime and deployment platform;
-2. TypeScript database-access library;
+1. TypeScript database-access library;
+2. managed container-hosting vendor;
 3. object-storage, queue, and email providers;
 4. Stripe Connect charge and account model;
 5. invoice and receipt document generation; and
-6. observability, secrets, and environment isolation.
+6. observability provider and service objectives.
