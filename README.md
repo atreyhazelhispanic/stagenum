@@ -147,6 +147,8 @@ decisions needed to build it responsibly. Foundational materials include:
   including rendered container and transaction-sequence diagrams;
 - the [production domain model](docs/architecture/production-domain-model.md),
   initial PostgreSQL migration, and rendered entity-relationship diagram;
+- the [MVP security and privacy baseline](docs/security/mvp-security-privacy-baseline.md)
+  and [versioned threat model](docs/security/threat-model-v1.md);
 - the [architecture decision record index](docs/adr/README.md), containing the
   accepted technical decisions and reusable ADR template;
 - the [clickable prototype specification](docs/product/clickable-prototype.md);
@@ -164,8 +166,9 @@ payment processing in this repository.
 
 ## Repository layout
 
-Product, research, marketing, legal-screening, and architecture documentation
-lives under `docs/`; the research prototype lives under `prototype/`; synthetic
+Product, research, marketing, legal-screening, security, and architecture
+documentation lives under `docs/`; the research prototype lives under
+`prototype/`; synthetic
 fixture data lives under `prototype/data/`; and significant technical decisions
 are recorded under `docs/adr/`.
 

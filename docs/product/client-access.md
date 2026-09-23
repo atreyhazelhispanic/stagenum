@@ -116,8 +116,10 @@ The product must support separate lifetimes for:
 - one-time verification codes; and
 - verified browser sessions.
 
-Exact durations remain an implementation and usability decision. The desired
-behavior is:
+The [MVP security, privacy, and data-retention baseline](../security/mvp-security-privacy-baseline.md)
+defines initial security defaults for these lifetimes, attempt limits, and resend
+cooldowns. Usability testing may change those values through a reviewed
+successor decision. The desired behavior is:
 
 - codes expire quickly and cannot be reused;
 - sessions last long enough to support realistic review without repeated
@@ -216,10 +218,11 @@ actually needs.
 
 ## Decisions deferred to architecture and usability testing
 
-1. Invitation, code, and session lifetimes
-2. Session-cookie and token implementation
-3. Code format, attempt limits, and resend cooldowns
-4. Whether passive stage viewing appears in the shared history
-5. Whether particularly sensitive projects require additional verification
-6. Client access across multiple concurrent projects
-7. Data-retention periods for internal security telemetry
+Initial lifetime, attempt-limit, resend, and security-telemetry retention
+defaults are now defined in the [MVP security, privacy, and data-retention baseline](../security/mvp-security-privacy-baseline.md).
+The remaining deferred decisions are:
+
+1. Provider authentication and session implementation
+2. Whether passive stage viewing appears in the shared history
+3. Whether particularly sensitive projects require additional verification
+4. Client access across multiple concurrent projects

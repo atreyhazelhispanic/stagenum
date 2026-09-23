@@ -229,6 +229,11 @@ previously recorded result.
 
 ## Trust and security boundaries
 
+The [MVP threat model](../security/threat-model-v1.md) and
+[security, privacy, and data-retention baseline](../security/mvp-security-privacy-baseline.md)
+define the launch controls, abuse cases, ownership, and record-class schedules
+that apply across these boundaries.
+
 ### Public network boundary
 
 All browser and future mobile traffic is untrusted. TLS terminates at the edge,
@@ -286,8 +291,8 @@ Retention is record-class specific. Final financial records use the documented
 seven-year U.S.-first baseline, subject to pre-launch legal review. Evidence,
 authentication telemetry, and ordinary application logs receive separate,
 purpose-limited schedules. Account closure does not silently destroy records
-that Stagenum must retain, but access and eventual deletion remain governed by
-documented policy.
+that Stagenum must retain, but access and eventual deletion remain governed
+by the [MVP security, privacy, and data-retention baseline](../security/mvp-security-privacy-baseline.md).
 
 ## Observability
 
