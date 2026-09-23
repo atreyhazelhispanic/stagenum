@@ -7,7 +7,7 @@ send notifications, or process payments.
 ## Local development
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -15,6 +15,15 @@ npm run dev
 
 ```bash
 npm run build
+```
+
+## Guided browser tests
+
+Install the Chromium test browser once, then run the suite:
+
+```bash
+npx playwright install chromium
+npm run test:e2e
 ```
 
 The product scope and validation criteria are documented in

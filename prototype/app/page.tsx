@@ -194,7 +194,13 @@ export default function Home() {
           }}
           onBack={() => setScreen('client-review')}
           onSend={() => setScreen('request-sent')}
-          onContinueAsProvider={() => setScreen('provider-response')}
+          onContinueAsProvider={() =>
+            setScreen(
+              screen === 'revision1-approved'
+                ? 'invoice-review'
+                : 'provider-response',
+            )
+          }
           onReset={resetDemo}
         />
       ) : screen === 'provider-response' ||

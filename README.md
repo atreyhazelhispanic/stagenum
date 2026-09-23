@@ -122,9 +122,10 @@ To reproduce the required repository checks locally:
 ```bash
 npm run lint
 npm run build
+npm run test:e2e
 ```
 
-GitHub Actions runs `npm ci`, lint, and the production build for every pull
+GitHub Actions runs `npm ci`, lint, the production build, and the guided browser tests for every pull
 request and every push to `main`. See
 [`prototype-ci.yml`](.github/workflows/prototype-ci.yml) for the pipeline.
 
