@@ -94,6 +94,12 @@ construction-management platform, a labor marketplace, or a replacement for
 legal advice. Integrations and adjacent workflows should earn their place by
 making staged approval and payment meaningfully better.
 
+## Production application foundation
+
+The root application is the deliberately separate production TypeScript
+foundation. See the [local development guide](docs/development/production-foundation.md)
+for PostgreSQL, migrations, web, worker, health checks, tests, and CI commands.
+
 ## Try the prototype
 
 The repository includes a mobile-first, synthetic-data walkthrough of the core
@@ -151,6 +157,8 @@ decisions needed to build it responsibly. Foundational materials include:
   and [versioned threat model](docs/security/threat-model-v1.md);
 - the [architecture decision record index](docs/adr/README.md), containing the
   accepted technical decisions and reusable ADR template;
+- the [production application foundation guide](docs/development/production-foundation.md),
+  covering local startup, migrations, process roles, and health contracts;
 - the [clickable prototype specification](docs/product/clickable-prototype.md);
 - the repository-owned interactive prototype under [`prototype/`](prototype/);
 - the [contractor interview plan](docs/research/contractor-interview-plan.md)
@@ -167,10 +175,10 @@ payment processing in this repository.
 ## Repository layout
 
 Product, research, marketing, legal-screening, security, and architecture
-documentation lives under `docs/`; the research prototype lives under
-`prototype/`; synthetic
-fixture data lives under `prototype/data/`; and significant technical decisions
-are recorded under `docs/adr/`.
+documentation lives under `docs/`; the production application uses root `app/`,
+`src/`, `db/`, and `scripts/` directories; the research prototype remains under
+`prototype/`; synthetic fixture data lives under `prototype/data/`; and
+significant technical decisions are recorded under `docs/adr/`.
 
 ## Contributing
 

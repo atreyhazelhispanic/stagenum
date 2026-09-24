@@ -21,3 +21,17 @@ $RECYCLE.BIN/
 *.swp
 *.swo
 *~
+
+# Node.js and application build output
+node_modules/
+.next/
+coverage/
+*.tsbuildinfo
+*.log
+
+# Test and local runtime output
+test-results/
+playwright-report/
+
+# Local PostgreSQL overrides
+compose.override.yaml

@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: stagenum
+      POSTGRES_USER: stagenum
+      POSTGRES_PASSWORD: stagenum
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U stagenum -d stagenum"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+    volumes:
+      - stagenum-postgres:/var/lib/postgresql/data
+
+  mailpit:
+    image: axllent/mailpit:v1.27
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  stagenum-postgres:

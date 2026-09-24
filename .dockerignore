@@ -1,0 +1,16 @@
+.git
+.github
+.next
+node_modules
+prototype/node_modules
+prototype/.next
+prototype/test-results
+docs
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+coverage
+README.md
+LICENSE
