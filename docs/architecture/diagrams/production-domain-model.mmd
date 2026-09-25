@@ -3,6 +3,9 @@ erDiagram
     USERS ||--o{ BUSINESS_MEMBERSHIPS : joins
     PROVIDER_BUSINESSES ||--o{ CLIENT_CONTACTS : serves
     PROVIDER_BUSINESSES ||--o{ PROJECTS : owns
+    PROVIDER_BUSINESSES ||--o{ PROVIDER_BRAND_ASSETS : owns
+    PROVIDER_BUSINESSES ||--o| PROVIDER_BRAND_ASSETS : selects_current
+    PROVIDER_BRAND_ASSETS ||--o{ PROVIDER_BRAND_ASSETS : replaces
     CLIENT_CONTACTS ||--o{ PROJECTS : commissions
     PROJECTS ||--o{ STAGES : contains
 
@@ -31,6 +34,7 @@ erDiagram
     APPROVALS ||--o| INVOICE_DRAFTS : prepares
     INVOICE_DRAFTS ||--o{ INVOICE_DRAFT_ITEMS : contains
     INVOICE_DRAFTS ||--o| INVOICES : issues
+    PROVIDER_BRAND_ASSETS ||--o{ INVOICES : snapshotted_on
     INVOICES ||--o{ INVOICE_LINE_ITEMS : snapshots
     INVOICES ||--o{ INVOICE_CORRECTIONS : corrects
     INVOICES ||--o{ PAYMENT_ATTEMPTS : attempts

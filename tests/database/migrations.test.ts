@@ -17,13 +17,14 @@ describe('migration parsing', () => {
     ).toThrow(/explicit BEGIN\/COMMIT wrapper/);
   });
 
-  it('loads the provider-branding migration after the initial schema', async () => {
+  it('loads all forward migrations in order', async () => {
     const migrations = await loadMigrations(path.join(process.cwd(), 'db/migrations'));
 
     expect(migrations.map((migration) => migration.name)).toEqual([
       '0001_initial_domain_schema.sql',
       '0002_provider_branding.sql',
       '0003_expand_brand_asset_size.sql',
+      '0004_enforce_stage_image_limit.sql',
     ]);
   });
 });

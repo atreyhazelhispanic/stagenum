@@ -192,6 +192,7 @@ The modular monolith begins with these internal boundaries:
 | Billing | Draft and issued invoice snapshots, corrections, balance projections | Raw payment credentials |
 | Payments and ledger | Payment attempts, Stripe references, refunds, reversals, disputes, fees, payouts, derived balances | Editing issued invoices or approved revisions |
 | Evidence | Object metadata, upload lifecycle, visibility, retention, removal requests | Arbitrary object-store access |
+| Branding | Private provider-logo assets, current-logo selection, immutable invoice branding snapshots | Public object access or mutable issued-invoice branding |
 | Notifications | Message intent, templates, recipient routing, delivery attempts | Deciding whether a business transition occurred |
 | Audit and timeline | Immutable actor, business-event, and visibility records | Secrets or unrestricted security telemetry |
 

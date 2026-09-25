@@ -2,7 +2,7 @@
 
 **Status:** Accepted design
 
-**Last updated:** 2026-09-23
+**Last updated:** 2026-09-25
 
 ## Purpose
 
@@ -74,6 +74,7 @@ create linked records rather than mutating history.
 | Module | Primary records |
 | --- | --- |
 | Identity and access | `users`, `provider_businesses`, `business_memberships`, `client_contacts`, `client_invitations`, `client_project_grants`, `client_sessions` |
+| Branding | `provider_brand_assets`, `provider_businesses.current_logo_asset_id` |
 | Projects and agreements | `projects`, `stages` |
 | Submissions and reviews | `submission_drafts`, `submission_revisions`, `active_stage_reviews`, terminal decisions, approvals, Change Requests, withdrawals |
 | Evidence | `evidence_objects`, draft/revision evidence links, `evidence_comments` |
@@ -134,6 +135,24 @@ revision when applicable, and evidence object. Comments cannot be edited into a
 different historical meaning; a later correction or removal workflow adds an
 activity record and policy-controlled visibility outcome.
 
+The MVP permits at most 10 image objects on one submission draft and on each
+immutable submission revision. Application validation gives the provider an
+immediate, useful error, while database triggers lock the stage and enforce the
+same limit under concurrent writes. The rule counts only `image/*` evidence;
+non-image evidence remains governed by its own validation and storage policy.
+
+### Provider branding
+
+A provider business may select one current optional logo from its owned
+`provider_brand_assets`. Logo objects are private, accept validated PNG or JPEG
+content up to 2.5 MiB, and retain their digest and dimensions. Replacing a logo
+creates a new linked asset rather than overwriting the previous object.
+
+When an invoice is issued, the exact logo asset identifier, storage key, media
+type, digest, and dimensions are copied onto the immutable invoice snapshot.
+Changing or removing the business's current logo therefore cannot silently
+alter an invoice that was already issued.
+
 ### Approval and invoice issuance
 
 An approval creates at most one `invoice_drafts` row through a unique approval
@@ -143,7 +162,8 @@ Issuance occurs in one transaction that:
 
 1. verifies an eligible approval and a positive total;
 2. allocates a business-scoped invoice number;
-3. copies draft values into immutable `invoices` and `invoice_line_items`;
+3. copies draft values and any selected provider-logo metadata into immutable
+   `invoices` and `invoice_line_items`;
 4. records the draft-to-issued relationship;
 5. adds activity; and
 6. writes notification and document-generation jobs.
@@ -300,6 +320,8 @@ Before production implementation is accepted, integration tests must prove:
 - pending or failed payment attempts do not affect balance;
 - successful refund and reversal totals cannot exceed their originating payment;
 - cross-business and cross-project foreign-key references fail; and
+- draft and submitted revisions reject an eleventh image, including under
+  concurrent attachment attempts; and
 - outbox intent commits or rolls back with its originating business transition.
 
 ## Related decisions and product documents
