@@ -390,7 +390,7 @@ A new ADR should reconsider this decision when:
 - [ADR-006: Use private object storage with signed access](0006-private-object-storage.md)
 - [ADR-007: Treat verified Stripe webhooks as payment authority](0007-stripe-webhook-payment-authority.md)
 - [Client access](../product/client-access.md)
-- [Client review](../product/client-review.md)
+- [Client review experience](../product/client-review-experience.md)
 - [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
 - [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
 - GitHub issue #7: Record foundational architecture decisions

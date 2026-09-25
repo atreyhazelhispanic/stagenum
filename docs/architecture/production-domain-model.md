@@ -14,8 +14,10 @@ and the relationship view is
 
 ![Stagenum production domain model](diagrams/production-domain-model.svg)
 
-The model is intentionally independent of an ORM. A later persistence-tool ADR
-may select query and migration tooling, but that tool must preserve these table
+The model is intentionally independent of an ORM. The executable baseline is
+`0001`; later forward migrations add accepted bounded changes such as provider
+branding and the MVP evidence-image invariant. A later persistence-tool ADR may
+select query and migration tooling, but that tool must preserve these table
 owners, constraints, transaction boundaries, and immutable records.
 
 ## Modeling rules

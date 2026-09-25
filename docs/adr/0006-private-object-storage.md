@@ -377,5 +377,5 @@ A new ADR should reconsider this decision when:
 - [ADR-005: Use a transactional outbox and idempotent background jobs](0005-transactional-outbox-and-jobs.md)
 - [Initial system architecture](../architecture/initial-system-architecture.md)
 - [System-container diagram](../architecture/diagrams/system-containers.mmd)
-- [Evidence comments](../product/evidence-comments.md)
+- [Evidence feedback](../product/evidence-feedback.md)
 - GitHub issue #7: Record foundational architecture decisions
