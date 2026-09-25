@@ -67,6 +67,12 @@ responsibility, access controls, and removal workflows.
   informed consent.
 - Project and evidence content supports scope, completion, review, dispute
   context, invoice generation, and authorized export.
+- Provider-business logos support optional invoice branding. Logo uploads are
+  limited to validated PNG/JPEG assets, stored privately, and snapshotted on
+  issued invoices; they are not sent to AI services in the MVP.
+- Evidence uploads are bounded to 10 images per stage in the MVP. AI image
+  interpretation and larger quotas are deferred to a separately authorized
+  v2 subscription capability.
 - Payment metadata is limited to Stripe identifiers, state, allowed masked
   display details, amounts, fees, disputes, and reconciliation references.
 - Security telemetry is collected only for abuse prevention, investigation,

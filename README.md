@@ -78,6 +78,8 @@ The current product definition and research prototype explore:
 - staged estimates or agreements;
 - milestone amounts and acceptance criteria;
 - photo and note capture;
+- optional provider-business logo branding on issued invoices;
+- up to 10 evidence images per stage, subject to file validation;
 - change and revision history;
 - client review, approval, and revision requests;
 - invoices tied to approved work;
@@ -86,6 +88,10 @@ The current product definition and research prototype explore:
 
 Exact production release boundaries remain subject to user research and are
 tracked in the product documentation.
+
+GPS and continuous location tracking, AI image interpretation, and higher
+evidence quotas are planned subscription capabilities for v2.0.0 rather than
+MVP requirements.
 
 ### Not an initial goal
 

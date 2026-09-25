@@ -89,12 +89,19 @@ phase, milestone, or progress payment.
     overall process cost in time, delayed payment, rework, disputes, or client
     trust? Approximate ranges are sufficient.
 
+17. If an invoice could optionally include your business logo, would that be
+    useful? Where do you currently keep the logo, and what would make you trust
+    an uploaded logo to appear correctly on an invoice?
+18. In a typical stage, about how many photos would you share with a client?
+    Would a limit of 10 photos per stage fit your normal work, and when would it
+    be too restrictive?
+
 ## Travel and mileage context
 
-17. On this project, did you or anyone on the team track job-site travel,
+19. On this project, did you or anyone on the team track job-site travel,
     mileage, or travel-related expenses? If so, who recorded it, when, in which
     tool, and who needed the result?
-18. Describe the last time that record was missing, late, disputed, or had to be
+20. Describe the last time that record was missing, late, disputed, or had to be
     reconstructed. What works well enough about the current method that you
     would keep it?
 
@@ -107,9 +114,9 @@ project stage, attaches evidence when it is complete, and sends it to the
 homeowner for approval or a documented Change Request. Approval prepares a draft
 invoice for the contractor to review and issue.
 
-19. Which part fits the project you described, what would not fit, and what might
+21. Which part fits the project you described, what would not fit, and what might
     the homeowner find confusing or burdensome?
-20. Which existing tool would Stagenum need to work with, and what measurable
+22. Which existing tool would Stagenum need to work with, and what measurable
     result would make changing your process worthwhile?
 
 ## Optional clickable prototype
@@ -123,19 +130,19 @@ with the researcher. Move the ready stage through client review, respond to the
 client when prompted, approve the correct revision, issue and pay the simulated
 invoice, and return to the projects screen.
 
-21. Where did you first hesitate, need help, or expect a different next action?
-22. Which stage, revision, invoice, and payment did you believe were connected?
-23. What information would you or a homeowner need before trusting this process?
-24. After returning to the projects screen, what did you believe had changed and
+23. Where did you first hesitate, need help, or expect a different next action?
+24. Which stage, revision, invoice, and payment did you believe were connected?
+25. What information would you or a homeowner need before trusting this process?
+26. After returning to the projects screen, what did you believe had changed and
     what should happen next?
-25. Which part would reduce work in your current process, and which part would
+27. Which part would reduce work in your current process, and which part would
     add work?
 
 ## Follow-up
 
-26. Would you be willing to spend 15–20 minutes on a follow-up call to clarify
+28. Would you be willing to spend 15–20 minutes on a follow-up call to clarify
     your answers or review a clickable prototype?
-27. If a prototype addressed your concerns, would you consider testing it on an
+29. If a prototype addressed your concerns, would you consider testing it on an
     appropriate future project? Is there another contractor or coordinator with
     a different process whom we should ask?
 

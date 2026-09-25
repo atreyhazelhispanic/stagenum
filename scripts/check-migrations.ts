@@ -5,6 +5,7 @@ import { logger } from '@/src/platform/logging/logger';
 
 const requiredTables = [
   'provider_businesses',
+  'provider_brand_assets',
   'projects',
   'submission_revisions',
   'invoices',

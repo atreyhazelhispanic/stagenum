@@ -33,6 +33,13 @@ Later decisions may refine provider and implementation details without
 silently changing these accepted boundaries. Material changes are recorded in
 new ADRs that supersede the affected decision.
 
+## Proposed implementation decisions
+
+- [ADR-010: Use bounded, human-approved agent assistance](../adr/0010-agent-assisted-workflows.md)
+  defines the future AI-assistance boundary, while the companion
+  [agent-assisted workflow notes](agent-assisted-workflows.md) explain its
+  context, cost, privacy, evaluation, and human-review model.
+
 ## Architectural approach
 
 Stagenum begins as a **modular monolith** with one deployable application and
@@ -72,6 +79,8 @@ The application integrates with:
 See [`diagrams/system-containers.mmd`](diagrams/system-containers.mmd) for the
 container-level view.
 
+The source diagram is [`diagrams/system-containers.mmd`](diagrams/system-containers.mmd).
+
 ![Stagenum system container architecture](diagrams/system-containers.svg)
 
 The primary stage-to-payment path is shown in
@@ -81,6 +90,11 @@ transactions from eventually delivered notifications, documents, and processor
 outcomes.
 
 ![Stagenum stage-to-payment sequence](diagrams/stage-to-payment-sequence.svg)
+
+The MVP evidence boundary and deferred v2 assistance are shown in
+[`diagrams/evidence-and-assistance-boundary.mmd`](diagrams/evidence-and-assistance-boundary.mmd).
+
+![Stagenum evidence and assistance boundary](diagrams/evidence-and-assistance-boundary.svg)
 
 ## Runtime containers
 
@@ -374,3 +388,8 @@ requires a durable decision, including:
 4. Stripe Connect charge and account model;
 5. invoice and receipt document generation; and
 6. observability provider and service objectives.
+
+A separate MVP issue should define privacy-safe product metrics and analytics,
+including the event taxonomy, activation and workflow funnels, retention,
+consent/vendor boundaries, AI-assistance acceptance and cost signals, and rules
+that exclude customer content and sensitive identifiers from analytics.

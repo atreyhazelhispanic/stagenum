@@ -1,0 +1,13 @@
+flowchart LR
+    provider["Provider selects evidence"] --> authorize["Authorize project and stage"]
+    authorize --> limit["MVP limits\n10 images per stage\nvalidated PNG/JPEG/other approved evidence"]
+    limit --> store["Private object storage\nshort-lived scoped access"]
+    store --> review["Provider and client review\nordinary application workflow"]
+
+    review -.-> future["v2 subscription\nAI image assistance\noptional GPS/mileage\nhigher evidence quota"]
+    future -.-> consent["Explicit opt-in\nseparate entitlement\nprivacy and cost controls"]
+
+    classDef current fill:#ecfeff,stroke:#0f766e,color:#134e4a;
+    classDef future fill:#fff7ed,stroke:#d97706,color:#7c2d12;
+    class provider,authorize,limit,store,review current;
+    class future,consent future;

@@ -21,6 +21,12 @@ flowchart LR
         stripe["Stripe Connect\nPayment credentials · processor events\nfees · disputes · settlement"]
     end
 
+    subgraph v2["Planned v2 subscription capabilities"]
+        gps["Optional location and mileage\nexplicit consent · project-scoped"]
+        ai["Optional AI image assistance\nprovider-selected · human-reviewed"]
+        quota["Higher evidence quotas\nsubscription entitlement"]
+    end
+
     provider -->|"TLS"| web
     client -->|"TLS"| web
     operator -->|"Strongly authenticated\nleast-privileged access"| web
@@ -35,6 +41,9 @@ flowchart LR
     worker -->|"Idempotent API operations"| stripe
     stripe -->|"Signed webhooks\nauthoritative outcomes"| api
     email -->|"Delivery events"| api
+    provider -.->|"Opt in later"| gps
+    provider -.->|"Opt in later"| ai
+    modules -.->|"Entitlement check"| quota
 
     classDef actor fill:#f8fafc,stroke:#64748b,color:#0f172a;
     classDef surface fill:#ecfeff,stroke:#0f766e,color:#134e4a;

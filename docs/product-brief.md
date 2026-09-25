@@ -114,6 +114,8 @@ to milestone invoicing reduces ambiguity and shortens the path to payment.
 - Stages with descriptions, amounts, dates, and acceptance criteria
 - Project and stage status
 - Notes, photos, files, and links as stage evidence
+- Up to 10 validated evidence images per stage
+- Optional provider-business logo branding on issued invoices
 - Stage submission for client review
 - Explicit approval or revision request
 - Revision and resubmission history
@@ -134,6 +136,9 @@ to milestone invoicing reduces ambiguity and shortens the path to payment.
 - Escrow, lending, collections, or dispute adjudication
 - Complex enterprise permissions and approval chains
 - Industry-specific workflow variants
+- GPS, continuous location tracking, and mileage automation
+- AI image interpretation, classification, or evidence descriptions
+- Higher evidence quotas, including the planned 50-image subscription tier
 - Native mobile applications unless validation shows they are necessary
 
 ## Product principles
