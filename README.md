@@ -165,6 +165,8 @@ decisions needed to build it responsibly. Foundational materials include:
   accepted technical decisions and reusable ADR template;
 - the [production application foundation guide](docs/development/production-foundation.md),
   covering local startup, migrations, process roles, and health contracts;
+- the [metrics and analytics instrumentation plan](docs/architecture/metrics-and-analytics.md),
+  defining privacy-conscious product, reliability, financial, and AI measurement;
 - the [clickable prototype specification](docs/product/clickable-prototype.md);
 - the repository-owned interactive prototype under [`prototype/`](prototype/);
 - the [contractor interview plan](docs/research/contractor-interview-plan.md)

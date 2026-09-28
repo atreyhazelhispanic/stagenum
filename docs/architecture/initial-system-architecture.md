@@ -325,6 +325,12 @@ identifier. Operational telemetry includes:
 Business audit records and operational logs are separate. Logs help operate the
 system; audit records explain durable business actions.
 
+Product analytics is a third, minimized plane. It measures adoption and workflow
+outcomes through versioned, allowlisted events without copying customer content
+or becoming authoritative for business or financial state. Event contracts,
+funnels, AI cost measures, privacy rules, and retention are defined in the
+[metrics and analytics instrumentation plan](metrics-and-analytics.md).
+
 ## Deployment shape
 
 The initial production environment may use managed platform services, but keeps

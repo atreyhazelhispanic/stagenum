@@ -8,6 +8,9 @@ baseline before the product accepts real customer data.
 - [MVP security, privacy, and data-retention baseline](mvp-security-privacy-baseline.md)
   defines minimum controls, record-class retention, incident response, and
   implementation acceptance criteria.
+- [Metrics and analytics instrumentation](../architecture/metrics-and-analytics.md)
+  defines minimized event contracts, prohibited fields, access separation, and
+  analytics retention.
 
 These documents are engineering decisions, not claims of certification or legal
 advice. Material changes to identity, payments, evidence processing, native
