@@ -12,6 +12,7 @@ $RECYCLE.BIN/
 .env
 .env.*
 !.env.example
+gha-creds-*.json
 !.env.*.example
 
 # JetBrains IDEs

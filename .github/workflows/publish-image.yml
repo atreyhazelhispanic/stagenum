@@ -1,0 +1,75 @@
+name: Publish Image
+
+on:
+  workflow_run:
+    workflows:
+      - CI
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-image-${{ github.event.workflow_run.head_sha }}
+  cancel-in-progress: false
+
+jobs:
+  staging:
+    name: Staging Registry
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      IMAGE_URI: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_STAGING_PROJECT_ID }}/${{ vars.GCP_ARTIFACT_REPOSITORY }}/${{ vars.GCP_APPLICATION_IMAGE }}
+      RELEASE_SHA: ${{ github.event.workflow_run.head_sha }}
+
+    steps:
+      - name: Checkout tested revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Build immutable image
+        run: >-
+          docker build
+          --label org.opencontainers.image.revision="${RELEASE_SHA}"
+          --tag "${IMAGE_URI}:${RELEASE_SHA}"
+          .
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          project_id: ${{ vars.GCP_STAGING_PROJECT_ID }}
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+
+      - name: Setup Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3
+
+      - name: Configure registry authentication
+        run: gcloud auth configure-docker "${{ vars.GCP_REGION }}-docker.pkg.dev" --quiet
+
+      - name: Publish immutable image
+        run: docker push "${IMAGE_URI}:${RELEASE_SHA}"
+
+      - name: Record published digest
+        run: |
+          digest="$(
+            gcloud artifacts docker images describe \
+              "${IMAGE_URI}:${RELEASE_SHA}" \
+              --format='value(image_summary.digest)'
+          )"
+          test -n "${digest}"
+          {
+            echo "### Published staging image"
+            echo
+            echo "- Revision: \`${RELEASE_SHA}\`"
+            echo "- Digest: \`${digest}\`"
+            echo "- Image: \`${IMAGE_URI}@${digest}\`"
+          } >> "${GITHUB_STEP_SUMMARY}"

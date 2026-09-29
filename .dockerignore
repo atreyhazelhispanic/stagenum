@@ -7,6 +7,7 @@ docs
 .env
 .env.*
 !.env.example
+gha-creds-*.json
 *.log
 .DS_Store
 coverage
