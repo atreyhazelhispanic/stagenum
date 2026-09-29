@@ -1,4 +1,4 @@
-name: Production Foundation CI
+name: CI
 
 on:
   pull_request:
@@ -14,10 +14,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  verify:
-    name: Lint, typecheck, test, migrate, and build
+  application:
+    name: Application
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     services:
       postgres:
@@ -40,14 +40,14 @@ jobs:
       PROCESS_ROLE: web
       DATABASE_URL: postgresql://stagenum:stagenum@localhost:5432/stagenum_test
       LOG_LEVEL: silent
-      RELEASE_SHA: ci
+      RELEASE_SHA: ${{ github.sha }}
       MIGRATIONS_DIR: db/migrations
 
     steps:
-      - name: Check out repository
+      - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Set up Node.js
+      - name: Setup Node
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
@@ -66,11 +66,48 @@ jobs:
       - name: Test
         run: npm test
 
-      - name: Create schema from zero
+      - name: Apply migrations
         run: npm run db:migrate
 
       - name: Verify schema
         run: npm run db:check
 
-      - name: Build
+      - name: Build application
         run: npm run build
+
+      - name: Build container
+        run: docker build --tag stagenum:${{ github.sha }} .
+
+  prototype:
+    name: Prototype
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: prototype
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: prototype/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build prototype
+        run: npm run build
+
+      - name: Install browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run browser tests
+        run: npm run test:e2e

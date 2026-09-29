@@ -2,9 +2,7 @@
 .github
 .next
 node_modules
-prototype/node_modules
-prototype/.next
-prototype/test-results
+prototype
 docs
 .env
 .env.*
