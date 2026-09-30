@@ -39,6 +39,9 @@ new ADRs that supersede the affected decision.
   defines the future AI-assistance boundary, while the companion
   [agent-assisted workflow notes](agent-assisted-workflows.md) explain its
   context, cost, privacy, evaluation, and human-review model.
+- [ADR-011: Use Expo for provider mobile access while retaining the web application](../adr/0011-mobile-client-and-web-access.md)
+  defines mobile-first provider access without replacing the provider web
+  dashboard or passwordless client-review experience.
 
 ## Architectural approach
 
@@ -109,8 +112,11 @@ The responsive web application provides provider and client experiences. It:
   credentials; and
 - never handles raw card or bank credentials outside Stripe-hosted elements.
 
-Future native applications use the same application API and do not receive
-direct database or unrestricted object-storage access.
+The Expo provider application defined by
+[ADR-011](../adr/0011-mobile-client-and-web-access.md) uses the same application
+API and does not receive direct database or unrestricted object-storage access.
+The provider web dashboard remains supported, and clients continue to review,
+request changes, approve, and pay through the responsive passwordless web flow.
 
 ### Application API
 

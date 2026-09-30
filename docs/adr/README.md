@@ -32,6 +32,7 @@ and link repairs do not require supersession.
 | [ADR-008](0008-passwordless-project-scoped-access.md) | Use passwordless, project-scoped client access | Accepted |
 | [ADR-009](0009-production-runtime-and-deployment.md) | Use Next.js on a managed Node.js container platform | Accepted |
 | [ADR-010](0010-agent-assisted-workflows.md) | Use bounded, human-approved agent assistance | Proposed |
+| [ADR-011](0011-mobile-client-and-web-access.md) | Use Expo for provider mobile access while retaining the web application | Accepted |
 
 ## Naming
 
